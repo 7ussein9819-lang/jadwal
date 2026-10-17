@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light" data-color="emerald" data-template="modern">
 <head>
-  <link rel="manifest" href="manifest.json">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>جَدوَل · Jadwal</title>
+<link rel="manifest" href='data:application/manifest+json,{"name":"Jadwal","short_name":"Jadwal","start_url":"./","display":"standalone","background_color":"#ecfdf5","theme_color":"#10b981","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2882/2882059.png","sizes":"512x512","type":"image/png"}]}'>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-/* ===== الألوان الهادئة ===== */
 [data-color="emerald"]{--hue:160;--hue2:175}
 [data-color="mint"]{--hue:145;--hue2:155}
 [data-color="sky"]{--hue:205;--hue2:215}
@@ -95,7 +94,6 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .card h2{margin-bottom:14px;font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px;color:var(--text)}
 .card h2 svg{width:18px;height:18px;stroke:var(--primary);fill:none;flex-shrink:0}
 
-/* Stats */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
 .stat-card{background:var(--surface);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);padding:16px 12px;text-align:center;position:relative;box-shadow:var(--shadow);transition:all .3s var(--tr)}
 .stat-card.clickable{cursor:pointer}
@@ -105,7 +103,6 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .stat-value{font-size:28px;font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .stat-label{color:var(--text-dim);font-size:11px;font-weight:700;margin-top:3px}
 
-/* Forms */
 .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:10px}
 .form-group{margin-bottom:8px}
 .form-group label{display:block;margin-bottom:6px;color:var(--text-dim);font-size:12px;font-weight:800}
@@ -115,7 +112,6 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .form-group select option{background:var(--surface-solid);color:var(--text)}
 .form-hint{color:var(--text-mute);font-size:11px;margin-top:4px;font-weight:500;line-height:1.5}
 
-/* Fix Date Input */
 input[type="date"] {
   direction: ltr;
   text-align: right;
@@ -126,7 +122,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   margin-right: auto;
 }
 
-/* Buttons */
 .btn{padding:10px 18px;border-radius:var(--radius-sm);border:none;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;transition:all .25s var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:7px}
 .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0}
 .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 4px 16px hsla(var(--hue),72%,45%,0.4)}
@@ -143,7 +138,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .btn-sm svg{width:13px;height:13px}
 .btn-row{display:flex;gap:7px;flex-wrap:wrap}
 
-/* Lists */
 .list{display:flex;flex-direction:column;gap:8px}
 .list-item{display:flex;align-items:flex-start;justify-content:space-between;padding:13px 15px;background:var(--surface-dim);border-radius:var(--radius-sm);border:1px solid var(--border);transition:all .25s var(--tr);gap:10px}
 .list-item:hover{background:var(--surface-hover);border-color:var(--border-strong)}
@@ -182,20 +176,17 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .alert-success{background:hsla(160,72%,45%,0.1);border-color:hsla(160,72%,45%,0.35);color:var(--success)}
 .alert-info{background:hsla(217,90%,55%,0.1);border-color:hsla(217,90%,55%,0.35);color:var(--info)}
 
-/* الجدول - القوالب */
 .schedule-table{width:100%;border-collapse:separate;border-spacing:3px;margin-top:12px;min-width:560px;table-layout:fixed}
 .schedule-table th,.schedule-table td{padding:9px 5px;border-radius:8px;text-align:center;font-size:11px;word-wrap:break-word}
 .schedule-table th{font-weight:800}
 .schedule-table th:first-child{width:70px}
 
-/* قالب Modern */
 [data-template="modern"] .schedule-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff}
 [data-template="modern"] .schedule-table .day-cell{background:hsla(var(--hue),72%,45%,0.15);color:var(--primary);font-weight:800;white-space:nowrap}
 [data-template="modern"] .schedule-table .slot-filled{background:hsla(var(--hue),72%,55%,0.12);color:var(--primary2);transition:transform .2s}
 [data-theme="dark"][data-template="modern"] .schedule-table .slot-filled{color:var(--primary-light)}
 [data-template="modern"] .schedule-table .slot-empty{background:var(--surface-dim);color:var(--text-mute)}
 
-/* قالب Classic */
 [data-template="classic"] .schedule-table{border-spacing:0;border:1px solid var(--border-strong)}
 [data-template="classic"] .schedule-table th{background:var(--surface-solid);color:var(--text);border:1px solid var(--border-strong);border-radius:0}
 [data-template="classic"] .schedule-table td{border:1px solid var(--border);border-radius:0}
@@ -203,7 +194,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 [data-template="classic"] .schedule-table .slot-filled{background:transparent}
 [data-template="classic"] .schedule-table .slot-empty{background:transparent}
 
-/* قالب Minimal */
 [data-template="minimal"] .schedule-table{border-spacing:0 6px}
 [data-template="minimal"] .schedule-table th{background:transparent;color:var(--primary);border-bottom:2px solid var(--primary);border-radius:0;padding-bottom:6px}
 [data-template="minimal"] .schedule-table .day-cell{background:transparent;color:var(--text);font-weight:800;border-left:2px solid var(--border-strong)}
@@ -219,7 +209,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .toast.error{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 10px 36px rgba(239,68,68,0.5)}
 .toast.success{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 10px 36px rgba(16,185,129,0.5)}
 
-/* Modals */
 .modal{position:fixed;inset:0;background:hsla(var(--hue),60%,5%,0.7);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;z-index:2000;padding:16px;overflow-y:auto}
 .modal.show{display:flex;animation:panelFade .3s}
 .modal-content{background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:var(--radius);max-width:760px;width:100%;max-height:90vh;overflow-y:auto;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,0.4);margin:auto}
@@ -233,7 +222,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .modal-footer{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--border)}
 .modal-footer p{color:var(--text-dim);font-size:11px;flex:1;min-width:120px}
 
-/* Teacher Modal Specifics */
 .teacher-section{padding:12px 0;border-bottom:1px solid var(--border)}
 .teacher-section:last-of-type{border-bottom:none;padding-bottom:0}
 .teacher-section h3{font-size:11px;font-weight:800;color:var(--text-dim);margin-bottom:10px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.4px}
@@ -298,7 +286,6 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
 .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* Media Queries */
 @media(min-width:1024px){
   body{padding:24px}
   header{padding:20px 24px;gap:18px}
@@ -537,6 +524,14 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
           <div class="form-group"><label data-i18n="colorMode">الألوان</label>
             <select id="print-color"><option value="color" data-i18n="colorOn">ألوان</option><option value="bw" data-i18n="colorOff">أبيض/أسود</option></select>
           </div>
+          <div class="form-group"><label>ستايل الجدول</label>
+            <select id="print-template">
+              <option value="modern">ملون (Modern)</option>
+              <option value="bw">أبيض وأسود (B&W)</option>
+              <option value="classic">كلاسيكي (Classic)</option>
+              <option value="minimal">أخضر فاتح (Green)</option>
+            </select>
+          </div>
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" id="print-current-btn"><svg><use href="#i-printer"/></svg> <span data-i18n="printCurrent">طباعة الحالي</span></button>
@@ -585,18 +580,12 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
         <div id="holidays-list" style="margin-top:14px"></div>
       </div>
       
-      <!-- قالب الجدول -->
-      <div class="card">
-        <h2><svg><use href="#i-layers"/></svg> قالب الجدول (Table Template)</h2>
-        <div class="form-row">
-          <div class="form-group"><label>شكل الجدول</label>
-            <select id="template-selector">
-              <option value="modern">عصري (Modern)</option>
-              <option value="classic">كلاسيكي (Classic)</option>
-              <option value="minimal">بسيط (Minimal)</option>
-            </select>
-          </div>
-        </div>
+      <!-- التواصل -->
+      <div class="card" style="text-align:center; padding: 24px;">
+        <p style="color:var(--text-dim); font-size: 14px; margin-bottom: 12px;">📱 للتواصل والدعم الفني</p>
+        <a href="https://t.me/HJS_98" target="_blank" class="btn btn-primary" style="text-decoration:none; display: inline-flex; width: auto;">
+          <svg><use href="#i-send"/></svg> Telegram: @HJS_98
+        </a>
       </div>
 
       <div class="card" data-admin-only>
@@ -606,14 +595,6 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
           <button class="btn btn-secondary" id="restore-btn"><svg><use href="#i-upload"/></svg> <span data-i18n="restore">استعادة</span></button>
           <input type="file" id="restore-input" accept=".json" style="display:none">
         </div>
-      </div>
-      
-      <!-- التواصل -->
-      <div class="card" style="text-align:center; padding: 24px;">
-        <p style="color:var(--text-dim); font-size: 14px; margin-bottom: 12px;">📱 للتواصل والدعم الفني</p>
-        <a href="https://t.me/HJS_98" target="_blank" class="btn btn-primary" style="text-decoration:none; display: inline-flex; width: auto;">
-          <svg><use href="#i-send"/></svg> Telegram: @HJS_98
-        </a>
       </div>
 
       <div class="card" data-admin-only>
@@ -696,7 +677,6 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
 <script>
 'use strict';
 
-/* ============ TRANSLATIONS ============ */
 const I18N = {
   ar: {
     appName:'جَدوَل · Jadwal', appTag:'إدارة الجدول الدراسي بذكاء',
@@ -759,7 +739,8 @@ const I18N = {
     partialGenerated:'توليد جزئي:',
     excelGenerated:'تم إنشاء ملف Excel ✓',
     printAllHint:'على A3 أفقي، كل المعلمين في صفحة واحدة',
-    needHours:'أدخل عدد الحصص'
+    needHours:'أدخل عدد الحصص',
+    dayColHeader:'اليوم'
   },
   en: {
     appName:'Jadwal · جَدوَل', appTag:'Smart School Scheduling',
@@ -822,7 +803,8 @@ const I18N = {
     partialGenerated:'Partially generated:',
     excelGenerated:'Excel file created ✓',
     printAllHint:'On A3 landscape, all teachers on one page',
-    needHours:'Enter hours'
+    needHours:'Enter hours',
+    dayColHeader:'Day'
   }
 };
 
@@ -899,10 +881,8 @@ function toast(msg, type=''){
 }
 function debounce(fn, ms){ let t; return function(...a){ clearTimeout(t); t = setTimeout(() => fn.apply(this,a), ms); }; }
 
-/* ============ THEME/COLOR/TEMPLATE ============ */
 document.documentElement.setAttribute('data-theme', localStorage.getItem('jadwal-theme') || 'light');
 document.documentElement.setAttribute('data-color', localStorage.getItem('jadwal-color') || 'emerald');
-document.documentElement.setAttribute('data-template', localStorage.getItem('jadwal-template') || 'modern');
 
 function updateThemeIcon(){
   const theme = document.documentElement.getAttribute('data-theme');
@@ -945,17 +925,6 @@ function markActiveColor(){
   });
 }
 
-/* Template */
-document.getElementById('template-selector').addEventListener('change', (e) => {
-  const val = e.target.value;
-  document.documentElement.setAttribute('data-template', val);
-  localStorage.setItem('jadwal-template', val);
-  state.template = val;
-  save();
-  renderScheduleDisplay();
-});
-
-/* ============ TABS ============ */
 function goToTab(name){
   const btn = document.querySelector('[data-tab="' + name + '"]');
   if(btn) btn.click();
@@ -975,7 +944,6 @@ document.querySelectorAll('.tabs button').forEach(b => {
   });
 });
 
-/* ============ LANGUAGE ============ */
 function applyLanguage(){
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
@@ -1014,7 +982,6 @@ document.getElementById('lang-btn').addEventListener('click', () => {
   }
 });
 
-/* ============ TEACHER MODAL ============ */
 let tmWorkingDays = [];
 let tmAssignments = [];
 let tmEditId = null;
@@ -1188,7 +1155,6 @@ function saveTeacherFromModal(){
 }
 window.saveTeacherFromModal = saveTeacherFromModal;
 
-/* ============ CLASSES ============ */
 document.getElementById('add-class-btn').addEventListener('click', () => {
   try{
     if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
@@ -1221,7 +1187,6 @@ window.deleteClass = (id) => {
   saveNow(); render(); toast(t('deleted'));
 };
 
-/* ============ UNAVAILABILITY ============ */
 let editingTeacherId = null;
 window.openUnavailModal = (teacherId) => {
   try{
@@ -1277,7 +1242,6 @@ document.getElementById('modal-save').addEventListener('click', () => { document
 document.getElementById('modal').addEventListener('click', (e) => { if(e.target.id === 'modal'){ document.getElementById('modal').classList.remove('show'); document.body.style.overflow = ''; } });
 document.getElementById('teacher-modal').addEventListener('click', (e) => { if(e.target.id === 'teacher-modal') closeTeacherModal(); });
 
-/* ============ RENDER ============ */
 function render(){
   try{
     document.getElementById('stat-teachers').textContent = state.teachers.length;
@@ -1367,7 +1331,6 @@ function renderScheduleSelect(){
   }catch(e){}
 }
 
-/* ============ ALERTS ============ */
 function analyzeConstraints(){
   const alerts = [];
   try{
@@ -1411,7 +1374,6 @@ function renderAlerts(){
   container.innerHTML = alerts.map(a => '<div class="alert alert-' + a.type + '"><svg><use href="#' + icons[a.type] + '"/></svg><span>' + a.text + '</span></div>').join('');
 }
 
-/* ============ GENERATION ============ */
 function shuffle(a){ for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
 
 function tryGenerate(){
@@ -1524,7 +1486,6 @@ document.getElementById('generate-btn').addEventListener('click', () => {
   }catch(e){}
 });
 
-/* ============ SCHEDULE DISPLAY ============ */
 function renderScheduleDisplay(){
   try{
     const el = document.getElementById('schedule-display');
@@ -1563,9 +1524,8 @@ function renderScheduleDisplay(){
       };
     }
     
-    // Fixed Headers
     const namesAr = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر'];
-    let html = '<h2>' + title + '</h2><div class="table-scroll"><table class="schedule-table"><thead><tr><th></th>';
+    let html = '<h2>' + title + '</h2><div class="table-scroll"><table class="schedule-table"><thead><tr><th>' + t('dayColHeader') + '</th>';
     for(let p = 1; p <= periods; p++) {
        const label = currentLang === 'ar' ? 'الدرس ' + (namesAr[p-1] || p) : 'Lesson ' + p;
        html += '<th>' + label + '</th>';
@@ -1587,7 +1547,6 @@ function renderScheduleDisplay(){
 document.getElementById('schedule-view').addEventListener('change', renderScheduleSelect);
 document.getElementById('schedule-entity').addEventListener('change', renderScheduleDisplay);
 
-/* ============ PRINT - COMPLETE REWRITE ============ */
 function buildMiniScheduleHTML(view, id, opts){
   const periods = Math.max(1, state.settings.periods || 7);
   const dayKeys = getDayKeys();
@@ -1621,26 +1580,37 @@ function buildMiniScheduleHTML(view, id, opts){
     };
   }
 
-  // Colors
   const primaryHue = getComputedStyle(document.documentElement).getPropertyValue('--hue').trim() || '160';
-  const template = document.documentElement.getAttribute('data-template') || 'modern';
+  const printTemplate = document.getElementById('print-template').value;
   
   let colors = {};
-  if (colorMode === 'bw') {
+  if (colorMode === 'bw' || printTemplate === 'bw') {
     colors = {
       primary: '#000000', headerBg: '#333333', headerText: '#ffffff',
       dayBg: '#e5e5e5', filledBg: '#f5f5f5', emptyBg: '#ffffff',
       border: '#999999', text: '#000000', subText: '#333333'
     };
+  } else if (printTemplate === 'classic') {
+    colors = {
+      primary: '#000000', headerBg: '#ffffff', headerText: '#000000',
+      dayBg: '#ffffff', filledBg: '#ffffff', emptyBg: '#ffffff',
+      border: '#000000', text: '#000000', subText: '#333333'
+    };
+  } else if (printTemplate === 'minimal') {
+     colors = {
+      primary: `hsl(${primaryHue}, 72%, 40%)`, headerBg: '#ffffff', headerText: `hsl(${primaryHue}, 72%, 40%)`,
+      dayBg: '#ffffff', filledBg: '#ffffff', emptyBg: '#ffffff',
+      border: '#e5e7eb', text: `hsl(${primaryHue}, 60%, 15%)`, subText: `hsl(${primaryHue}, 50%, 35%)`
+    };
   } else {
     colors = {
       primary: `hsl(${primaryHue}, 72%, 40%)`,
-      headerBg: template === 'classic' ? '#ffffff' : (template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 72%, 45%)`),
-      headerText: template === 'classic' ? `hsl(${primaryHue}, 60%, 15%)` : (template === 'minimal' ? `hsl(${primaryHue}, 72%, 45%)` : '#ffffff'),
-      dayBg: template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 85%, 92%)`,
-      filledBg: template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 80%, 95%)`,
+      headerBg: `hsl(${primaryHue}, 72%, 45%)`,
+      headerText: '#ffffff',
+      dayBg: `hsl(${primaryHue}, 85%, 92%)`,
+      filledBg: `hsl(${primaryHue}, 80%, 95%)`,
       emptyBg: '#ffffff',
-      border: template === 'classic' ? `hsl(${primaryHue}, 50%, 70%)` : (template === 'minimal' ? '#e5e7eb' : `transparent`),
+      border: `hsl(${primaryHue}, 50%, 70%)`,
       text: `hsl(${primaryHue}, 60%, 15%)`,
       subText: `hsl(${primaryHue}, 50%, 35%)`
     };
@@ -1654,7 +1624,7 @@ function buildMiniScheduleHTML(view, id, opts){
   const namesAr = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر'];
   
   let html = `<div class="mini-schedule"><div class="mini-title">${esc(title)}</div>`;
-  html += `<table class="mini-table"><thead><tr><th class="corner"></th>`;
+  html += `<table class="mini-table"><thead><tr><th class="corner">${t('dayColHeader')}</th>`;
   for(let p = 1; p <= periods; p++) {
     let label = p;
     if (!opts.compact) {
@@ -1702,13 +1672,11 @@ function openPrintWindow(scope){
       const teacherCount = state.teachers.length;
 
       if(isA3 && isLandscape){
-        // A3 landscape = all in one page, grid layout
         let cols = 2;
         if (teacherCount > 4 && teacherCount <= 9) cols = 3;
         else if (teacherCount > 9) cols = 4;
         const compact = teacherCount > 6;
         
-        // Adjust font sizes dynamically based on count to fill page
         let fs, subFs, titleFs, cellPad;
         if (teacherCount <= 4) {
           fs = '11pt'; subFs = '9pt'; titleFs = '15pt'; cellPad = '6px 4px';
@@ -1725,7 +1693,6 @@ function openPrintWindow(scope){
         content += `</div>`;
         pageConfig = `@page { size: A3 landscape; margin: 0.5cm; }`;
         
-        // Override CSS for this specific print
         content = `<style>
           .mini-table th { font-size: ${fs}; padding: ${cellPad}; }
           .mini-table td { font-size: ${fs}; padding: ${cellPad}; }
@@ -1769,21 +1736,18 @@ function openPrintWindow(scope){
     const subFs = size === 'A3' ? '7pt' : '6pt';
 
     const primaryHue = getComputedStyle(document.documentElement).getPropertyValue('--hue').trim() || '160';
-    const template = document.documentElement.getAttribute('data-template') || 'modern';
+    const printTemplate = document.getElementById('print-template').value;
     
     let colors = {};
-    if (colorMode === 'bw') {
+    if (colorMode === 'bw' || printTemplate === 'bw') {
       colors = { headerBg: '#333333', headerText: '#ffffff', dayBg: '#e5e5e5', filledBg: '#f5f5f5', emptyBg: '#ffffff', border: '#999999', text: '#000000', subText: '#333333' };
+    } else if (printTemplate === 'classic') {
+      colors = { headerBg: '#ffffff', headerText: '#000000', dayBg: '#ffffff', filledBg: '#ffffff', emptyBg: '#ffffff', border: '#000000', text: '#000000', subText: '#333333' };
+    } else if (printTemplate === 'minimal') {
+      colors = { headerBg: '#ffffff', headerText: `hsl(${primaryHue}, 72%, 40%)`, dayBg: '#ffffff', filledBg: '#ffffff', emptyBg: '#ffffff', border: '#e5e7eb', text: `hsl(${primaryHue}, 60%, 15%)`, subText: `hsl(${primaryHue}, 50%, 35%)` };
     } else {
       colors = {
-        headerBg: template === 'classic' ? '#ffffff' : (template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 72%, 45%)`),
-        headerText: template === 'classic' ? `hsl(${primaryHue}, 60%, 15%)` : (template === 'minimal' ? `hsl(${primaryHue}, 72%, 45%)` : '#ffffff'),
-        dayBg: template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 85%, 92%)`,
-        filledBg: template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 80%, 95%)`,
-        emptyBg: '#ffffff',
-        border: template === 'classic' ? `hsl(${primaryHue}, 50%, 70%)` : (template === 'minimal' ? '#e5e7eb' : `transparent`),
-        text: `hsl(${primaryHue}, 60%, 15%)`,
-        subText: `hsl(${primaryHue}, 50%, 35%)`
+        headerBg: `hsl(${primaryHue}, 72%, 45%)`, headerText: '#ffffff', dayBg: `hsl(${primaryHue}, 85%, 92%)`, filledBg: `hsl(${primaryHue}, 80%, 95%)`, emptyBg: '#ffffff', border: `hsl(${primaryHue}, 50%, 70%)`, text: `hsl(${primaryHue}, 60%, 15%)`, subText: `hsl(${primaryHue}, 50%, 35%)`
       };
     }
 
@@ -1889,9 +1853,7 @@ body {
 ${content}
 <script>
 window.onload = function(){
-  setTimeout(function(){
-    window.print();
-  }, 300);
+  setTimeout(function(){ window.print(); }, 300);
 };
 window.onafterprint = function(){
   setTimeout(function(){ window.close(); }, 100);
@@ -1916,10 +1878,6 @@ window.onafterprint = function(){
 document.getElementById('print-current-btn').addEventListener('click', () => openPrintWindow('current'));
 document.getElementById('print-all-btn').addEventListener('click', () => openPrintWindow('all'));
 
-document.getElementById('print-btn')?.addEventListener('click', () => openPrintWindow('current'));
-document.getElementById('pdf-btn')?.addEventListener('click', () => openPrintWindow('current'));
-
-/* ============ EXPORTS - EXCEL ============ */
 function buildScheduleMatrix(view, id){
   const periods = Math.max(1, state.settings.periods || 7);
   const dayKeys = getDayKeys();
@@ -2069,16 +2027,13 @@ document.getElementById('csv-btn').addEventListener('click', () => {
   }catch(e){}
 });
 
-/* ============ PNG EXPORT (FIXED) ============ */
 document.getElementById('png-btn').addEventListener('click', () => {
   try{
     if(!state.schedule || typeof html2canvas === 'undefined'){ toast(t('noData'), 'error'); return; }
     
-    // Create a clone for capturing to avoid scroll clipping
     const el = document.getElementById('schedule-display');
     const clone = el.cloneNode(true);
     
-    // Create off-screen wrapper
     const wrapper = document.createElement('div');
     wrapper.style.position = 'fixed';
     wrapper.style.left = '-9999px';
@@ -2089,25 +2044,22 @@ document.getElementById('png-btn').addEventListener('click', () => {
     wrapper.style.width = 'max-content';
     wrapper.style.minWidth = '800px';
     
-    // Fix internal scroll container
     const scroller = clone.querySelector('.table-scroll');
     if(scroller) {
       scroller.style.overflow = 'visible';
       scroller.style.width = 'auto';
     }
     
-    // Ensure table expands fully
     const table = clone.querySelector('.schedule-table');
     if(table) {
       table.style.minWidth = '100%';
       table.style.width = '100%';
-      table.style.tableLayout = 'auto'; // Let it expand
+      table.style.tableLayout = 'auto';
     }
     
     wrapper.appendChild(clone);
     document.body.appendChild(wrapper);
     
-    // Small delay to ensure rendering
     setTimeout(() => {
       html2canvas(wrapper, { backgroundColor: null, scale: 2 }).then(canvas => {
         canvas.toBlob(blob => {
@@ -2127,7 +2079,6 @@ document.getElementById('png-btn').addEventListener('click', () => {
   }catch(e){ console.error(e); toast(t('error'), 'error'); }
 });
 
-/* ============ SHARE ============ */
 document.getElementById('share-btn').addEventListener('click', () => {
   try{
     const role = document.getElementById('share-role').value || 'editor';
@@ -2166,7 +2117,6 @@ function loadFromURL(){
   }catch(e){ return false; }
 }
 
-/* ============ REPORTS ============ */
 function renderReports(){
   try{
     let totalRequired = 0, totalPlaced = 0;
@@ -2220,13 +2170,11 @@ function renderReports(){
   }catch(e){}
 }
 
-/* ============ SETTINGS ============ */
 function renderSettings(){
   try{
     document.getElementById('term-name').value = state.calendar.term || '';
     document.getElementById('term-start').value = state.calendar.startDate || '';
     document.getElementById('term-end').value = state.calendar.endDate || '';
-    document.getElementById('template-selector').value = state.template || 'modern';
     renderHolidays();
   }catch(e){}
 }
@@ -2252,7 +2200,6 @@ document.getElementById('add-holiday-btn').addEventListener('click', () => {
   }catch(e){}
 });
 
-/* ============ BACKUP ============ */
 document.getElementById('backup-btn').addEventListener('click', () => {
   try{
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
@@ -2279,7 +2226,6 @@ document.getElementById('restore-input').addEventListener('change', (e) => {
   e.target.value = '';
 });
 
-/* ============ RESET ============ */
 document.getElementById('reset-btn').addEventListener('click', () => {
   if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
   if(!confirm(t('deleteConfirmReset'))) return;
@@ -2289,13 +2235,11 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   render(); toast(t('deleted'));
 });
 
-/* ============ ROLE ============ */
 function applyRole(){
   const isViewer = state.role === 'viewer';
   document.querySelectorAll('[data-admin-only]').forEach(el => { el.style.display = isViewer ? 'none' : ''; });
 }
 
-/* ============ INIT ============ */
 function init(){
   try{
     updateThemeIcon();
@@ -2304,7 +2248,6 @@ function init(){
     load();
     document.getElementById('periods-count').value = state.settings.periods || 7;
     document.getElementById('days-count').value = state.settings.days || 5;
-    document.getElementById('template-selector').value = state.template || 'modern';
     applyLanguage();
   }catch(e){
     console.error(e);
@@ -2323,19 +2266,16 @@ document.getElementById('days-count').addEventListener('change', debounce(() => 
   save(); render();
 }, 400));
 
-/* Close color popover on scroll/click outside */
 window.addEventListener('scroll', () => {
   document.getElementById('color-popover').classList.remove('show');
 }, { passive: true });
+
+// Register Service Worker for offline
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(err => console.log('SW Error:', err));
+  });
+}
 </script>
-  <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('✓ يعمل أوفلاين بنجاح'))
-        .catch(err => console.log('خطأ في التحميل الأوفلاين:', err));
-    });
-  }
-  </script>
 </body>
 </html>
