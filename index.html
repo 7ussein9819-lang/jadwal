@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light" data-color="emerald" data-template="modern">
 <head>
+  <link rel="manifest" href="manifest.json">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>جَدوَل · Jadwal</title>
@@ -2327,5 +2328,14 @@ window.addEventListener('scroll', () => {
   document.getElementById('color-popover').classList.remove('show');
 }, { passive: true });
 </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('✓ يعمل أوفلاين بنجاح'))
+        .catch(err => console.log('خطأ في التحميل الأوفلاين:', err));
+    });
+  }
+  </script>
 </body>
 </html>
