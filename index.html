@@ -2,7 +2,8 @@
 <html lang="ar" dir="rtl" data-theme="light">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#10b981">
 <title>جَدوَل · Jadwal</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
@@ -31,7 +32,7 @@
   --orb-opacity:0.18;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Tajawal',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 35%,var(--bg3) 70%,var(--bg4) 100%);background-size:200% 200%;animation:bgShift 20s ease infinite;color:var(--text);min-height:100vh;padding:20px;overflow-x:hidden;position:relative}
+body{font-family:'Tajawal',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 35%,var(--bg3) 70%,var(--bg4) 100%);background-size:200% 200%;animation:bgShift 20s ease infinite;color:var(--text);min-height:100vh;padding:16px;overflow-x:hidden;position:relative}
 @keyframes bgShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--orb-opacity);animation:float 22s ease-in-out infinite}
@@ -39,203 +40,302 @@ body{font-family:'Tajawal',sans-serif;background:linear-gradient(135deg,var(--bg
 .orb-2{width:520px;height:520px;background:#6ee7b7;bottom:-180px;left:-120px;animation-delay:-6s}
 .orb-3{width:320px;height:320px;background:#a7f3d0;top:45%;left:35%;animation-delay:-12s}
 @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-40px) scale(1.08)}66%{transform:translate(-30px,30px) scale(.92)}}
-.app{max-width:1280px;margin:0 auto;position:relative;z-index:1}
+.app{max-width:1280px;margin:0 auto;position:relative;z-index:1;width:100%}
 
-/* Icons */
-.i{width:18px;height:18px;display:inline-block;vertical-align:middle;flex-shrink:0;stroke-width:2}
-.i-lg{width:22px;height:22px}
-.i-sm{width:14px;height:14px}
+header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:16px 18px;background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);flex-wrap:nowrap}
+.logo-badge{width:46px;height:46px;min-width:46px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(16,185,129,0.4);flex-shrink:0}
+.logo-badge svg{width:24px;height:24px;stroke:#fff;stroke-width:2;fill:none}
+.header-text{flex:1;min-width:0;overflow:hidden}
+header h1{font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.header-actions{display:flex;gap:6px;flex-shrink:0}
+.icon-toggle{width:38px;height:38px;border-radius:10px;border:1px solid var(--border-strong);background:var(--surface-dim);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s var(--tr)}
+.icon-toggle:hover{background:var(--surface-hover);border-color:var(--primary);transform:translateY(-1px)}
+.icon-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none}
 
-header{display:flex;align-items:center;gap:18px;margin-bottom:24px;padding:20px 24px;background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-.logo-badge{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(16,185,129,0.4);animation:logoFloat 4s ease-in-out infinite}
-.logo-badge svg{width:28px;height:28px;stroke:#fff}
-@keyframes logoFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-4px) rotate(-3deg)}}
-.header-text{flex:1;min-width:0}
-header h1{font-size:24px;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-header p{color:var(--text-dim);font-size:13px;margin-top:2px;font-weight:600}
-.header-actions{display:flex;gap:8px;flex-shrink:0}
-.icon-toggle{width:42px;height:42px;border-radius:12px;border:1px solid var(--border-strong);background:var(--surface-dim);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s var(--tr)}
-.icon-toggle:hover{background:var(--surface-hover);border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow-hover)}
-.icon-toggle svg{width:20px;height:20px;stroke:currentColor}
-
-/* Tabs - ALWAYS one row */
-.tabs{display:flex;gap:6px;overflow-x:auto;flex-wrap:nowrap;padding:8px;background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:999px;margin-bottom:20px;box-shadow:var(--shadow);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+/* Tabs - always one row, scrollable */
+.tabs-wrapper{position:relative;margin-bottom:16px}
+.tabs{display:flex;gap:5px;overflow-x:auto;flex-wrap:nowrap;padding:6px;background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:999px;box-shadow:var(--shadow);scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
 .tabs::-webkit-scrollbar{display:none}
-.tabs button{flex:0 0 auto;min-width:max-content;padding:11px 18px;background:transparent;border:none;color:var(--text-dim);border-radius:999px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .3s var(--tr);white-space:nowrap}
-.tabs button svg{width:16px;height:16px;stroke:currentColor;flex-shrink:0;transition:transform .3s}
-.tabs button.active{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 6px 24px rgba(16,185,129,0.4)}
-.tabs button.active svg{stroke:#fff}
+.tabs button{flex:0 0 auto;min-width:max-content;padding:10px 16px;background:transparent;border:none;color:var(--text-dim);border-radius:999px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .3s var(--tr);white-space:nowrap}
+.tabs button svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0}
+.tabs button.active{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 5px 20px rgba(16,185,129,0.4)}
 .tabs button:hover:not(.active){color:var(--text);background:var(--surface-dim)}
-.tabs button:hover svg{transform:scale(1.15) rotate(-5deg)}
 
 .tab-panel{display:none;animation:panelFade .35s ease}
 .tab-panel.active{display:block}
-@keyframes panelFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.card{background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:16px;box-shadow:var(--shadow);transition:border-color .3s var(--tr),box-shadow .3s var(--tr)}
+@keyframes panelFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);transition:border-color .3s var(--tr),box-shadow .3s var(--tr)}
 .card:hover{border-color:var(--border-strong);box-shadow:var(--shadow-hover)}
-.card h2{margin-bottom:16px;font-size:17px;font-weight:800;display:flex;align-items:center;gap:10px;color:var(--text)}
-.card h2 svg{width:20px;height:20px;stroke:var(--primary)}
+.card h2{margin-bottom:14px;font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px;color:var(--text)}
+.card h2 svg{width:18px;height:18px;stroke:var(--primary);fill:none;flex-shrink:0}
 
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:16px}
-.stat-card{background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);padding:20px 16px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:all .4s var(--tr)}
-.stat-card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow-hover)}
-.stat-icon-badge{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(52,211,153,0.08));display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
-.stat-icon-badge svg{width:22px;height:22px;stroke:var(--primary)}
-.stat-value{font-size:32px;font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.stat-label{color:var(--text-dim);font-size:12px;font-weight:700;margin-top:4px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+.stat-card{background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);padding:16px 12px;text-align:center;position:relative;box-shadow:var(--shadow);transition:transform .3s var(--tr),border-color .3s var(--tr)}
+.stat-card:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow-hover)}
+.stat-icon-badge{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(52,211,153,0.08));display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.stat-icon-badge svg{width:20px;height:20px;stroke:var(--primary);fill:none}
+.stat-value{font-size:28px;font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{color:var(--text-dim);font-size:11px;font-weight:700;margin-top:3px}
 
-.form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:14px}
-.form-group{margin-bottom:12px}
-.form-group label{display:block;margin-bottom:7px;color:var(--text-dim);font-size:12px;font-weight:800;letter-spacing:.2px}
-.form-group input,.form-group select{width:100%;padding:11px 15px;background:var(--surface-dim);border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:14px;transition:all .3s var(--tr)}
-.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(16,185,129,0.15);background:var(--surface-hover)}
+.form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:10px}
+.form-group{margin-bottom:8px}
+.form-group label{display:block;margin-bottom:6px;color:var(--text-dim);font-size:12px;font-weight:800}
+.form-group input,.form-group select{width:100%;padding:10px 13px;background:var(--surface-dim);border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:14px;transition:all .3s var(--tr)}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(16,185,129,0.15);background:var(--surface-hover)}
 .form-group input::placeholder{color:var(--text-mute)}
 .form-group select option{background:var(--surface-solid);color:var(--text)}
-.form-hint{color:var(--text-mute);font-size:11px;margin-top:5px;font-weight:500;line-height:1.5}
+.form-hint{color:var(--text-mute);font-size:11px;margin-top:4px;font-weight:500;line-height:1.5}
 
-.btn{padding:11px 20px;border-radius:var(--radius-sm);border:none;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;transition:all .25s var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:8px}
-.btn svg{width:16px;height:16px;stroke:currentColor;flex-shrink:0}
-.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 4px 20px rgba(16,185,129,0.4)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(16,185,129,0.55)}
-.btn-primary:disabled{opacity:.6;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-large{width:100%;padding:16px;font-size:15px;margin-top:6px}
+.btn{padding:10px 18px;border-radius:var(--radius-sm);border:none;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;transition:all .25s var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 4px 16px rgba(16,185,129,0.4)}
+.btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 7px 24px rgba(16,185,129,0.5)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-large{width:100%;padding:15px;font-size:14px;margin-top:4px}
 .btn-secondary{background:var(--surface-dim);border:1px solid var(--border-strong);color:var(--text)}
-.btn-secondary:hover{background:var(--surface-hover);border-color:var(--primary);transform:translateY(-1px)}
+.btn-secondary:hover{background:var(--surface-hover);border-color:var(--primary)}
 .btn-danger{background:rgba(239,68,68,0.1);color:var(--danger);border:1px solid rgba(239,68,68,0.35)}
 .btn-danger:hover{background:rgba(239,68,68,0.2);border-color:var(--danger)}
-.btn-success{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 4px 20px rgba(16,185,129,0.4)}
-.btn-success:hover{transform:translateY(-2px)}
-.btn-sm{padding:7px 12px;font-size:12px}
-.btn-sm svg{width:14px;height:14px}
-.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+.btn-success{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.btn-success:hover{transform:translateY(-1px);box-shadow:0 7px 24px rgba(16,185,129,0.5)}
+.btn-sm{padding:6px 11px;font-size:11px}
+.btn-sm svg{width:13px;height:13px}
+.btn-row{display:flex;gap:7px;flex-wrap:wrap}
 
-.list{display:flex;flex-direction:column;gap:10px}
-.list-item{display:flex;align-items:flex-start;justify-content:space-between;padding:15px 17px;background:var(--surface-dim);border-radius:var(--radius-sm);border:1px solid var(--border);transition:all .3s var(--tr);gap:12px}
+.list{display:flex;flex-direction:column;gap:8px}
+.list-item{display:flex;align-items:flex-start;justify-content:space-between;padding:13px 15px;background:var(--surface-dim);border-radius:var(--radius-sm);border:1px solid var(--border);transition:all .25s var(--tr);gap:10px}
 .list-item:hover{background:var(--surface-hover);border-color:var(--border-strong)}
 .list-item .info{flex:1;min-width:0}
-.list-item .title{font-weight:800;font-size:14px;margin-bottom:6px;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.list-item .meta{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px}
+.list-item .title{font-weight:800;font-size:14px;margin-bottom:5px;color:var(--text);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.list-item .meta{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px}
 .list-item .actions{display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap}
-.assignments-preview{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)}
-.assign-chip{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface);border-radius:7px;font-size:11px;font-weight:600;border:1px solid var(--border);color:var(--text)}
-.assign-chip svg{width:11px;height:11px;stroke:var(--primary)}
+.assignments-preview{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;padding-top:7px;border-top:1px dashed var(--border)}
+.assign-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;background:var(--surface);border-radius:7px;font-size:11px;font-weight:600;border:1px solid var(--border);color:var(--text);white-space:nowrap}
+.assign-chip svg{width:10px;height:10px;stroke:var(--primary);fill:none;flex-shrink:0}
+.assign-chip b{color:var(--primary);font-weight:800}
 
-.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 11px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}
-.badge svg{width:11px;height:11px;stroke:currentColor}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge svg{width:10px;height:10px;stroke:currentColor;fill:none;flex-shrink:0}
 .badge-primary{background:rgba(16,185,129,0.15);color:var(--primary);border:1px solid var(--border-strong)}
 .badge-success{background:rgba(16,185,129,0.15);color:var(--success);border:1px solid rgba(16,185,129,0.3)}
 .badge-warning{background:rgba(245,158,11,0.15);color:var(--warning);border:1px solid rgba(245,158,11,0.3)}
 .badge-danger{background:rgba(239,68,68,0.15);color:var(--danger);border:1px solid rgba(239,68,68,0.3)}
 .badge-info{background:rgba(59,130,246,0.15);color:var(--info);border:1px solid rgba(59,130,246,0.3)}
 
-.icon-btn{padding:8px;background:var(--surface-dim);border:1px solid var(--border-strong);color:var(--text);border-radius:9px;cursor:pointer;transition:all .25s;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.icon-btn{padding:7px;background:var(--surface-dim);border:1px solid var(--border-strong);color:var(--text);border-radius:8px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;line-height:1}
 .icon-btn:hover{background:var(--surface-hover);border-color:var(--primary);transform:translateY(-1px)}
-.icon-btn svg{width:15px;height:15px;stroke:currentColor}
+.icon-btn svg{width:14px;height:14px;stroke:currentColor;fill:none}
 .icon-btn.danger{color:var(--danger)}
 .icon-btn.danger:hover{border-color:var(--danger);background:rgba(239,68,68,0.12)}
 
-.empty-state{text-align:center;padding:44px 20px;color:var(--text-mute)}
-.empty-state svg{width:48px;height:48px;stroke:var(--text-mute);opacity:.5;margin-bottom:12px}
-.empty-state p{font-size:14px;font-weight:500}
+.empty-state{text-align:center;padding:36px 16px;color:var(--text-mute)}
+.empty-state svg{width:42px;height:42px;stroke:var(--text-mute);fill:none;opacity:.5;margin-bottom:10px}
+.empty-state p{font-size:13px;font-weight:500}
 
-.alert{padding:13px 16px;border-radius:var(--radius-sm);margin-bottom:9px;display:flex;align-items:flex-start;gap:11px;font-size:13px;font-weight:600;line-height:1.5;border:1px solid;animation:alertSlide .4s ease}
-@keyframes alertSlide{from{opacity:0;transform:translateX(-15px)}to{opacity:1;transform:none}}
-.alert svg{width:18px;height:18px;flex-shrink:0;margin-top:1px}
+.alert{padding:11px 14px;border-radius:var(--radius-sm);margin-bottom:8px;display:flex;align-items:flex-start;gap:9px;font-size:12px;font-weight:600;line-height:1.5;border:1px solid;animation:alertSlide .3s ease}
+@keyframes alertSlide{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.alert svg{width:16px;height:16px;flex-shrink:0;stroke:currentColor;fill:none;margin-top:1px}
 .alert-error{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.35);color:var(--danger)}
 .alert-warning{background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.35);color:var(--warning)}
 .alert-success{background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.35);color:var(--success)}
 .alert-info{background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.35);color:var(--info)}
 
-.schedule-table{width:100%;border-collapse:separate;border-spacing:4px;margin-top:14px;min-width:640px}
-.schedule-table th,.schedule-table td{padding:11px 7px;border-radius:9px;text-align:center;font-size:12px}
+.schedule-table{width:100%;border-collapse:separate;border-spacing:3px;margin-top:12px;min-width:560px;table-layout:fixed}
+.schedule-table th,.schedule-table td{padding:9px 5px;border-radius:8px;text-align:center;font-size:11px;word-wrap:break-word}
 .schedule-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:800}
+.schedule-table th:first-child{width:70px}
 .schedule-table .day-cell{background:rgba(16,185,129,0.15);color:var(--primary);font-weight:800;white-space:nowrap}
 .schedule-table .slot-filled{background:rgba(52,211,153,0.12);color:var(--primary2);transition:transform .2s}
 [data-theme="dark"] .schedule-table .slot-filled{color:var(--primary-light)}
 .schedule-table .slot-filled:hover{background:rgba(52,211,153,0.25);transform:scale(1.02)}
 .schedule-table .slot-empty{background:var(--surface-dim);color:var(--text-mute)}
-.schedule-table .subject-name{font-weight:800;display:block;margin-bottom:2px;font-size:12px}
-.schedule-table .teacher-name{font-size:10px;opacity:.7;font-weight:600}
-.table-scroll{overflow-x:auto;border-radius:var(--radius-sm)}
+.schedule-table .subject-name{font-weight:800;display:block;margin-bottom:2px;font-size:11px}
+.schedule-table .teacher-name{font-size:10px;opacity:.7;font-weight:600;display:block}
+.table-scroll{overflow-x:auto;border-radius:var(--radius-sm);-webkit-overflow-scrolling:touch}
 
-.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(120px);background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;padding:13px 24px;border-radius:12px;font-weight:700;box-shadow:0 10px 40px rgba(16,185,129,0.5);transition:transform .4s var(--tr);z-index:3000;max-width:90vw;text-align:center;font-size:13px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;padding:12px 22px;border-radius:12px;font-weight:700;box-shadow:0 10px 36px rgba(16,185,129,0.5);transition:transform .4s var(--tr);z-index:3000;max-width:calc(100vw - 32px);text-align:center;font-size:13px}
 .toast.show{transform:translateX(-50%) translateY(0)}
-.toast.error{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 10px 40px rgba(239,68,68,0.5)}
-.toast.success{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 10px 40px rgba(16,185,129,0.5)}
+.toast.error{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 10px 36px rgba(239,68,68,0.5)}
+.toast.success{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 10px 36px rgba(16,185,129,0.5)}
 
-.modal{position:fixed;inset:0;background:rgba(4,31,28,0.65);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;z-index:2000;padding:20px;overflow-y:auto}
-[data-theme="light"] .modal{background:rgba(6,78,59,0.35)}
+.modal{position:fixed;inset:0;background:rgba(4,31,28,0.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;z-index:2000;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+[data-theme="light"] .modal{background:rgba(6,78,59,0.4)}
 .modal.show{display:flex;animation:panelFade .3s}
-.modal-content{background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:var(--radius);max-width:780px;width:100%;max-height:90vh;overflow:auto;padding:22px;box-shadow:0 24px 80px rgba(0,0,0,0.4);margin:auto}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px;padding-bottom:14px;border-bottom:1px solid var(--border)}
-.modal-header h2{font-size:16px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:8px}
-.modal-header h2 svg{width:18px;height:18px;stroke:var(--primary)}
-.modal-close{background:transparent;border:none;color:var(--text);cursor:pointer;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
+.modal-content{background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:var(--radius);max-width:760px;width:100%;max-height:90vh;overflow-y:auto;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,0.4);margin:auto;-webkit-overflow-scrolling:touch}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--border);position:sticky;top:-20px;background:var(--surface-solid);z-index:1;margin-top:-20px;padding-top:20px}
+.modal-header h2{font-size:15px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:7px;flex:1;min-width:0}
+.modal-header h2 svg{width:17px;height:17px;stroke:var(--primary);fill:none;flex-shrink:0}
+.modal-close{background:transparent;border:none;color:var(--text);cursor:pointer;width:32px;height:32px;min-width:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
 .modal-close:hover{background:var(--surface-hover);transform:rotate(90deg)}
-.modal-close svg{width:18px;height:18px;stroke:currentColor}
-.modal-footer{margin-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--border)}
-.modal-footer p{color:var(--text-dim);font-size:12px}
+.modal-close svg{width:16px;height:16px;stroke:currentColor;fill:none}
+.modal-footer{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--border)}
+.modal-footer p{color:var(--text-dim);font-size:11px;flex:1;min-width:120px}
 
-.teacher-section{padding:14px 0;border-bottom:1px solid var(--border)}
-.teacher-section:last-of-type{border-bottom:none}
-.teacher-section h3{font-size:12px;font-weight:800;color:var(--text-dim);margin-bottom:12px;display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.5px}
-.teacher-section h3 svg{width:14px;height:14px;stroke:var(--primary)}
-.days-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:7px}
+.teacher-section{padding:12px 0;border-bottom:1px solid var(--border)}
+.teacher-section:last-of-type{border-bottom:none;padding-bottom:0}
+.teacher-section h3{font-size:11px;font-weight:800;color:var(--text-dim);margin-bottom:10px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.4px}
+.teacher-section h3 svg{width:13px;height:13px;stroke:var(--primary);fill:none}
+.days-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:6px}
 .day-checkbox{position:relative}
 .day-checkbox input{position:absolute;opacity:0;pointer-events:none}
-.day-checkbox label{display:flex;align-items:center;justify-content:center;padding:11px 14px;background:var(--surface-dim);border:2px solid var(--border);border-radius:10px;font-weight:700;font-size:12px;color:var(--text-dim);transition:all .2s;cursor:pointer}
+.day-checkbox label{display:flex;align-items:center;justify-content:center;padding:9px 12px;background:var(--surface-dim);border:2px solid var(--border);border-radius:9px;font-weight:700;font-size:12px;color:var(--text-dim);transition:all .2s;cursor:pointer;text-align:center}
 .day-checkbox input:checked + label{background:rgba(16,185,129,0.15);border-color:var(--primary);color:var(--primary)}
 
-.assignments-list{display:flex;flex-direction:column;gap:9px;margin-bottom:10px}
-.assignment-row{display:grid;grid-template-columns:1.5fr 1.5fr 85px 38px;gap:7px;align-items:center;background:var(--surface-dim);padding:9px;border-radius:10px;border:1px solid var(--border);animation:panelFade .3s}
-.assignment-row select,.assignment-row input{padding:9px 11px;background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:7px;color:var(--text);font-family:inherit;font-size:12px;width:100%}
+.assignments-list{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+.assignment-row{display:grid;grid-template-columns:1.4fr 1.4fr 75px 34px;gap:6px;align-items:center;background:var(--surface-dim);padding:8px;border-radius:9px;border:1px solid var(--border);animation:panelFade .25s}
+.assignment-row select,.assignment-row input{padding:8px 10px;background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:6px;color:var(--text);font-family:inherit;font-size:12px;width:100%;min-width:0}
 .assignment-row select:focus,.assignment-row input:focus{outline:none;border-color:var(--primary)}
-.assignment-row .remove-btn{padding:7px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:var(--danger);border-radius:7px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center}
+.assignment-row .remove-btn{padding:6px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:var(--danger);border-radius:6px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;min-width:34px;height:34px}
 .assignment-row .remove-btn:hover{background:rgba(239,68,68,0.3)}
-.assignment-row .remove-btn svg{width:13px;height:13px;stroke:currentColor}
+.assignment-row .remove-btn svg{width:12px;height:12px;stroke:currentColor;fill:none}
 
-.summary-panel{background:rgba(16,185,129,0.06);border:1px solid var(--border-strong);border-radius:12px;padding:14px;margin-top:14px}
-.summary-panel h3{font-size:12px;font-weight:800;color:var(--text-dim);margin-bottom:12px;display:flex;align-items:center;gap:7px;text-transform:uppercase;letter-spacing:.5px}
-.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:8px;margin-bottom:10px}
-.summary-item{text-align:center;padding:10px 6px;background:var(--surface);border-radius:9px;border:1px solid var(--border)}
-.summary-item .lbl{font-size:10px;color:var(--text-mute);font-weight:700;margin-bottom:3px}
-.summary-item .val{font-size:20px;font-weight:900;color:var(--primary)}
+.summary-panel{background:rgba(16,185,129,0.06);border:1px solid var(--border-strong);border-radius:10px;padding:12px;margin-top:12px}
+.summary-panel h3{font-size:11px;font-weight:800;color:var(--text-dim);margin-bottom:10px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.4px}
+.summary-panel h3 svg{width:13px;height:13px;stroke:var(--primary);fill:none}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:7px;margin-bottom:9px}
+.summary-item{text-align:center;padding:9px 5px;background:var(--surface);border-radius:8px;border:1px solid var(--border)}
+.summary-item .lbl{font-size:10px;color:var(--text-mute);font-weight:700;margin-bottom:2px}
+.summary-item .val{font-size:18px;font-weight:900;color:var(--primary)}
 .summary-item.warn .val{color:var(--warning)}
 .summary-item.danger .val{color:var(--danger)}
-.summary-status{padding:11px;background:var(--surface);border-radius:9px;text-align:center;font-weight:800;font-size:13px}
+.summary-status{padding:9px;background:var(--surface);border-radius:8px;text-align:center;font-weight:800;font-size:12px}
 .summary-status.ok{color:var(--success)}
 .summary-status.warn{color:var(--warning)}
 .summary-status.danger{color:var(--danger)}
 
-.unavail-table{width:100%;border-collapse:separate;border-spacing:4px}
-.unavail-table th,.unavail-table td{padding:10px 5px;text-align:center;border-radius:9px;font-size:12px}
+.unavail-table{width:100%;border-collapse:separate;border-spacing:3px}
+.unavail-table th,.unavail-table td{padding:8px 4px;text-align:center;border-radius:7px;font-size:11px}
 .unavail-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:800}
-.unavail-table .day-cell{background:rgba(16,185,129,0.15);color:var(--primary);font-weight:800;white-space:nowrap}
-.unavail-table td.avail{background:rgba(16,185,129,0.15);color:var(--success);cursor:pointer;font-weight:800;transition:all .2s}
-.unavail-table td.avail:hover{background:rgba(16,185,129,0.3);transform:scale(1.08)}
-.unavail-table td.unavail{background:rgba(239,68,68,0.2);color:var(--danger);cursor:pointer;font-weight:800;transition:all .2s}
-.unavail-table td.unavail:hover{background:rgba(239,68,68,0.35);transform:scale(1.08)}
+.unavail-table .day-cell{background:rgba(16,185,129,0.15);color:var(--primary);font-weight:800;white-space:nowrap;font-size:11px}
+.unavail-table td.avail{background:rgba(16,185,129,0.15);color:var(--success);cursor:pointer;font-weight:800;transition:all .15s;user-select:none}
+.unavail-table td.avail:hover{background:rgba(16,185,129,0.3);transform:scale(1.05)}
+.unavail-table td.unavail{background:rgba(239,68,68,0.2);color:var(--danger);cursor:pointer;font-weight:800;transition:all .15s;user-select:none}
+.unavail-table td.unavail:hover{background:rgba(239,68,68,0.35);transform:scale(1.05)}
 
-.share-box{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.share-box input{flex:1;min-width:180px;padding:11px 14px;background:var(--surface-dim);border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:12px;direction:ltr;text-align:left}
+.share-box{display:flex;gap:7px;margin-top:9px;flex-wrap:wrap}
+.share-box input{flex:1;min-width:150px;padding:9px 12px;background:var(--surface-dim);border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:11px;direction:ltr;text-align:left}
 
-.chart-bar-container{background:var(--surface-dim);border-radius:11px;padding:12px 14px;margin-bottom:7px;border:1px solid var(--border)}
-.chart-bar-label{display:flex;justify-content:space-between;margin-bottom:7px;font-size:12px;font-weight:700;color:var(--text)}
-.chart-bar{height:9px;background:var(--surface-dim);border-radius:5px;overflow:hidden}
-.chart-bar-fill{height:100%;border-radius:5px;transition:width .8s var(--tr);background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.chart-bar-container{background:var(--surface-dim);border-radius:9px;padding:10px 12px;margin-bottom:6px;border:1px solid var(--border)}
+.chart-bar-label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;font-weight:700;color:var(--text);gap:8px}
+.chart-bar-label span:first-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chart-bar-label span:last-child{flex-shrink:0}
+.chart-bar{height:8px;background:var(--surface-dim);border-radius:4px;overflow:hidden}
+.chart-bar-fill{height:100%;border-radius:4px;transition:width .8s var(--tr);background:linear-gradient(90deg,var(--primary),var(--primary-light))}
 .chart-bar-fill.warn{background:linear-gradient(90deg,#f59e0b,#f97316)}
 .chart-bar-fill.danger{background:linear-gradient(90deg,#ef4444,#dc2626)}
 
-.holiday-item{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--surface-dim);border-radius:9px;margin-bottom:7px;border:1px solid var(--border);font-size:13px;color:var(--text)}
-.holiday-item button{background:transparent;border:1px solid rgba(239,68,68,0.3);color:var(--danger);padding:4px 9px;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700;font-size:11px;transition:all .2s}
+.holiday-item{display:flex;justify-content:space-between;align-items:center;padding:8px 11px;background:var(--surface-dim);border-radius:8px;margin-bottom:6px;border:1px solid var(--border);font-size:12px;color:var(--text);gap:8px;flex-wrap:wrap}
+.holiday-item button{background:transparent;border:1px solid rgba(239,68,68,0.3);color:var(--danger);padding:3px 8px;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:700;font-size:10px;transition:all .2s;flex-shrink:0}
 .holiday-item button:hover{background:rgba(239,68,68,0.15)}
 
-.steps{padding-right:22px;line-height:2.1;color:var(--text-dim);font-size:13px}
+.steps{padding-right:20px;line-height:2;color:var(--text-dim);font-size:13px}
 .steps b{color:var(--text);font-weight:800}
-html[dir="ltr"] .steps{padding-right:0;padding-left:22px}
+html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
 
-.spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:inline-block}
+.spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* ============ RESPONSIVE ============ */
+@media(min-width:1024px){
+  body{padding:24px}
+  header{padding:20px 24px;gap:18px}
+  .logo-badge{width:52px;height:52px;min-width:52px;border-radius:16px}
+  .logo-badge svg{width:26px;height:26px}
+  header h1{font-size:24px}
+  header p{font-size:13px}
+  .icon-toggle{width:42px;height:42px}
+  .tabs{padding:7px}
+  .tabs button{padding:11px 18px;font-size:13px}
+  .card{padding:22px}
+  .stat-value{font-size:32px}
+  .stat-icon-badge{width:46px;height:46px}
+}
+
+@media(max-width:1023px) and (min-width:769px){
+  /* Tablet landscape */
+  .app{max-width:100%}
+}
+
+@media(max-width:768px){
+  body{padding:10px}
+  header{padding:12px 14px;gap:10px;margin-bottom:14px;flex-wrap:nowrap}
+  .logo-badge{width:40px;height:40px;min-width:40px;border-radius:11px}
+  .logo-badge svg{width:20px;height:20px}
+  header h1{font-size:17px}
+  header p{font-size:11px}
+  .icon-toggle{width:34px;height:34px;border-radius:9px}
+  .icon-toggle svg{width:16px;height:16px}
+  .tabs{padding:5px;gap:4px}
+  .tabs button{padding:8px 12px;font-size:11px;gap:5px}
+  .tabs button svg{width:13px;height:13px}
+  .card{padding:14px;margin-bottom:12px;border-radius:14px}
+  .card h2{font-size:14px;margin-bottom:11px}
+  .card h2 svg{width:16px;height:16px}
+  .stat-card{padding:12px 8px;border-radius:14px}
+  .stat-icon-badge{width:36px;height:36px;border-radius:10px}
+  .stat-icon-badge svg{width:17px;height:17px}
+  .stat-value{font-size:22px}
+  .stat-label{font-size:10px}
+  .stats{gap:8px;grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr;gap:8px}
+  .form-group input,.form-group select{font-size:13px;padding:9px 11px}
+  .btn{padding:9px 14px;font-size:12px}
+  .btn svg{width:13px;height:13px}
+  .btn-large{padding:13px;font-size:13px}
+  .list-item{padding:11px 12px}
+  .list-item .title{font-size:13px}
+  .list-item .actions{gap:4px}
+  .icon-btn{padding:6px}
+  .icon-btn svg{width:12px;height:12px}
+  .schedule-table th,.schedule-table td{padding:6px 3px;font-size:10px}
+  .schedule-table .subject-name{font-size:10px}
+  .schedule-table .teacher-name{font-size:9px}
+  .modal{padding:0}
+  .modal-content{max-width:100%;max-height:100vh;min-height:100vh;border-radius:0;padding:16px;margin:0}
+  .modal-header{padding-top:16px;top:-16px;margin-top:-16px}
+  .assignment-row{grid-template-columns:1fr 1fr;gap:5px}
+  .assignment-row .remove-btn{grid-column:span 2;height:32px}
+  .days-grid{grid-template-columns:repeat(2,1fr)}
+  .summary-grid{grid-template-columns:repeat(2,1fr)}
+  .modal-footer{flex-direction:column-reverse;gap:8px}
+  .modal-footer .btn{width:100%}
+  .modal-footer p{text-align:center;width:100%}
+}
+
+@media(max-width:480px){
+  body{padding:8px}
+  header{padding:10px 12px;gap:8px}
+  .logo-badge{width:36px;height:36px;min-width:36px;border-radius:10px}
+  .logo-badge svg{width:18px;height:18px}
+  header h1{font-size:15px}
+  header p{font-size:10px}
+  .icon-toggle{width:32px;height:32px}
+  .icon-toggle svg{width:14px;height:14px}
+  .tabs button{padding:7px 10px;font-size:10px}
+  .tabs button svg{width:12px;height:12px}
+  .card{padding:12px}
+  .card h2{font-size:13px}
+  .stat-value{font-size:20px}
+  .stat-label{font-size:9px}
+  .btn{padding:8px 12px;font-size:11px}
+  .btn-row{gap:5px}
+  .btn-row .btn{flex:1 1 calc(50% - 3px);min-width:0}
+  .assign-chip{font-size:10px;padding:3px 7px}
+  .badge{font-size:10px;padding:3px 7px}
+  .summary-item .val{font-size:16px}
+  .summary-item .lbl{font-size:9px}
+  .unavail-table th,.unavail-table td{padding:6px 3px;font-size:10px}
+  .unavail-table .day-cell{font-size:10px}
+}
+
+@media(max-width:360px){
+  header h1{font-size:13px}
+  header p{display:none}
+  .tabs button span{display:none}
+  .tabs button{padding:8px}
+  .tabs button svg{width:16px;height:16px}
+}
 
 @media print{
   body *{visibility:hidden}
@@ -252,139 +352,115 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:22px}
   .schedule-table td,.schedule-table th{border-radius:0!important;color:#000}
   .table-scroll{overflow:visible!important}
 }
-
-@media(max-width:768px){
-  body{padding:12px}
-  header{flex-wrap:wrap;padding:16px;gap:12px}
-  .logo-badge{width:44px;height:44px}
-  header h1{font-size:20px}
-  header p{font-size:11px}
-  .header-actions{width:100%;justify-content:flex-end}
-  .stat-value{font-size:26px}
-  .stat-icon-badge{width:40px;height:40px}
-  .card{padding:16px}
-  .schedule-table th,.schedule-table td{padding:7px 4px;font-size:11px}
-  .modal-content{padding:16px}
-  .unavail-table th,.unavail-table td{padding:7px 4px;font-size:11px}
-  .list-item{flex-wrap:wrap}
-  .form-row{grid-template-columns:1fr}
-  .assignment-row{grid-template-columns:1fr 1fr;gap:6px}
-  .assignment-row .remove-btn{grid-column:span 2;padding:8px}
-  .days-grid{grid-template-columns:repeat(2,1fr)}
-}
 </style>
 </head>
 <body>
 
 <!-- SVG ICON SPRITE -->
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-  <defs>
-    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
-    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-    <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></symbol>
-    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
-    <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
-    <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
-    <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
-    <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
-    <symbol id="i-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
-    <symbol id="i-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
-    <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
-    <symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
-    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
-    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
-    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
-    <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.7L19.6 10l-5.7 1.9L12 17.6l-1.9-5.7L4.4 10l5.7-1.9z"/><path d="M19 15l.9 2.7 2.7.9-2.7.9L19 22.2l-.9-2.7-2.7-.9 2.7-.9z"/><path d="M5 2l.6 1.9L7.5 4.5l-1.9.6L5 7l-.6-1.9L2.5 4.5l1.9-.6z"/></symbol>
-    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
-    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
-    <symbol id="i-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
-    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
-    <symbol id="i-x-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></symbol>
-    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
-    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
-    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
-    <symbol id="i-graduation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
-    <symbol id="i-user-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></symbol>
-    <symbol id="i-crown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M3 8l4.5 6L12 4l4.5 10L21 8l-2 12H5z"/></symbol>
-    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
-    <symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
-    <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
-    <symbol id="i-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
-    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
-  </defs>
+<defs>
+<symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="i-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
+<symbol id="i-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+<symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.7L19.6 10l-5.7 1.9L12 17.6l-1.9-5.7L4.4 10l5.7-1.9z"/><path d="M19 15l.9 2.7 2.7.9-2.7.9L19 22.2l-.9-2.7-2.7-.9 2.7-.9z"/><path d="M5 2l.6 1.9L7.5 4.5l-1.9.6L5 7l-.6-1.9L2.5 4.5l1.9-.6z"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+<symbol id="i-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+<symbol id="i-x-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+<symbol id="i-user-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></symbol>
+<symbol id="i-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
+<symbol id="i-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+</defs>
 </svg>
 
 <div class="orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
 
 <div class="app">
   <header>
-    <div class="logo-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div class="logo-badge"><svg viewBox="0 0 24 24"><use href="#i-calendar"/></svg></div>
     <div class="header-text">
-      <h1>جَدوَل · Jadwal</h1>
-      <p>إدارة الجدول الدراسي بذكاء</p>
+      <h1 data-i18n="appName">جَدوَل · Jadwal</h1>
+      <p data-i18n="appTag">إدارة الجدول الدراسي بذكاء</p>
     </div>
     <div class="header-actions">
-      <button class="icon-toggle" id="theme-btn" title="الوضع الليلي"><svg id="theme-icon" class="i"><use href="#i-moon"/></svg></button>
-      <button class="icon-toggle" id="lang-btn" title="Change Language"><svg class="i"><use href="#i-globe"/></svg></button>
+      <button class="icon-toggle" id="theme-btn" data-i18n-title="toggleTheme"><svg id="theme-icon"><use href="#i-moon"/></svg></button>
+      <button class="icon-toggle" id="lang-btn" data-i18n-title="changeLang"><svg><use href="#i-globe"/></svg></button>
     </div>
   </header>
 
-  <nav class="tabs">
-    <button data-tab="home" class="active"><svg class="i"><use href="#i-home"/></svg> الرئيسية</button>
-    <button data-tab="teachers"><svg class="i"><use href="#i-users"/></svg> المعلمون</button>
-    <button data-tab="classes"><svg class="i"><use href="#i-building"/></svg> الصفوف</button>
-    <button data-tab="schedule"><svg class="i"><use href="#i-calendar"/></svg> الجدول</button>
-    <button data-tab="reports"><svg class="i"><use href="#i-chart"/></svg> التقارير</button>
-    <button data-tab="settings"><svg class="i"><use href="#i-settings"/></svg> الإعدادات</button>
-  </nav>
+  <div class="tabs-wrapper">
+    <nav class="tabs">
+      <button data-tab="home" class="active"><svg><use href="#i-home"/></svg> <span data-i18n="tabHome">الرئيسية</span></button>
+      <button data-tab="teachers"><svg><use href="#i-users"/></svg> <span data-i18n="tabTeachers">المعلمون</span></button>
+      <button data-tab="classes"><svg><use href="#i-building"/></svg> <span data-i18n="tabClasses">الصفوف</span></button>
+      <button data-tab="schedule"><svg><use href="#i-calendar"/></svg> <span data-i18n="tabSchedule">الجدول</span></button>
+      <button data-tab="reports"><svg><use href="#i-chart"/></svg> <span data-i18n="tabReports">التقارير</span></button>
+      <button data-tab="settings"><svg><use href="#i-settings"/></svg> <span data-i18n="tabSettings">الإعدادات</span></button>
+    </nav>
+  </div>
 
   <main>
     <section id="home" class="tab-panel active">
       <div class="stats">
-        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-users"/></svg></div><div class="stat-value" id="stat-teachers">0</div><div class="stat-label">معلم</div></div>
-        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-building"/></svg></div><div class="stat-value" id="stat-classes">0</div><div class="stat-label">صف</div></div>
-        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-book"/></svg></div><div class="stat-value" id="stat-requirements">0</div><div class="stat-label">مادة</div></div>
-        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-clock"/></svg></div><div class="stat-value" id="stat-hours">0</div><div class="stat-label">حصة أسبوعيًا</div></div>
+        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-users"/></svg></div><div class="stat-value" id="stat-teachers">0</div><div class="stat-label" data-i18n="labelTeachers">معلم</div></div>
+        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-building"/></svg></div><div class="stat-value" id="stat-classes">0</div><div class="stat-label" data-i18n="labelClasses">صف</div></div>
+        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-book"/></svg></div><div class="stat-value" id="stat-requirements">0</div><div class="stat-label" data-i18n="labelSubjects">مادة</div></div>
+        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-clock"/></svg></div><div class="stat-value" id="stat-hours">0</div><div class="stat-label" data-i18n="labelWeekly">حصة أسبوعيًا</div></div>
       </div>
       <div id="alerts-container"></div>
       <div class="card">
-        <h2><svg><use href="#i-settings"/></svg> إعدادات التوليد</h2>
+        <h2><svg><use href="#i-settings"/></svg> <span data-i18n="genSettings">إعدادات التوليد</span></h2>
         <div class="form-row">
-          <div class="form-group"><label>عدد الحصص في اليوم</label><input type="number" id="periods-count" min="4" max="10" value="7"><div class="form-hint">كم حصة في اليوم الواحد (عادة 6-8)</div></div>
-          <div class="form-group"><label>أيام الدراسة</label>
-            <select id="days-count"><option value="5">5 أيام (الأحد - الخميس)</option><option value="6">6 أيام (إضافة السبت)</option></select>
-            <div class="form-hint">عدد أيام الأسبوع الدراسي</div>
+          <div class="form-group"><label data-i18n="periodsPerDay">عدد الحصص في اليوم</label><input type="number" id="periods-count" min="4" max="10" value="7" data-i18n-placeholder="periodsHint"><div class="form-hint" data-i18n="periodsHint">كم حصة في اليوم (عادة 6-8)</div></div>
+          <div class="form-group"><label data-i18n="schoolDays">أيام الدراسة</label>
+            <select id="days-count"><option value="5" data-i18n="days5">5 أيام (الأحد - الخميس)</option><option value="6" data-i18n="days6">6 أيام (إضافة السبت)</option></select>
           </div>
         </div>
-        <button class="btn btn-primary btn-large" id="generate-btn"><svg><use href="#i-sparkles"/></svg> توليد الجدول تلقائيًا</button>
+        <button class="btn btn-primary btn-large" id="generate-btn"><svg><use href="#i-sparkles"/></svg> <span data-i18n="generate">توليد الجدول تلقائيًا</span></button>
       </div>
       <div class="card" data-admin-only>
-        <h2><svg><use href="#i-link"/></svg> مشاركة البيانات</h2>
-        <p style="color:var(--text-dim);margin-bottom:12px;font-size:12px">أنشئ رابطًا يحتوي كل بياناتك وشاركه مع أي شخص.</p>
+        <h2><svg><use href="#i-link"/></svg> <span data-i18n="shareTitle">مشاركة البيانات</span></h2>
+        <p style="color:var(--text-dim);margin-bottom:12px;font-size:12px" data-i18n="shareDesc">أنشئ رابطًا يحتوي كل بياناتك وشاركه مع أي شخص.</p>
         <div class="form-row">
-          <div class="form-group"><label>نوع الصلاحية</label>
-            <select id="share-role"><option value="editor">محرر — يمكنه التعديل</option><option value="viewer">مشاهد — عرض فقط</option></select>
+          <div class="form-group"><label data-i18n="shareRole">نوع الصلاحية</label>
+            <select id="share-role"><option value="editor" data-i18n="roleEditorOpt">محرر — يمكنه التعديل</option><option value="viewer" data-i18n="roleViewerOpt">مشاهد — عرض فقط</option></select>
           </div>
         </div>
-        <button class="btn btn-primary" id="share-btn"><svg><use href="#i-link"/></svg> إنشاء رابط المشاركة</button>
+        <button class="btn btn-primary" id="share-btn"><svg><use href="#i-link"/></svg> <span data-i18n="createLink">إنشاء رابط المشاركة</span></button>
         <div class="share-box" id="share-box" style="display:none">
           <input type="text" id="share-url" readonly>
-          <button class="btn btn-secondary" id="copy-url-btn"><svg><use href="#i-copy"/></svg> نسخ</button>
+          <button class="btn btn-secondary" id="copy-url-btn"><svg><use href="#i-copy"/></svg> <span data-i18n="copy">نسخ</span></button>
         </div>
         <p id="share-hint" style="color:var(--text-dim);font-size:11px;margin-top:8px"></p>
       </div>
       <div class="card">
-        <h2><svg><use href="#i-info"/></svg> كيف تستخدم البرنامج؟</h2>
+        <h2><svg><use href="#i-info"/></svg> <span data-i18n="howToUse">كيف تستخدم البرنامج؟</span></h2>
         <ol class="steps">
-          <li>أضف <b>الصفوف</b> أولاً</li>
-          <li>أضف <b>المعلم</b> وأدخل كل معلوماته</li>
-          <li>حدد <b>أوقات عدم توفره</b> إن وجدت</li>
-          <li>اضغط <b>توليد الجدول</b></li>
-          <li>اطبع أو حمّل PDF/Excel/PNG</li>
+          <li data-i18n="step1">أضف الصفوف أولاً</li>
+          <li data-i18n="step2">أضف المعلم وأدخل كل معلوماته</li>
+          <li data-i18n="step3">حدد أوقات عدم توفره</li>
+          <li data-i18n="step4">اضغط توليد الجدول</li>
+          <li data-i18n="step5">اطبع أو حمّل PDF/Excel/PNG</li>
         </ol>
       </div>
     </section>
@@ -392,8 +468,8 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:22px}
     <section id="teachers" class="tab-panel">
       <div class="card" data-admin-only>
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-          <h2 style="margin:0"><svg><use href="#i-users"/></svg> قائمة المعلمين</h2>
-          <button class="btn btn-primary" id="add-teacher-btn"><svg><use href="#i-plus"/></svg> إضافة معلم</button>
+          <h2 style="margin:0"><svg><use href="#i-users"/></svg> <span data-i18n="teachersList">قائمة المعلمين</span></h2>
+          <button class="btn btn-primary" id="add-teacher-btn"><svg><use href="#i-plus"/></svg> <span data-i18n="addTeacher">إضافة معلم</span></button>
         </div>
       </div>
       <div class="card"><div id="teachers-list" class="list"></div></div>
@@ -401,29 +477,29 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:22px}
 
     <section id="classes" class="tab-panel">
       <div class="card" data-admin-only>
-        <h2><svg><use href="#i-plus"/></svg> إضافة صف</h2>
+        <h2><svg><use href="#i-plus"/></svg> <span data-i18n="addClass">إضافة صف</span></h2>
         <div class="form-row">
-          <div class="form-group"><label>اسم الصف</label><input type="text" id="class-name" placeholder="مثال: الأول أ"></div>
-          <div class="form-group"><label>المرحلة</label>
-            <select id="class-stage"><option value="primary">ابتدائي</option><option value="middle">متوسط</option><option value="secondary">إعدادي</option></select>
+          <div class="form-group"><label data-i18n="className">اسم الصف</label><input type="text" id="class-name" data-i18n-placeholder="classNamePlaceholder" placeholder="مثال: الأول أ"></div>
+          <div class="form-group"><label data-i18n="stage">المرحلة</label>
+            <select id="class-stage"><option value="primary" data-i18n="primary">ابتدائي</option><option value="middle" data-i18n="middle">متوسط</option><option value="secondary" data-i18n="secondary">إعدادي</option></select>
           </div>
         </div>
-        <button class="btn btn-primary" id="add-class-btn"><svg><use href="#i-plus"/></svg> إضافة</button>
+        <button class="btn btn-primary" id="add-class-btn"><svg><use href="#i-plus"/></svg> <span data-i18n="add">إضافة</span></button>
       </div>
-      <div class="card"><h2><svg><use href="#i-building"/></svg> قائمة الصفوف</h2><div id="classes-list" class="list"></div></div>
+      <div class="card"><h2><svg><use href="#i-building"/></svg> <span data-i18n="classesList">قائمة الصفوف</span></h2><div id="classes-list" class="list"></div></div>
     </section>
 
     <section id="schedule" class="tab-panel">
       <div class="card">
         <div class="form-row">
-          <div class="form-group"><label>عرض حسب</label><select id="schedule-view"><option value="class">الصف</option><option value="teacher">المعلم</option></select></div>
-          <div class="form-group"><label>اختر</label><select id="schedule-entity"></select></div>
-          <div class="form-group"><label>حجم الورق</label><select id="print-size"><option value="A4">A4</option><option value="A3">A3</option></select></div>
-          <div class="form-group"><label>اتجاه الورق</label><select id="print-orientation"><option value="landscape">أفقي</option><option value="portrait">عمودي</option></select></div>
+          <div class="form-group"><label data-i18n="viewBy">عرض حسب</label><select id="schedule-view"><option value="class" data-i18n="viewByClass">الصف</option><option value="teacher" data-i18n="viewByTeacher">المعلم</option></select></div>
+          <div class="form-group"><label data-i18n="select">اختر</label><select id="schedule-entity"></select></div>
+          <div class="form-group"><label data-i18n="paperSize">حجم الورق</label><select id="print-size"><option value="A4">A4</option><option value="A3">A3</option></select></div>
+          <div class="form-group"><label data-i18n="orientation">اتجاه الورق</label><select id="print-orientation"><option value="landscape" data-i18n="landscape">أفقي</option><option value="portrait" data-i18n="portrait">عمودي</option></select></div>
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" id="pdf-btn"><svg><use href="#i-file-text"/></svg> PDF</button>
-          <button class="btn btn-secondary" id="print-btn"><svg><use href="#i-printer"/></svg> طباعة</button>
+          <button class="btn btn-secondary" id="print-btn"><svg><use href="#i-printer"/></svg> <span data-i18n="print">طباعة</span></button>
           <button class="btn btn-success" id="excel-btn"><svg><use href="#i-download"/></svg> Excel</button>
           <button class="btn btn-secondary" id="csv-btn"><svg><use href="#i-download"/></svg> CSV</button>
           <button class="btn btn-secondary" id="png-btn"><svg><use href="#i-image"/></svg> PNG</button>
@@ -434,45 +510,45 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:22px}
 
     <section id="reports" class="tab-panel">
       <div class="stats">
-        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-trending-up"/></svg></div><div class="stat-value" id="report-total-required">0</div><div class="stat-label">إجمالي المطلوب</div></div>
-        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-target"/></svg></div><div class="stat-value" id="report-total-placed">0</div><div class="stat-label">الموزعة</div></div>
-        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-alert"/></svg></div><div class="stat-value" id="report-warnings">0</div><div class="stat-label">تحذيرات</div></div>
+        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-trending-up"/></svg></div><div class="stat-value" id="report-total-required">0</div><div class="stat-label" data-i18n="totalRequired">إجمالي المطلوب</div></div>
+        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-target"/></svg></div><div class="stat-value" id="report-total-placed">0</div><div class="stat-label" data-i18n="totalPlaced">الموزعة</div></div>
+        <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-alert"/></svg></div><div class="stat-value" id="report-warnings">0</div><div class="stat-label" data-i18n="warningsCount">تحذيرات</div></div>
       </div>
-      <div class="card"><h2><svg><use href="#i-users"/></svg> توزيع حصص المعلمين</h2><div id="teacher-chart"></div></div>
-      <div class="card"><h2><svg><use href="#i-building"/></svg> توزيع حصص الصفوف</h2><div id="class-chart"></div></div>
-      <div class="card"><h2><svg><use href="#i-alert"/></svg> التحذيرات</h2><div id="warnings-list"></div></div>
+      <div class="card"><h2><svg><use href="#i-users"/></svg> <span data-i18n="teachersDistribution">توزيع حصص المعلمين</span></h2><div id="teacher-chart"></div></div>
+      <div class="card"><h2><svg><use href="#i-building"/></svg> <span data-i18n="classesDistribution">توزيع حصص الصفوف</span></h2><div id="class-chart"></div></div>
+      <div class="card"><h2><svg><use href="#i-alert"/></svg> <span data-i18n="warningsList">التحذيرات</span></h2><div id="warnings-list"></div></div>
     </section>
 
     <section id="settings" class="tab-panel">
       <div class="card">
-        <h2><svg><use href="#i-calendar"/></svg> بيانات الفصل</h2>
+        <h2><svg><use href="#i-calendar"/></svg> <span data-i18n="termInfo">بيانات الفصل</span></h2>
         <div class="form-row">
-          <div class="form-group"><label>اسم الفصل</label><input type="text" id="term-name"></div>
-          <div class="form-group"><label>البداية</label><input type="date" id="term-start"></div>
-          <div class="form-group"><label>النهاية</label><input type="date" id="term-end"></div>
+          <div class="form-group"><label data-i18n="termName">اسم الفصل</label><input type="text" id="term-name"></div>
+          <div class="form-group"><label data-i18n="startDate">البداية</label><input type="date" id="term-start"></div>
+          <div class="form-group"><label data-i18n="endDate">النهاية</label><input type="date" id="term-end"></div>
         </div>
-        <button class="btn btn-primary" id="save-term-btn"><svg><use href="#i-save"/></svg> حفظ</button>
+        <button class="btn btn-primary" id="save-term-btn"><svg><use href="#i-save"/></svg> <span data-i18n="save">حفظ</span></button>
       </div>
       <div class="card">
-        <h2><svg><use href="#i-calendar"/></svg> العطل</h2>
+        <h2><svg><use href="#i-calendar"/></svg> <span data-i18n="holidays">العطل</span></h2>
         <div class="form-row">
-          <div class="form-group"><label>اسم المناسبة</label><input type="text" id="holiday-name"></div>
-          <div class="form-group"><label>التاريخ</label><input type="date" id="holiday-date"></div>
+          <div class="form-group"><label data-i18n="holidayName">اسم المناسبة</label><input type="text" id="holiday-name"></div>
+          <div class="form-group"><label data-i18n="holidayDate">التاريخ</label><input type="date" id="holiday-date"></div>
         </div>
-        <button class="btn btn-primary" id="add-holiday-btn"><svg><use href="#i-plus"/></svg> إضافة</button>
-        <div id="holidays-list" style="margin-top:16px"></div>
+        <button class="btn btn-primary" id="add-holiday-btn"><svg><use href="#i-plus"/></svg> <span data-i18n="add">إضافة</span></button>
+        <div id="holidays-list" style="margin-top:14px"></div>
       </div>
       <div class="card" data-admin-only>
-        <h2><svg><use href="#i-save"/></svg> نسخ احتياطي</h2>
+        <h2><svg><use href="#i-save"/></svg> <span data-i18n="backup">نسخ احتياطي</span></h2>
         <div class="btn-row">
-          <button class="btn btn-primary" id="backup-btn"><svg><use href="#i-download"/></svg> تحميل</button>
-          <button class="btn btn-secondary" id="restore-btn"><svg><use href="#i-upload"/></svg> استعادة</button>
+          <button class="btn btn-primary" id="backup-btn"><svg><use href="#i-download"/></svg> <span data-i18n="download">تحميل</span></button>
+          <button class="btn btn-secondary" id="restore-btn"><svg><use href="#i-upload"/></svg> <span data-i18n="restore">استعادة</span></button>
           <input type="file" id="restore-input" accept=".json" style="display:none">
         </div>
       </div>
       <div class="card" data-admin-only>
-        <h2><svg><use href="#i-alert"/></svg> منطقة الخطر</h2>
-        <button class="btn btn-danger" id="reset-btn"><svg><use href="#i-trash"/></svg> حذف الكل</button>
+        <h2><svg><use href="#i-alert"/></svg> <span data-i18n="dangerZone">منطقة الخطر</span></h2>
+        <button class="btn btn-danger" id="reset-btn"><svg><use href="#i-trash"/></svg> <span data-i18n="resetAll">حذف الكل</span></button>
       </div>
     </section>
   </main>
@@ -482,50 +558,50 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:22px}
 <div id="teacher-modal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2 id="tm-title"><svg><use href="#i-user-plus"/></svg> إضافة معلم</h2>
+      <h2 id="tm-title"><svg><use href="#i-user-plus"/></svg> <span data-i18n="addTeacher">إضافة معلم</span></h2>
       <button class="modal-close" onclick="closeTeacherModal()"><svg><use href="#i-x"/></svg></button>
     </div>
 
     <div class="teacher-section">
-      <h3><svg><use href="#i-users"/></svg> المعلومات الأساسية</h3>
+      <h3><svg><use href="#i-users"/></svg> <span data-i18n="basicInfo">المعلومات الأساسية</span></h3>
       <div class="form-row">
-        <div class="form-group"><label>اسم المعلم</label><input type="text" id="tm-name" placeholder="مثال: أحمد محمد"></div>
-        <div class="form-group"><label>المرحلة</label>
-          <select id="tm-stage"><option value="primary">ابتدائي</option><option value="middle">متوسط</option><option value="secondary">إعدادي</option></select>
+        <div class="form-group"><label data-i18n="teacherName">اسم المعلم</label><input type="text" id="tm-name" data-i18n-placeholder="teacherNamePlaceholder" placeholder="مثال: أحمد محمد"></div>
+        <div class="form-group"><label data-i18n="stage">المرحلة</label>
+          <select id="tm-stage"><option value="primary" data-i18n="primary">ابتدائي</option><option value="middle" data-i18n="middle">متوسط</option><option value="secondary" data-i18n="secondary">إعدادي</option></select>
         </div>
       </div>
     </div>
 
     <div class="teacher-section">
-      <h3><svg><use href="#i-clock"/></svg> الحد اليومي للحصص</h3>
+      <h3><svg><use href="#i-clock"/></svg> <span data-i18n="dailyLimitSection">الحد اليومي للحصص</span></h3>
       <div class="form-group">
-        <label>أقصى عدد حصص في اليوم الواحد</label>
+        <label data-i18n="maxDaily">أقصى عدد حصص في اليوم الواحد</label>
         <input type="number" id="tm-max-day" value="6" min="1" max="12" oninput="updateTeacherSummary()">
-        <div class="form-hint">📌 الحد الأقصى للحصص في <b>يوم واحد</b>. السعة الأسبوعية = الحد اليومي × أيام الدوام (تُحسب تلقائيًا).</div>
+        <div class="form-hint" data-i18n="maxDailyHint">📌 الحد الأقصى للحصص في يوم واحد. السعة الأسبوعية = الحد اليومي × أيام الدوام (تُحسب تلقائيًا).</div>
       </div>
     </div>
 
     <div class="teacher-section">
-      <h3><svg><use href="#i-calendar"/></svg> أيام الدوام في الأسبوع</h3>
+      <h3><svg><use href="#i-calendar"/></svg> <span data-i18n="workingDaysLabel">أيام الدوام في الأسبوع</span></h3>
       <div id="tm-working-days" class="days-grid"></div>
-      <div class="form-hint" style="margin-top:10px">📌 اختر الأيام التي يعمل فيها المعلم فعليًا (حسب العقد).</div>
+      <div class="form-hint" style="margin-top:8px" data-i18n="workingDaysHint">📌 اختر الأيام التي يعمل فيها المعلم فعليًا (حسب العقد).</div>
     </div>
 
     <div class="teacher-section">
-      <h3><svg><use href="#i-book"/></svg> الصفوف والمواد</h3>
+      <h3><svg><use href="#i-book"/></svg> <span data-i18n="assignments">الصفوف والمواد</span></h3>
       <div id="tm-assignments" class="assignments-list"></div>
-      <button type="button" class="btn btn-secondary btn-sm" onclick="addAssignmentRow()"><svg><use href="#i-plus"/></svg> إضافة صف/مادة</button>
-      <div class="form-hint" style="margin-top:10px">📌 أضف كل صف ومادة يدرّسها المعلم مع <b>عدد الحصص الأسبوعية</b>. مثال: رياضيات الأول أ — 5 حصص، علوم الأول أ — 2 حصص.</div>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="addAssignmentRow()"><svg><use href="#i-plus"/></svg> <span data-i18n="addAssignment">إضافة صف/مادة</span></button>
+      <div class="form-hint" style="margin-top:8px" data-i18n="assignmentsHint">📌 أضف كل صف ومادة يدرّسها المعلم مع عدد الحصص الأسبوعية.</div>
     </div>
 
     <div class="summary-panel">
-      <h3><svg><use href="#i-chart"/></svg> ملخص تلقائي</h3>
+      <h3><svg><use href="#i-chart"/></svg> <span data-i18n="summary">ملخص تلقائي</span></h3>
       <div id="tm-summary"></div>
     </div>
 
     <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeTeacherModal()">إلغاء</button>
-      <button class="btn btn-primary" id="tm-save-btn" onclick="saveTeacherFromModal()"><svg><use href="#i-save"/></svg> حفظ</button>
+      <button class="btn btn-secondary" onclick="closeTeacherModal()" data-i18n="cancel">إلغاء</button>
+      <button class="btn btn-primary" id="tm-save-btn" onclick="saveTeacherFromModal()"><svg><use href="#i-save"/></svg> <span data-i18n="save">حفظ</span></button>
     </div>
   </div>
 </div>
@@ -534,13 +610,13 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:22px}
 <div id="modal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2><svg><use href="#i-clock"/></svg> أوقات عدم التوفر — <span id="modal-teacher-name"></span></h2>
+      <h2><svg><use href="#i-clock"/></svg> <span data-i18n="unavailTitle">أوقات عدم التوفر</span> — <span id="modal-teacher-name"></span></h2>
       <button class="modal-close" id="modal-close"><svg><use href="#i-x"/></svg></button>
     </div>
     <div id="modal-grid"></div>
     <div class="modal-footer">
-      <p>انقر على أي حصة لتبديل الحالة بين متاح ✓ ومحظور ✕</p>
-      <button class="btn btn-primary" id="modal-save"><svg><use href="#i-save"/></svg> حفظ وإغلاق</button>
+      <p data-i18n="unavailHint">انقر على أي حصة لتبديل الحالة بين متاح ✓ ومحظور ✕</p>
+      <button class="btn btn-primary" id="modal-save"><svg><use href="#i-save"/></svg> <span data-i18n="saveClose">حفظ وإغلاق</span></button>
     </div>
   </div>
 </div>
@@ -550,29 +626,148 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:22px}
 <script>
 'use strict';
 
-/* ===== THEME ===== */
-document.documentElement.setAttribute('data-theme', localStorage.getItem('jadwal-theme') || 'light');
-function updateThemeIcon(){
-  document.getElementById('theme-icon').innerHTML = '<use href="#' + (document.documentElement.getAttribute('data-theme') === 'light' ? 'i-moon' : 'i-sun') + '"/>';
-}
-document.getElementById('theme-btn').addEventListener('click', () => {
-  const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('jadwal-theme', next);
-  updateThemeIcon();
-});
+/* ============ TRANSLATIONS ============ */
+const I18N = {
+  ar: {
+    appName:'جَدوَل · Jadwal', appTag:'إدارة الجدول الدراسي بذكاء',
+    toggleTheme:'الوضع الليلي/النهاري', changeLang:'تغيير اللغة',
+    tabHome:'الرئيسية', tabTeachers:'المعلمون', tabClasses:'الصفوف', tabSchedule:'الجدول', tabReports:'التقارير', tabSettings:'الإعدادات',
+    labelTeachers:'معلم', labelClasses:'صف', labelSubjects:'مادة', labelWeekly:'حصة أسبوعيًا',
+    genSettings:'إعدادات التوليد', periodsPerDay:'عدد الحصص في اليوم', periodsHint:'كم حصة في اليوم (عادة 6-8)', schoolDays:'أيام الدراسة',
+    days5:'5 أيام (الأحد - الخميس)', days6:'6 أيام (إضافة السبت)',
+    generate:'توليد الجدول تلقائيًا', generating:'جاري التوليد...',
+    shareTitle:'مشاركة البيانات', shareDesc:'أنشئ رابطًا يحتوي كل بياناتك وشاركه مع أي شخص.',
+    shareRole:'نوع الصلاحية', roleEditorOpt:'محرر — يمكنه التعديل', roleViewerOpt:'مشاهد — عرض فقط',
+    createLink:'إنشاء رابط المشاركة', copy:'نسخ', copied:'تم النسخ ✓',
+    howToUse:'كيف تستخدم البرنامج؟',
+    step1:'أضف الصفوف أولاً', step2:'أضف المعلم وأدخل كل معلوماته', step3:'حدد أوقات عدم توفره',
+    step4:'اضغط توليد الجدول', step5:'اطبع أو حمّل PDF/Excel/PNG',
+    teachersList:'قائمة المعلمين', addTeacher:'إضافة معلم', editTeacher:'تعديل معلم',
+    teacherName:'اسم المعلم', teacherNamePlaceholder:'مثال: أحمد محمد',
+    dailyLimitSection:'الحد اليومي للحصص', maxDaily:'أقصى عدد حصص في اليوم الواحد',
+    maxDailyHint:'📌 الحد الأقصى للحصص في يوم واحد. السعة الأسبوعية = الحد اليومي × أيام الدوام.',
+    workingDaysLabel:'أيام الدوام في الأسبوع', workingDaysHint:'📌 اختر الأيام التي يعمل فيها المعلم فعليًا.',
+    assignments:'الصفوف والمواد', addAssignment:'إضافة صف/مادة',
+    assignmentsHint:'📌 أضف كل صف ومادة يدرّسها المعلم مع عدد الحصص الأسبوعية.',
+    summary:'ملخص تلقائي', basicInfo:'المعلومات الأساسية',
+    addClass:'إضافة صف', className:'اسم الصف', classNamePlaceholder:'مثال: الأول أ', stage:'المرحلة',
+    primary:'ابتدائي', middle:'متوسط', secondary:'إعدادي', classesList:'قائمة الصفوف',
+    add:'إضافة', save:'حفظ', cancel:'إلغاء',
+    viewBy:'عرض حسب', viewByClass:'الصف', viewByTeacher:'المعلم', select:'اختر',
+    paperSize:'حجم الورق', orientation:'اتجاه الورق', landscape:'أفقي', portrait:'عمودي', print:'طباعة',
+    totalRequired:'إجمالي المطلوب', totalPlaced:'الموزعة', warningsCount:'تحذيرات',
+    teachersDistribution:'توزيع حصص المعلمين', classesDistribution:'توزيع حصص الصفوف', warningsList:'التحذيرات',
+    termInfo:'بيانات الفصل', termName:'اسم الفصل', startDate:'البداية', endDate:'النهاية',
+    holidays:'العطل', holidayName:'اسم المناسبة', holidayDate:'التاريخ',
+    backup:'نسخ احتياطي', download:'تحميل', restore:'استعادة', dangerZone:'منطقة الخطر', resetAll:'حذف الكل',
+    unavailTitle:'أوقات عدم التوفر', unavailHint:'انقر على أي حصة لتبديل الحالة بين متاح ✓ ومحظور ✕', saveClose:'حفظ وإغلاق',
+    noTeachers:'لا يوجد معلمون بعد', noClasses:'لا توجد صفوف بعد',
+    noSchedule:'لم يتم توليد الجدول بعد', noScheduleHint:'اذهب للرئيسية واضغط توليد الجدول',
+    classSchedule:'جدول الصف', teacherSchedule:'جدول المعلم',
+    hours:'حصة', days:'أيام', delete:'حذف',
+    deleteConfirmTeacher:'حذف هذا المعلم وكل مواده؟', deleteConfirmClass:'حذف هذا الصف وكل مواده؟',
+    deleteConfirmReset:'هل أنت متأكد من حذف جميع البيانات؟',
+    needName:'ادخل اسم المعلم', needWorkingDays:'اختر يوم دوام واحد على الأقل',
+    needClassOrSubject:'أضف صفًا ومادة واحدة على الأقل', exists:'موجود مسبقًا',
+    added:'تم الإضافة ✓', updated:'تم التحديث ✓', deleted:'تم الحذف',
+    generated:'تم التوليد بنجاح ✓', partialGen:'حصة لم توزع', error:'حدث خطأ',
+    noData:'لا يوجد جدول', downloaded:'تم التحميل ✓',
+    shareReady:'رابط المشاركة جاهز ✓', importedFromLink:'تم الاستيراد ✓',
+    termSaved:'تم الحفظ ✓', holidayAdded:'تمت الإضافة ✓', noHolidays:'لا توجد عطل',
+    restored:'تمت الاستعادة ✓', invalidFile:'ملف غير صالح', saved:'تم الحفظ ✓',
+    selectEntity:'اختر عنصرًا للعرض', unavailable:'محظورة',
+    statusOK:'✅ يمكن حفظ المعلم وتوليد الجدول', statusWarn:'⚠️ السعة ممتلئة',
+    statusDangerDays:'❌ اختر يوم دوام واحد على الأقل',
+    statusDangerOver:'❌ الحصص أكثر من السعة',
+    statusWarnZero:'⚠️ أضف صفًا واحدًا على الأقل',
+    capacity:'السعة', totalAssigned:'المطلوبة', workingDays:'أيام الدوام', dailyLimit:'يومي',
+    capacityFormula:'الحساب: أيام الدوام ({d}) × الحد اليومي ({m}) = {c} حصة كحد أقصى',
+    remaining:'متبقٍ {n} حصة احتياطية',
+    classLabel:'الصف', subjectPlaceholder:'المادة', addClassesFirst:'أضف صفوفًا أولاً',
+    noTeachersWarn:'لا يوجد معلمون', noClassesWarn:'لا توجد صفوف',
+    cannotGenerate:'لا يمكن التوليد بسبب:', fixThenRetry:'عالج المشاكل ثم أعد المحاولة',
+    partialGenerated:'تم التوليد جزئيًا:', saving:'جاري الحفظ...',
+    roleAdmin:'مدير', roleEditor:'محرر', roleViewer:'مشاهد',
+    subject:'المادة'
+  },
+  en: {
+    appName:'Jadwal · جَدوَل', appTag:'Smart School Scheduling',
+    toggleTheme:'Toggle theme', changeLang:'Change language',
+    tabHome:'Home', tabTeachers:'Teachers', tabClasses:'Classes', tabSchedule:'Schedule', tabReports:'Reports', tabSettings:'Settings',
+    labelTeachers:'Teachers', labelClasses:'Classes', labelSubjects:'Subjects', labelWeekly:'Weekly hours',
+    genSettings:'Generation Settings', periodsPerDay:'Periods per day', periodsHint:'Periods per day (usually 6-8)', schoolDays:'School days',
+    days5:'5 days (Sun - Thu)', days6:'6 days (add Saturday)',
+    generate:'Generate schedule', generating:'Generating...',
+    shareTitle:'Share Data', shareDesc:'Create a link with all your data and share it.',
+    shareRole:'Access level', roleEditorOpt:'Editor — can modify', roleViewerOpt:'Viewer — read only',
+    createLink:'Create share link', copy:'Copy', copied:'Copied ✓',
+    howToUse:'How to use?',
+    step1:'Add classes first', step2:'Add a teacher with all info', step3:'Set unavailable times',
+    step4:'Click Generate Schedule', step5:'Print or download PDF/Excel/PNG',
+    teachersList:'Teachers List', addTeacher:'Add Teacher', editTeacher:'Edit Teacher',
+    teacherName:'Teacher name', teacherNamePlaceholder:'e.g. John Smith',
+    dailyLimitSection:'Daily Hour Limit', maxDaily:'Max hours per day',
+    maxDailyHint:'📌 Max hours in one day. Weekly capacity = daily × working days.',
+    workingDaysLabel:'Working days per week', workingDaysHint:'📌 Choose the days this teacher actually works.',
+    assignments:'Classes & Subjects', addAssignment:'Add Class/Subject',
+    assignmentsHint:'📌 Add each class & subject this teacher teaches, with weekly hours.',
+    summary:'Auto Summary', basicInfo:'Basic Info',
+    addClass:'Add Class', className:'Class name', classNamePlaceholder:'e.g. Grade 1A', stage:'Stage',
+    primary:'Primary', middle:'Middle', secondary:'Secondary', classesList:'Classes List',
+    add:'Add', save:'Save', cancel:'Cancel',
+    viewBy:'View by', viewByClass:'Class', viewByTeacher:'Teacher', select:'Select',
+    paperSize:'Paper size', orientation:'Orientation', landscape:'Landscape', portrait:'Portrait', print:'Print',
+    totalRequired:'Total Required', totalPlaced:'Placed', warningsCount:'Warnings',
+    teachersDistribution:'Teachers Hours Distribution', classesDistribution:'Classes Hours Distribution', warningsList:'Warnings',
+    termInfo:'Term Info', termName:'Term name', startDate:'Start date', endDate:'End date',
+    holidays:'Holidays', holidayName:'Holiday name', holidayDate:'Date',
+    backup:'Backup', download:'Download', restore:'Restore', dangerZone:'Danger Zone', resetAll:'Delete All',
+    unavailTitle:'Unavailable Times', unavailHint:'Click any period to toggle available ✓ / blocked ✕', saveClose:'Save & Close',
+    noTeachers:'No teachers yet', noClasses:'No classes yet',
+    noSchedule:'Schedule not generated yet', noScheduleHint:'Go to Home and click Generate',
+    classSchedule:'Class Schedule', teacherSchedule:'Teacher Schedule',
+    hours:'hours', days:'days', delete:'Delete',
+    deleteConfirmTeacher:'Delete this teacher and all their subjects?', deleteConfirmClass:'Delete this class and all its subjects?',
+    deleteConfirmReset:'Delete all data?',
+    needName:'Enter teacher name', needWorkingDays:'Choose at least one working day',
+    needClassOrSubject:'Add at least one class & subject', exists:'Already exists',
+    added:'Added ✓', updated:'Updated ✓', deleted:'Deleted',
+    generated:'Generated ✓', partialGen:'unplaced hours', error:'An error occurred',
+    noData:'No schedule', downloaded:'Downloaded ✓',
+    shareReady:'Share link ready ✓', importedFromLink:'Imported from link ✓',
+    termSaved:'Saved ✓', holidayAdded:'Added ✓', noHolidays:'No holidays',
+    restored:'Restored ✓', invalidFile:'Invalid file', saved:'Saved ✓',
+    selectEntity:'Select an item to view', unavailable:'blocked',
+    statusOK:'✅ Ready to save and generate', statusWarn:'⚠️ Fully used capacity',
+    statusDangerDays:'❌ Choose at least one working day',
+    statusDangerOver:'❌ Required hours exceed capacity',
+    statusWarnZero:'⚠️ Add at least one assignment',
+    capacity:'Capacity', totalAssigned:'Required', workingDays:'Working days', dailyLimit:'Daily',
+    capacityFormula:'Calculation: Working days ({d}) × Daily limit ({m}) = {c} max',
+    remaining:'{n} spare hours',
+    classLabel:'Class', subjectPlaceholder:'Subject', addClassesFirst:'Add classes first',
+    noTeachersWarn:'No teachers', noClassesWarn:'No classes',
+    cannotGenerate:'Cannot generate because:', fixThenRetry:'Fix issues and retry',
+    partialGenerated:'Generated partially:', saving:'Saving...',
+    roleAdmin:'Admin', roleEditor:'Editor', roleViewer:'Viewer',
+    subject:'Subject'
+  }
+};
 
-/* ===== DAY KEYS ===== */
+let currentLang = localStorage.getItem('jadwal-lang') || 'ar';
+const t = (k) => (I18N[currentLang] && I18N[currentLang][k]) || k;
+const tf = (k, v) => { let s = t(k); Object.keys(v||{}).forEach(x => { s = s.replace('{'+x+'}', v[x]); }); return s; };
+
+/* ============ DAY KEYS ============ */
 const ALL_DAY_KEYS = ['sun','mon','tue','wed','thu','sat'];
 const DAY_NAMES = {
   ar:{sun:'الأحد',mon:'الاثنين',tue:'الثلاثاء',wed:'الأربعاء',thu:'الخميس',sat:'السبت'},
   en:{sun:'Sunday',mon:'Monday',tue:'Tuesday',wed:'Wednesday',thu:'Thursday',sat:'Saturday'}
 };
-let currentLang = localStorage.getItem('jadwal-lang') || 'ar';
 const getDayKeys = () => ALL_DAY_KEYS.slice(0, Math.max(1, Math.min(6, state.settings.days || 5)));
 const dayName = (key) => DAY_NAMES[currentLang]?.[key] || key;
 
-/* ===== STATE ===== */
+/* ============ STATE ============ */
 const defaultState = () => ({
   teachers: [], classes: [], requirements: [],
   schedule: null,
@@ -582,7 +777,7 @@ const defaultState = () => ({
 });
 let state = defaultState();
 
-/* ===== STORAGE ===== */
+/* ============ STORAGE ============ */
 let saveTimer = null;
 function save(){ clearTimeout(saveTimer); saveTimer = setTimeout(() => { try{ localStorage.setItem('jadwal-state', JSON.stringify(state)); }catch(e){} }, 300); }
 function saveNow(){ clearTimeout(saveTimer); try{ localStorage.setItem('jadwal-state', JSON.stringify(state)); }catch(e){} }
@@ -600,42 +795,29 @@ function load(){
     if(!state.classes) state.classes = [];
     if(!state.requirements) state.requirements = [];
 
-    // ⚡ إصلاح جذري: تجاهل maxWeek المحفوظ وأعد حسابه من maxDay × أيام الدوام
     state.teachers = state.teachers.filter(tc => tc && tc.id && tc.name).map(tc => {
-      const workingDays = Array.isArray(tc.workingDays) && tc.workingDays.length > 0
-        ? tc.workingDays
-        : ['sun','mon','tue','wed','thu'];
+      const wd = Array.isArray(tc.workingDays) && tc.workingDays.length > 0 ? tc.workingDays : ['sun','mon','tue','wed','thu'];
       const maxDay = Math.max(1, parseInt(tc.maxDay) || 6);
-      // ⚡ الأهم: احسب maxWeek من جديد كل مرة
-      const maxWeek = maxDay * workingDays.length;
       return {
-        ...tc,
-        maxDay,
-        maxWeek,
-        workingDays,
+        ...tc, maxDay, maxWeek: maxDay * wd.length, workingDays: wd,
         unavailable: Array.isArray(tc.unavailable) ? tc.unavailable : [],
         stage: tc.stage || 'primary'
       };
     });
-
     state.classes = state.classes.filter(c => c && c.id && c.name);
-
     const classIds = new Set(state.classes.map(c => c.id));
     const teacherIds = new Set(state.teachers.map(t => t.id));
     state.requirements = state.requirements
       .filter(r => r && r.id && classIds.has(r.classId) && teacherIds.has(r.teacherId))
       .map(r => ({ ...r, weekly: Math.max(1, parseInt(r.weekly) || 1), subject: String(r.subject || '') }));
-
-    if(state.schedule && (typeof state.schedule !== 'object' || !state.schedule.grid)){
-      state.schedule = null;
-    }
+    if(state.schedule && (typeof state.schedule !== 'object' || !state.schedule.grid)) state.schedule = null;
   }catch(e){
     console.error(e);
     state = defaultState();
   }
 }
 
-/* ===== UTILS ===== */
+/* ============ UTILS ============ */
 const genId = () => Date.now().toString(36) + Math.random().toString(36).slice(2,8);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 
@@ -646,12 +828,25 @@ function toast(msg, type=''){
     el.textContent = msg;
     el.className = 'toast show ' + type;
     clearTimeout(el._t);
-    el._t = setTimeout(() => el.classList.remove('show'), 3500);
+    el._t = setTimeout(() => el.classList.remove('show'), 3200);
   }catch(e){}
 }
 function debounce(fn, ms){ let t; return function(...a){ clearTimeout(t); t = setTimeout(() => fn.apply(this,a), ms); }; }
 
-/* ===== TABS ===== */
+/* ============ THEME ============ */
+document.documentElement.setAttribute('data-theme', localStorage.getItem('jadwal-theme') || 'light');
+function updateThemeIcon(){
+  const theme = document.documentElement.getAttribute('data-theme');
+  document.getElementById('theme-icon').innerHTML = '<use href="#' + (theme === 'light' ? 'i-moon' : 'i-sun') + '"/>';
+}
+document.getElementById('theme-btn').addEventListener('click', () => {
+  const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('jadwal-theme', next);
+  updateThemeIcon();
+});
+
+/* ============ TABS ============ */
 document.querySelectorAll('.tabs button').forEach(b => {
   b.addEventListener('click', () => {
     document.querySelectorAll('.tabs button').forEach(x => x.classList.remove('active'));
@@ -665,113 +860,84 @@ document.querySelectorAll('.tabs button').forEach(b => {
   });
 });
 
-/* ===== LANGUAGE ===== */
-const L = {
-  ar:{ appTag:'إدارة الجدول الدراسي بذكاء', roleAdmin:'مدير', roleEditor:'محرر', roleViewer:'مشاهد',
-    addTeacher:'إضافة معلم', editTeacher:'تعديل معلم', teachersList:'قائمة المعلمين',
-    addClass:'إضافة صف', className:'اسم الصف', classesList:'قائمة الصفوف',
-    needName:'ادخل اسم المعلم', needWorkingDays:'اختر يوم دوام واحد على الأقل',
-    needClassOrSubject:'أضف صفًا ومادة واحدة على الأقل', exists:'موجود مسبقًا',
-    added:'تم الإضافة ✓', updated:'تم التحديث ✓', deleted:'تم الحذف',
-    deleteConfirmTeacher:'حذف هذا المعلم وكل مواده؟', deleteConfirmClass:'حذف هذا الصف وكل مواده؟',
-    deleteConfirmReset:'هل أنت متأكد من حذف جميع البيانات؟', saved:'تم الحفظ ✓',
-    noTeachers:'لا يوجد معلمون بعد', noClasses:'لا توجد صفوف بعد',
-    noSchedule:'لم يتم توليد الجدول بعد', noScheduleHint:'اذهب للرئيسية واضغط توليد الجدول',
-    generated:'تم التوليد بنجاح ✓', partialGen:'حصة لم توزع', error:'حدث خطأ',
-    noData:'لا يوجد جدول', downloaded:'تم التحميل ✓', copied:'تم النسخ ✓',
-    shareReady:'رابط المشاركة جاهز ✓', importedFromLink:'تم الاستيراد من الرابط ✓',
-    termSaved:'تم الحفظ ✓', holidayAdded:'تمت الإضافة ✓', noHolidays:'لا توجد عطل',
-    restored:'تمت الاستعادة ✓', invalidFile:'ملف غير صالح',
-    selectEntity:'اختر عنصرًا للعرض', classSchedule:'جدول الصف',
-    teacherSchedule:'جدول المعلم', hours:'حصة', days:'أيام', subject:'المادة',
-    available:'متاح', blocked:'محظور', capacity:'السعة الأسبوعية',
-    totalAssigned:'الحصص المطلوبة', workingDays:'أيام الدوام', dailyLimit:'الحد اليومي',
-    statusOK:'✅ يمكن حفظ المعلم وتوليد الجدول', statusWarn:'⚠️ السعة ممتلئة — لا مرونة',
-    statusDangerDays:'❌ اختر يوم دوام واحد على الأقل',
-    statusDangerOver:'❌ الحصص المطلوبة أكثر من السعة',
-    statusDangerNoAssign:'⚠️ أضف صفًا واحدًا على الأقل',
-    statusWarnZero:'⚠️ لم تتم إضافة أي صف/مادة',
-    capacityFormula:'الحساب: أيام الدوام ({d}) × الحد اليومي ({m}) = {c} حصة كحد أقصى',
-    remaining:'متبقٍ {n} حصة احتياطية',
-    classLabel:'الصف', stageLabel:'المرحلة', cancel:'إلغاء', save:'حفظ',
-    addAssignment:'إضافة صف/مادة', add:'إضافة', basicInfo:'المعلومات الأساسية',
-    workingDaysLabel:'أيام الدوام في الأسبوع', assignments:'الصفوف والمواد',
-    summary:'ملخص تلقائي', maxDaily:'أقصى عدد حصص في اليوم الواحد',
-    maxDailyHint:'📌 الحد الأقصى للحصص في يوم واحد. السعة الأسبوعية = الحد اليومي × أيام الدوام (تُحسب تلقائيًا).',
-    workingDaysHint:'📌 اختر الأيام التي يعمل فيها المعلم فعليًا (حسب العقد).',
-    assignmentsHint:'📌 أضف كل صف ومادة يدرّسها المعلم مع عدد الحصص الأسبوعية.'
-  },
-  en:{ appTag:'Smart School Scheduling', roleAdmin:'Admin', roleEditor:'Editor', roleViewer:'Viewer',
-    addTeacher:'Add Teacher', editTeacher:'Edit Teacher', teachersList:'Teachers List',
-    addClass:'Add Class', className:'Class Name', classesList:'Classes List',
-    needName:'Enter teacher name', needWorkingDays:'Choose at least one working day',
-    needClassOrSubject:'Add at least one class & subject', exists:'Already exists',
-    added:'Added ✓', updated:'Updated ✓', deleted:'Deleted',
-    deleteConfirmTeacher:'Delete this teacher and all their subjects?', deleteConfirmClass:'Delete this class and all its subjects?',
-    deleteConfirmReset:'Delete all data?', saved:'Saved ✓',
-    noTeachers:'No teachers yet', noClasses:'No classes yet',
-    noSchedule:'Schedule not generated yet', noScheduleHint:'Go to Home and click Generate',
-    generated:'Generated ✓', partialGen:'unplaced hours', error:'Error',
-    noData:'No schedule', downloaded:'Downloaded ✓', copied:'Copied ✓',
-    shareReady:'Share link ready ✓', importedFromLink:'Imported from link ✓',
-    termSaved:'Saved ✓', holidayAdded:'Added ✓', noHolidays:'No holidays',
-    restored:'Restored ✓', invalidFile:'Invalid file',
-    selectEntity:'Select an item', classSchedule:'Class Schedule',
-    teacherSchedule:'Teacher Schedule', hours:'hours', days:'days', subject:'Subject',
-    available:'Available', blocked:'Blocked', capacity:'Weekly Capacity',
-    totalAssigned:'Required Hours', workingDays:'Working Days', dailyLimit:'Daily Limit',
-    statusOK:'✅ Ready to save and generate', statusWarn:'⚠️ Fully used capacity',
-    statusDangerDays:'❌ Choose at least one working day',
-    statusDangerOver:'❌ Required hours exceed capacity',
-    statusDangerNoAssign:'⚠️ Add at least one assignment',
-    statusWarnZero:'⚠️ No assignments added',
-    capacityFormula:'Calculation: Working days ({d}) × Daily limit ({m}) = {c} max',
-    remaining:'{n} spare hours remaining',
-    classLabel:'Class', stageLabel:'Stage', cancel:'Cancel', save:'Save',
-    addAssignment:'Add Class/Subject', add:'Add', basicInfo:'Basic Info',
-    workingDaysLabel:'Working Days per Week', assignments:'Classes & Subjects',
-    summary:'Auto Summary', maxDaily:'Max Hours per Day',
-    maxDailyHint:'📌 Max hours in one day. Weekly capacity = daily × working days (auto-calculated).',
-    workingDaysHint:'📌 Choose the days the teacher actually works (per contract).',
-    assignmentsHint:'📌 Add every class & subject the teacher teaches, with weekly hours.'
-  }
-};
-const t = (k) => (L[currentLang] && L[currentLang][k]) || k;
-const tf = (k, v) => { let s = t(k); Object.keys(v||{}).forEach(x => { s = s.replace('{'+x+'}', v[x]); }); return s; };
-
+/* ============ LANGUAGE - FIXED ============ */
 function applyLanguage(){
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-  updateRoleBadge();
+
+  // Update all [data-i18n] elements - handle nested spans properly
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if(!key) return;
+    const span = el.querySelector('span');
+    if(span){
+      // Element has a child span - update the span only
+      span.textContent = t(key);
+    } else if(el.tagName === 'BUTTON' || el.tagName === 'OPTION' || el.tagName === 'LABEL' || !el.querySelector('*')){
+      // Safe to update text content
+      el.textContent = t(key);
+    } else {
+      // Has other children - just update text nodes
+      el.childNodes.forEach(n => {
+        if(n.nodeType === 3 && n.textContent.trim()) n.textContent = t(key);
+      });
+    }
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    el.placeholder = t(el.dataset.i18nPlaceholder);
+  });
+
+  // Update titles
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    el.title = t(el.dataset.i18nTitle);
+  });
+
+  // Update teacher modal title if open
+  const tmTitle = document.getElementById('tm-title');
+  if(tmTitle){
+    const isEdit = tmTitle.dataset.edit === '1';
+    tmTitle.innerHTML = '<svg><use href="#' + (isEdit ? 'i-edit' : 'i-user-plus') + '"/></svg> <span>' + t(isEdit ? 'editTeacher' : 'addTeacher') + '</span>';
+  }
+
+  // Re-render dynamic content
   try{ render(); }catch(e){ console.error(e); }
+  try{ updateTeacherSummary(); }catch(e){}
+
+  // Update schedule dropdown placeholder
+  try{ renderScheduleSelect(); }catch(e){}
 }
+
 document.getElementById('lang-btn').addEventListener('click', () => {
   currentLang = currentLang === 'ar' ? 'en' : 'ar';
   localStorage.setItem('jadwal-lang', currentLang);
   applyLanguage();
+  // Re-render current tab
+  const activeTab = document.querySelector('.tabs button.active');
+  if(activeTab){
+    const tabName = activeTab.dataset.tab;
+    if(tabName === 'reports') renderReports();
+    if(tabName === 'settings') renderSettings();
+    if(tabName === 'schedule') renderScheduleSelect();
+  }
 });
 
-/* ===== ROLE ===== */
-function updateRoleBadge(){ /* kept simple - no role badge visible now */ }
-function applyRole(){
-  const isViewer = state.role === 'viewer';
-  document.querySelectorAll('[data-admin-only]').forEach(el => { el.style.display = isViewer ? 'none' : ''; });
-}
-
-/* ===== TEACHER MODAL ===== */
+/* ============ TEACHER MODAL ============ */
 let tmWorkingDays = [];
 let tmAssignments = [];
 let tmEditId = null;
 
 function openTeacherModal(editId){
   try{
-    if(state.role === 'viewer'){ toast('صلاحية المشاهد لا تسمح بالتعديل', 'error'); return; }
-    if(!editId && state.classes.length === 0){
-      toast(currentLang==='ar'?'أضف صفوفًا أولاً من تبويب الصفوف':'Add classes first', 'error');
-      return;
-    }
+    if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
+    if(!editId && state.classes.length === 0){ toast(t('addClassesFirst'), 'error'); return; }
+
     tmEditId = editId || null;
-    document.getElementById('tm-title').innerHTML = '<svg><use href="#' + (editId ? 'i-edit' : 'i-user-plus') + '"/></svg> ' + t(editId ? 'editTeacher' : 'addTeacher');
+    const tmTitle = document.getElementById('tm-title');
+    tmTitle.dataset.edit = editId ? '1' : '0';
+    tmTitle.innerHTML = '<svg><use href="#' + (editId ? 'i-edit' : 'i-user-plus') + '"/></svg> <span>' + t(editId ? 'editTeacher' : 'addTeacher') + '</span>';
+
     document.getElementById('tm-name').value = '';
     document.getElementById('tm-stage').value = 'primary';
     document.getElementById('tm-max-day').value = 6;
@@ -780,7 +946,7 @@ function openTeacherModal(editId){
 
     if(editId){
       const teacher = state.teachers.find(x => x.id === editId);
-      if(!teacher){ toast('المعلم غير موجود', 'error'); return; }
+      if(!teacher){ toast(t('error'), 'error'); return; }
       document.getElementById('tm-name').value = teacher.name || '';
       document.getElementById('tm-stage').value = teacher.stage || 'primary';
       document.getElementById('tm-max-day').value = teacher.maxDay || 6;
@@ -795,15 +961,14 @@ function openTeacherModal(editId){
     renderAssignmentsRows();
     updateTeacherSummary();
     document.getElementById('teacher-modal').classList.add('show');
-  }catch(e){
-    console.error(e);
-    toast(t('error'), 'error');
-  }
+    document.body.style.overflow = 'hidden';
+  }catch(e){ console.error(e); toast(t('error'), 'error'); }
 }
 window.openTeacherModal = openTeacherModal;
 
 function closeTeacherModal(){
   document.getElementById('teacher-modal').classList.remove('show');
+  document.body.style.overflow = '';
 }
 window.closeTeacherModal = closeTeacherModal;
 
@@ -814,10 +979,7 @@ function renderWorkingDaysCheckboxes(){
   tmWorkingDays = tmWorkingDays.filter(k => dayKeys.includes(k));
   el.innerHTML = dayKeys.map(k => {
     const checked = tmWorkingDays.includes(k);
-    return `<div class="day-checkbox">
-      <input type="checkbox" id="wd-${k}" data-day="${k}" ${checked?'checked':''}>
-      <label for="wd-${k}">${esc(dayName(k))}</label>
-    </div>`;
+    return '<div class="day-checkbox"><input type="checkbox" id="wd-' + k + '" data-day="' + k + '" ' + (checked?'checked':'') + '><label for="wd-' + k + '">' + esc(dayName(k)) + '</label></div>';
   }).join('');
   el.querySelectorAll('input[data-day]').forEach(input => {
     input.addEventListener('change', () => {
@@ -833,17 +995,15 @@ function renderAssignmentsRows(){
   const el = document.getElementById('tm-assignments');
   if(!el) return;
   if(tmAssignments.length === 0) tmAssignments.push({ classId:'', subject:'', weekly:4 });
-  el.innerHTML = tmAssignments.map((a, i) => `
-    <div class="assignment-row" data-index="${i}">
-      <select class="assign-class" data-i="${i}">
-        <option value="">-- ${t('classLabel')} --</option>
-        ${state.classes.map(c => `<option value="${c.id}" ${a.classId===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}
-      </select>
-      <input type="text" class="assign-subject" data-i="${i}" value="${esc(a.subject)}" placeholder="${currentLang==='ar'?'المادة (مثال: رياضيات)':'Subject'}">
-      <input type="number" class="assign-weekly" data-i="${i}" value="${a.weekly||4}" min="1" max="15" title="حصة/أسبوع">
-      <button type="button" class="remove-btn" onclick="removeAssignmentRow(${i})"><svg><use href="#i-x"/></svg></button>
-    </div>
-  `).join('');
+  el.innerHTML = tmAssignments.map((a, i) => {
+    const classOptions = state.classes.map(c => '<option value="' + c.id + '"' + (a.classId===c.id?' selected':'') + '>' + esc(c.name) + '</option>').join('');
+    return '<div class="assignment-row" data-index="' + i + '">' +
+      '<select class="assign-class" data-i="' + i + '"><option value="">-- ' + t('classLabel') + ' --</option>' + classOptions + '</select>' +
+      '<input type="text" class="assign-subject" data-i="' + i + '" value="' + esc(a.subject) + '" placeholder="' + t('subjectPlaceholder') + '">' +
+      '<input type="number" class="assign-weekly" data-i="' + i + '" value="' + (a.weekly||4) + '" min="1" max="15" title="' + t('hours') + '">' +
+      '<button type="button" class="remove-btn" onclick="removeAssignmentRow(' + i + ')"><svg><use href="#i-x"/></svg></button>' +
+    '</div>';
+  }).join('');
   el.querySelectorAll('.assign-class').forEach(s => {
     s.addEventListener('change', (e) => {
       const i = parseInt(e.target.dataset.i);
@@ -874,11 +1034,8 @@ function addAssignmentRow(){
 window.addAssignmentRow = addAssignmentRow;
 
 function removeAssignmentRow(i){
-  if(tmAssignments.length <= 1){
-    tmAssignments[0] = { classId:'', subject:'', weekly:4 };
-  } else {
-    tmAssignments.splice(i, 1);
-  }
+  if(tmAssignments.length <= 1){ tmAssignments[0] = { classId:'', subject:'', weekly:4 }; }
+  else { tmAssignments.splice(i, 1); }
   renderAssignmentsRows();
   updateTeacherSummary();
 }
@@ -893,39 +1050,20 @@ function updateTeacherSummary(){
     const capacity = maxDay * wDays;
     const totalAssigned = tmAssignments.reduce((s, a) => s + (parseInt(a.weekly) || 0), 0);
 
-    let statusClass = 'ok';
-    let statusText = t('statusOK');
-    let saveDisabled = false;
+    let statusClass = 'ok', statusText = t('statusOK'), saveDisabled = false;
+    if(wDays === 0){ statusClass = 'danger'; statusText = t('statusDangerDays'); saveDisabled = true; }
+    else if(totalAssigned > capacity){ statusClass = 'danger'; statusText = t('statusDangerOver') + ' (' + totalAssigned + ' > ' + capacity + ')'; saveDisabled = true; }
+    else if(totalAssigned === 0){ statusClass = 'warn'; statusText = t('statusWarnZero'); saveDisabled = true; }
+    else if(totalAssigned === capacity){ statusClass = 'warn'; statusText = t('statusWarn'); }
+    else { statusText = t('statusOK') + ' — ' + tf('remaining', { n: capacity - totalAssigned }); }
 
-    if(wDays === 0){
-      statusClass = 'danger';
-      statusText = t('statusDangerDays');
-      saveDisabled = true;
-    } else if(totalAssigned > capacity){
-      statusClass = 'danger';
-      statusText = t('statusDangerOver') + ' (' + totalAssigned + ' > ' + capacity + ')';
-      saveDisabled = true;
-    } else if(totalAssigned === 0){
-      statusClass = 'warn';
-      statusText = t('statusWarnZero');
-      saveDisabled = true;
-    } else if(totalAssigned === capacity){
-      statusClass = 'warn';
-      statusText = t('statusWarn');
-    } else {
-      statusText = t('statusOK') + ' — ' + tf('remaining', { n: capacity - totalAssigned });
-    }
-
-    summaryEl.innerHTML = `
-      <div class="summary-grid">
-        <div class="summary-item"><div class="lbl">${t('workingDays')}</div><div class="val">${wDays}</div></div>
-        <div class="summary-item"><div class="lbl">${t('dailyLimit')}</div><div class="val">${maxDay}</div></div>
-        <div class="summary-item"><div class="lbl">${t('capacity')}</div><div class="val">${capacity}</div></div>
-        <div class="summary-item ${totalAssigned > capacity ? 'danger' : totalAssigned === capacity ? 'warn' : ''}"><div class="lbl">${t('totalAssigned')}</div><div class="val">${totalAssigned}</div></div>
-      </div>
-      <div class="summary-status ${statusClass}">${statusText}</div>
-      <div class="form-hint" style="margin-top:10px;text-align:center">${tf('capacityFormula', { d: wDays, m: maxDay, c: capacity })}</div>
-    `;
+    summaryEl.innerHTML = '<div class="summary-grid">' +
+      '<div class="summary-item"><div class="lbl">' + t('workingDays') + '</div><div class="val">' + wDays + '</div></div>' +
+      '<div class="summary-item"><div class="lbl">' + t('dailyLimit') + '</div><div class="val">' + maxDay + '</div></div>' +
+      '<div class="summary-item"><div class="lbl">' + t('capacity') + '</div><div class="val">' + capacity + '</div></div>' +
+      '<div class="summary-item ' + (totalAssigned > capacity ? 'danger' : totalAssigned === capacity ? 'warn' : '') + '"><div class="lbl">' + t('totalAssigned') + '</div><div class="val">' + totalAssigned + '</div></div>' +
+      '</div><div class="summary-status ' + statusClass + '">' + statusText + '</div>' +
+      '<div class="form-hint" style="margin-top:8px;text-align:center">' + tf('capacityFormula', { d: wDays, m: maxDay, c: capacity }) + '</div>';
 
     const saveBtn = document.getElementById('tm-save-btn');
     if(saveBtn) saveBtn.disabled = saveDisabled;
@@ -934,7 +1072,7 @@ function updateTeacherSummary(){
 
 function saveTeacherFromModal(){
   try{
-    if(state.role === 'viewer'){ toast('لا تملك صلاحية', 'error'); return; }
+    if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
     const name = document.getElementById('tm-name').value.trim();
     const stage = document.getElementById('tm-stage').value;
     const maxDay = Math.max(1, parseInt(document.getElementById('tm-max-day').value) || 6);
@@ -944,46 +1082,27 @@ function saveTeacherFromModal(){
     if(wDays === 0){ toast(t('needWorkingDays'), 'error'); return; }
 
     const capacity = maxDay * wDays;
-    const validAssignments = tmAssignments.filter(a => a.classId && a.subject.trim() && (parseInt(a.weekly) || 0) > 0);
-    const totalAssigned = validAssignments.reduce((s, a) => s + (parseInt(a.weekly)||0), 0);
+    const valid = tmAssignments.filter(a => a.classId && a.subject.trim() && (parseInt(a.weekly) || 0) > 0);
+    const totalAssigned = valid.reduce((s, a) => s + (parseInt(a.weekly)||0), 0);
 
-    if(validAssignments.length === 0){ toast(t('needClassOrSubject'), 'error'); return; }
-    if(totalAssigned > capacity){
-      toast(t('statusDangerOver') + ' (' + totalAssigned + ' > ' + capacity + ')', 'error');
-      return;
-    }
-    if(state.teachers.some(x => x.name === name && x.id !== tmEditId)){
-      toast(t('exists'), 'error'); return;
-    }
+    if(valid.length === 0){ toast(t('needClassOrSubject'), 'error'); return; }
+    if(totalAssigned > capacity){ toast(t('statusDangerOver'), 'error'); return; }
+    if(state.teachers.some(x => x.name === name && x.id !== tmEditId)){ toast(t('exists'), 'error'); return; }
 
     const teacherId = tmEditId || genId();
 
     if(tmEditId){
       const teacher = state.teachers.find(x => x.id === tmEditId);
-      if(!teacher){ toast('المعلم غير موجود', 'error'); return; }
-      teacher.name = name;
-      teacher.stage = stage;
-      teacher.maxDay = maxDay;
-      teacher.maxWeek = capacity;
-      teacher.workingDays = tmWorkingDays.slice();
+      if(!teacher){ toast(t('error'), 'error'); return; }
+      teacher.name = name; teacher.stage = stage; teacher.maxDay = maxDay;
+      teacher.maxWeek = capacity; teacher.workingDays = tmWorkingDays.slice();
       state.requirements = state.requirements.filter(r => r.teacherId !== tmEditId);
     } else {
-      state.teachers.push({
-        id: teacherId, name, stage,
-        maxDay, maxWeek: capacity,
-        workingDays: tmWorkingDays.slice(),
-        unavailable: []
-      });
+      state.teachers.push({ id: teacherId, name, stage, maxDay, maxWeek: capacity, workingDays: tmWorkingDays.slice(), unavailable: [] });
     }
 
-    validAssignments.forEach(a => {
-      state.requirements.push({
-        id: genId(),
-        teacherId: teacherId,
-        classId: a.classId,
-        subject: a.subject.trim(),
-        weekly: parseInt(a.weekly) || 4
-      });
+    valid.forEach(a => {
+      state.requirements.push({ id: genId(), teacherId, classId: a.classId, subject: a.subject.trim(), weekly: parseInt(a.weekly) || 4 });
     });
 
     state.schedule = null;
@@ -991,20 +1110,17 @@ function saveTeacherFromModal(){
     closeTeacherModal();
     render();
     toast(tmEditId ? t('updated') : t('added'), 'success');
-  }catch(e){
-    console.error(e);
-    toast(t('error') + ': ' + e.message, 'error');
-  }
+  }catch(e){ console.error(e); toast(t('error') + ': ' + e.message, 'error'); }
 }
 window.saveTeacherFromModal = saveTeacherFromModal;
 
-/* ===== CLASSES ===== */
+/* ============ CLASSES ============ */
 document.getElementById('add-class-btn').addEventListener('click', () => {
   try{
-    if(state.role === 'viewer'){ toast('لا تملك صلاحية', 'error'); return; }
+    if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
     const name = document.getElementById('class-name').value.trim();
     const stage = document.getElementById('class-stage').value;
-    if(!name){ toast('ادخل اسم الصف', 'error'); return; }
+    if(!name){ toast(t('needName'), 'error'); return; }
     if(state.classes.some(x => x.name === name)){ toast(t('exists'), 'error'); return; }
     state.classes.push({ id: genId(), name, stage });
     document.getElementById('class-name').value = '';
@@ -1013,12 +1129,12 @@ document.getElementById('add-class-btn').addEventListener('click', () => {
   }catch(e){ console.error(e); }
 });
 
-document.getElementById('add-teacher-btn').addEventListener('click', () => { openTeacherModal(null); });
+document.getElementById('add-teacher-btn').addEventListener('click', () => openTeacherModal(null));
 
-/* ===== DELETE ===== */
+/* ============ DELETE ============ */
 window.deleteTeacher = (id) => {
   try{
-    if(state.role === 'viewer'){ toast('لا تملك صلاحية', 'error'); return; }
+    if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
     if(!confirm(t('deleteConfirmTeacher'))) return;
     state.teachers = state.teachers.filter(x => x.id !== id);
     state.requirements = state.requirements.filter(x => x.teacherId !== id);
@@ -1028,7 +1144,7 @@ window.deleteTeacher = (id) => {
 };
 window.deleteClass = (id) => {
   try{
-    if(state.role === 'viewer'){ toast('لا تملك صلاحية', 'error'); return; }
+    if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
     if(!confirm(t('deleteConfirmClass'))) return;
     state.classes = state.classes.filter(x => x.id !== id);
     state.requirements = state.requirements.filter(x => x.classId !== id);
@@ -1037,17 +1153,18 @@ window.deleteClass = (id) => {
   }catch(e){ console.error(e); }
 };
 
-/* ===== UNAVAILABILITY ===== */
+/* ============ UNAVAILABILITY ============ */
 let editingTeacherId = null;
 window.openUnavailModal = (teacherId) => {
   try{
-    if(state.role === 'viewer'){ toast('لا تملك صلاحية', 'error'); return; }
+    if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
     const teacher = state.teachers.find(x => x.id === teacherId);
     if(!teacher) return;
     editingTeacherId = teacherId;
     document.getElementById('modal-teacher-name').textContent = teacher.name;
     renderUnavailGrid();
     document.getElementById('modal').classList.add('show');
+    document.body.style.overflow = 'hidden';
   }catch(e){ console.error(e); }
 };
 
@@ -1059,7 +1176,7 @@ function renderUnavailGrid(){
     const periods = Math.max(1, state.settings.periods || 7);
     const teacherDays = (teacher.workingDays || getDayKeys()).filter(k => getDayKeys().includes(k));
     if(teacherDays.length === 0){
-      document.getElementById('modal-grid').innerHTML = '<div class="empty-state"><p>لا توجد أيام دوام لهذا المعلم</p></div>';
+      document.getElementById('modal-grid').innerHTML = '<div class="empty-state"><p>' + t('noClasses') + '</p></div>';
       return;
     }
     let html = '<div class="table-scroll"><table class="unavail-table"><thead><tr><th>#</th>';
@@ -1090,17 +1207,27 @@ function renderUnavailGrid(){
     });
   }catch(e){ console.error(e); }
 }
-document.getElementById('modal-close').addEventListener('click', () => document.getElementById('modal').classList.remove('show'));
+document.getElementById('modal-close').addEventListener('click', () => {
+  document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow = '';
+});
 document.getElementById('modal-save').addEventListener('click', () => {
   document.getElementById('modal').classList.remove('show');
+  document.body.style.overflow = '';
   render();
   toast(t('saved'), 'success');
 });
 document.getElementById('modal').addEventListener('click', (e) => {
-  if(e.target.id === 'modal') document.getElementById('modal').classList.remove('show');
+  if(e.target.id === 'modal'){
+    document.getElementById('modal').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+});
+document.getElementById('teacher-modal').addEventListener('click', (e) => {
+  if(e.target.id === 'teacher-modal') closeTeacherModal();
 });
 
-/* ===== RENDER ===== */
+/* ============ RENDER ============ */
 function render(){
   try{
     document.getElementById('stat-teachers').textContent = state.teachers.length;
@@ -1122,41 +1249,40 @@ function renderTeachers(){
     el.innerHTML = '<div class="empty-state"><svg><use href="#i-users"/></svg><p>' + t('noTeachers') + '</p></div>';
     return;
   }
+  const stages = { primary:'primary', middle:'middle', secondary:'secondary' };
   el.innerHTML = state.teachers.map(tc => {
-    const teacherReqs = state.requirements.filter(r => r.teacherId === tc.id);
-    const totalWeekly = teacherReqs.reduce((s,r) => s + (parseInt(r.weekly)||0), 0);
+    const reqs = state.requirements.filter(r => r.teacherId === tc.id);
+    const totalWeekly = reqs.reduce((s,r) => s + (parseInt(r.weekly)||0), 0);
     const wDays = (tc.workingDays || getDayKeys()).filter(k => getDayKeys().includes(k));
-    // ⚡ حساب مباشر - لا نعتمد على maxWeek المحفوظ
     const capacity = (tc.maxDay || 6) * wDays.length;
     const unavailCount = (tc.unavailable || []).length;
-    const stages = { primary:'ابتدائي', middle:'متوسط', secondary:'إعدادي' };
     const fillPct = capacity > 0 ? Math.round((totalWeekly/capacity)*100) : 0;
     const fillClass = fillPct > 100 ? 'danger' : fillPct > 90 ? 'warning' : 'success';
 
-    const assignmentsHTML = teacherReqs.length > 0
-      ? '<div class="assignments-preview">' + teacherReqs.map(r => {
+    const assignmentsHTML = reqs.length > 0
+      ? '<div class="assignments-preview">' + reqs.map(r => {
           const cls = state.classes.find(c => c.id === r.classId);
           return '<span class="assign-chip"><svg><use href="#i-book"/></svg>' + esc(r.subject) + ' · ' + esc(cls ? cls.name : '?') + ' <b>(' + r.weekly + ')</b></span>';
         }).join('') + '</div>'
-      : '<div class="assignments-preview"><span class="assign-chip" style="opacity:.6">لا توجد تعيينات</span></div>';
+      : '<div class="assignments-preview"><span class="assign-chip" style="opacity:.6">—</span></div>';
 
     const dayChips = wDays.map(k => '<span class="badge badge-info">' + esc(dayName(k).slice(0,3)) + '</span>').join('');
 
     const actions = state.role === 'viewer' ? '' :
       '<div class="actions">' +
-        '<button class="icon-btn" onclick="openTeacherModal(\'' + tc.id + '\')" title="تعديل"><svg><use href="#i-edit"/></svg></button>' +
-        '<button class="icon-btn" onclick="openUnavailModal(\'' + tc.id + '\')" title="أوقات عدم التوفر"><svg><use href="#i-clock"/></svg></button>' +
-        '<button class="icon-btn danger" onclick="deleteTeacher(\'' + tc.id + '\')" title="حذف"><svg><use href="#i-trash"/></svg></button>' +
+        '<button class="icon-btn" onclick="openTeacherModal(\'' + tc.id + '\')" title="' + t('editTeacher') + '"><svg><use href="#i-edit"/></svg></button>' +
+        '<button class="icon-btn" onclick="openUnavailModal(\'' + tc.id + '\')" title="' + t('unavailTitle') + '"><svg><use href="#i-clock"/></svg></button>' +
+        '<button class="icon-btn danger" onclick="deleteTeacher(\'' + tc.id + '\')" title="' + t('delete') + '"><svg><use href="#i-trash"/></svg></button>' +
       '</div>';
 
     return '<div class="list-item"><div class="info">' +
-      '<div class="title">' + esc(tc.name) + ' <span class="badge badge-primary">' + (stages[tc.stage] || 'ابتدائي') + '</span></div>' +
+      '<div class="title">' + esc(tc.name) + ' <span class="badge badge-primary">' + t(stages[tc.stage] || 'primary') + '</span></div>' +
       '<div class="meta">' +
         '<span class="badge badge-' + fillClass + '"><svg><use href="#i-chart"/></svg>' + totalWeekly + ' / ' + capacity + ' (' + fillPct + '%)</span>' +
         '<span class="badge badge-primary"><svg><use href="#i-calendar"/></svg>' + wDays.length + ' ' + t('days') + '</span>' +
-        (unavailCount > 0 ? '<span class="badge badge-danger"><svg><use href="#i-clock"/></svg>' + unavailCount + ' محظورة</span>' : '') +
+        (unavailCount > 0 ? '<span class="badge badge-danger"><svg><use href="#i-clock"/></svg>' + unavailCount + ' ' + t('unavailable') + '</span>' : '') +
       '</div>' +
-      '<div class="meta" style="margin-top:6px">' + dayChips + '</div>' +
+      '<div class="meta" style="margin-top:5px">' + dayChips + '</div>' +
       assignmentsHTML +
       '</div>' + actions + '</div>';
   }).join('');
@@ -1169,16 +1295,16 @@ function renderClasses(){
     el.innerHTML = '<div class="empty-state"><svg><use href="#i-building"/></svg><p>' + t('noClasses') + '</p></div>';
     return;
   }
-  const stages = { primary:'ابتدائي', middle:'متوسط', secondary:'إعدادي' };
+  const stages = { primary:'primary', middle:'middle', secondary:'secondary' };
   el.innerHTML = state.classes.map(c => {
-    const classReqs = state.requirements.filter(r => r.classId === c.id);
-    const totalWeekly = classReqs.reduce((s,r) => s + (parseInt(r.weekly)||0), 0);
+    const reqs = state.requirements.filter(r => r.classId === c.id);
+    const totalWeekly = reqs.reduce((s,r) => s + (parseInt(r.weekly)||0), 0);
     const actions = state.role === 'viewer' ? '' :
-      '<button class="icon-btn danger" onclick="deleteClass(\'' + c.id + '\')" title="حذف"><svg><use href="#i-trash"/></svg></button>';
+      '<button class="icon-btn danger" onclick="deleteClass(\'' + c.id + '\')" title="' + t('delete') + '"><svg><use href="#i-trash"/></svg></button>';
     return '<div class="list-item"><div class="info"><div class="title">' + esc(c.name) +
-      ' <span class="badge badge-primary">' + (stages[c.stage] || 'ابتدائي') + '</span></div>' +
+      ' <span class="badge badge-primary">' + t(stages[c.stage] || 'primary') + '</span></div>' +
       '<div class="meta"><span class="badge badge-success"><svg><use href="#i-clock"/></svg>' + totalWeekly + ' ' + t('hours') + '</span>' +
-      '<span class="badge badge-info"><svg><use href="#i-book"/></svg>' + classReqs.length + ' مادة</span></div>' +
+      '<span class="badge badge-info"><svg><use href="#i-book"/></svg>' + reqs.length + '</span></div>' +
       '</div>' + actions + '</div>';
   }).join('');
 }
@@ -1199,7 +1325,7 @@ function renderScheduleSelect(){
   }catch(e){ console.error(e); }
 }
 
-/* ===== ALERTS ===== */
+/* ============ ALERTS ============ */
 function analyzeConstraints(){
   const alerts = [];
   try{
@@ -1212,11 +1338,11 @@ function analyzeConstraints(){
       const reqs = state.requirements.filter(r => r.classId === cls.id);
       const required = reqs.reduce((s,r) => s + (parseInt(r.weekly)||0), 0);
       if(required > slotsPerClass){
-        alerts.push({ type:'error', text:'الصف "' + esc(cls.name) + '": يحتاج ' + required + ' حصة لكن المتاح ' + slotsPerClass + ' فقط' });
+        alerts.push({ type:'error', text: cls.name + ': ' + required + ' > ' + slotsPerClass });
       }
       reqs.forEach(r => {
         if((parseInt(r.weekly)||0) > days){
-          alerts.push({ type:'error', text:'المادة "' + esc(r.subject) + '" في "' + esc(cls.name) + '": ' + r.weekly + ' حصة > ' + days + ' أيام (لا يمكن تكرار المادة أكثر من مرة يوميًا)' });
+          alerts.push({ type:'error', text: r.subject + ' · ' + cls.name + ': ' + r.weekly + ' > ' + days });
         }
       });
     });
@@ -1227,17 +1353,17 @@ function analyzeConstraints(){
       const wDays = (tc.workingDays || dayKeys).filter(k => dayKeys.includes(k));
       const capacity = wDays.length * (tc.maxDay || 6);
       if(required > capacity){
-        alerts.push({ type:'error', text:'المعلم "' + esc(tc.name) + '": يحتاج ' + required + ' حصة لكن سعته ' + capacity + ' (' + wDays.length + ' أيام × ' + (tc.maxDay || 6) + ')' });
+        alerts.push({ type:'error', text: tc.name + ': ' + required + ' > ' + capacity + ' (' + wDays.length + '×' + (tc.maxDay || 6) + ')' });
       }
       reqs.forEach(r => {
         if((parseInt(r.weekly)||0) > wDays.length){
-          alerts.push({ type:'error', text:'المعلم "' + esc(tc.name) + '" — "' + esc(r.subject) + '": ' + r.weekly + ' حصة > ' + wDays.length + ' أيام دوام' });
+          alerts.push({ type:'error', text: tc.name + ' · ' + r.subject + ': ' + r.weekly + ' > ' + wDays.length });
         }
       });
     });
 
     if(alerts.length === 0 && state.teachers.length > 0 && state.classes.length > 0 && state.requirements.length > 0){
-      alerts.push({ type:'success', text:'كل البيانات متوازنة — جاهز للتوليد ✅' });
+      alerts.push({ type:'success', text: currentLang === 'ar' ? 'كل البيانات متوازنة ✅' : 'All data balanced ✅' });
     }
   }catch(e){ console.error(e); }
   return alerts;
@@ -1247,133 +1373,98 @@ function renderAlerts(){
   if(!container) return;
   const alerts = analyzeConstraints();
   if(alerts.length === 0){ container.innerHTML = ''; return; }
-  container.innerHTML = alerts.map(a => {
-    const icon = { error:'i-x-circle', warning:'i-alert', success:'i-check-circle', info:'i-info' }[a.type];
-    return '<div class="alert alert-' + a.type + '"><svg><use href="#' + icon + '"/></svg><span>' + a.text + '</span></div>';
-  }).join('');
+  const icons = { error:'i-x-circle', warning:'i-alert', success:'i-check-circle', info:'i-info' };
+  container.innerHTML = alerts.map(a => '<div class="alert alert-' + a.type + '"><svg><use href="#' + icons[a.type] + '"/></svg><span>' + a.text + '</span></div>').join('');
 }
 
-/* ===== GENERATION - محسّن من الجذور ===== */
+/* ============ GENERATION ============ */
 function shuffle(a){ for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
 
 function tryGenerate(){
   const periods = Math.max(1, parseInt(state.settings.periods) || 7);
   const dayKeys = getDayKeys();
-
   const grid = {};
   state.classes.forEach(c => {
     grid[c.id] = {};
     dayKeys.forEach(d => { grid[c.id][d] = {}; for(let p = 1; p <= periods; p++) grid[c.id][d][p] = null; });
   });
-
-  const teacherBusy = {}, teacherDayCnt = {}, teacherWeekCnt = {};
-  // ⚡ تتبع خاص لمنع نفس المادة لنفس الصف مرتين في نفس اليوم
+  const tBusy = {}, tDayCnt = {}, tWeekCnt = {};
   const classSubjectDay = {};
-
   state.teachers.forEach(tc => {
-    teacherBusy[tc.id] = {}; teacherDayCnt[tc.id] = {}; teacherWeekCnt[tc.id] = 0;
+    tBusy[tc.id] = {}; tDayCnt[tc.id] = {}; tWeekCnt[tc.id] = 0;
     dayKeys.forEach(d => {
-      teacherBusy[tc.id][d] = {};
-      for(let p = 1; p <= periods; p++) teacherBusy[tc.id][d][p] = false;
-      teacherDayCnt[tc.id][d] = 0;
+      tBusy[tc.id][d] = {};
+      for(let p = 1; p <= periods; p++) tBusy[tc.id][d][p] = false;
+      tDayCnt[tc.id][d] = 0;
     });
   });
   state.classes.forEach(c => { classSubjectDay[c.id] = {}; });
 
-  // بناء قائمة المهام
   const tasks = [];
   state.requirements.forEach(r => {
     const w = parseInt(r.weekly) || 0;
-    for(let i = 0; i < w; i++){
-      tasks.push({ ...r, weekly: parseInt(r.weekly) || 0 });
-    }
+    for(let i = 0; i < w; i++) tasks.push({ ...r, weekly: parseInt(r.weekly) || 0 });
   });
 
-  // ⚡ ترتيب ذكي: المواد الكبيرة أولاً، ثم معلمون بأقل مرونة
   tasks.sort((a, b) => {
     const ta = state.teachers.find(x => x.id === a.teacherId);
     const tb = state.teachers.find(x => x.id === b.teacherId);
-    const wDaysA = (ta?.workingDays || dayKeys).filter(k => dayKeys.includes(k)).length;
-    const wDaysB = (tb?.workingDays || dayKeys).filter(k => dayKeys.includes(k)).length;
-    if(wDaysA !== wDaysB) return wDaysA - wDaysB; // أقل أيام أولاً (أصعب)
-    return b.weekly - a.weekly; // مواد بحصص أكثر أولاً
+    const wA = (ta?.workingDays || dayKeys).length;
+    const wB = (tb?.workingDays || dayKeys).length;
+    if(wA !== wB) return wA - wB;
+    return b.weekly - a.weekly;
   });
 
-  // خلط خفيف داخل كل مجموعة لتنويع
-  // (نستخدم Fisher-Yates على مجموعات متساوية الأولوية)
   for(let i = tasks.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
-    // نخلط فقط إذا كان للمهمتين نفس الأولوية تقريبًا
     const ta = state.teachers.find(x => x.id === tasks[i].teacherId);
     const tb = state.teachers.find(x => x.id === tasks[j].teacherId);
-    const wDaysA = (ta?.workingDays || dayKeys).length;
-    const wDaysB = (tb?.workingDays || dayKeys).length;
-    if(Math.abs(wDaysA - wDaysB) <= 1 && Math.abs(tasks[i].weekly - tasks[j].weekly) <= 1){
+    const wA = (ta?.workingDays || dayKeys).length;
+    const wB = (tb?.workingDays || dayKeys).length;
+    if(Math.abs(wA - wB) <= 1 && Math.abs(tasks[i].weekly - tasks[j].weekly) <= 1){
       [tasks[i], tasks[j]] = [tasks[j], tasks[i]];
     }
   }
 
   const unplaced = [];
-
   for(const task of tasks){
     const teacher = state.teachers.find(x => x.id === task.teacherId);
     if(!teacher || !grid[task.classId]){ unplaced.push(task); continue; }
-
     const unavail = teacher.unavailable || [];
     const workingDays = (teacher.workingDays || dayKeys).filter(k => dayKeys.includes(k));
     if(workingDays.length === 0){ unplaced.push(task); continue; }
-
     const maxDay = Math.max(1, parseInt(teacher.maxDay) || 6);
-    const maxWeek = maxDay * workingDays.length; // ⚡ حساب مباشر - لا نعتمد على maxWeek المحفوظ
+    const maxWeek = maxDay * workingDays.length;
 
-    // ⚡ منع تكرار المادة لنفس الصف في نفس اليوم
-    const classSubKey = task.classId + '|' + task.subject;
     if(!classSubjectDay[task.classId][task.subject]) classSubjectDay[task.classId][task.subject] = {};
 
     const candidates = [];
-
     for(const d of workingDays){
-      if(teacherDayCnt[teacher.id][d] >= maxDay) continue;
-      if(teacherWeekCnt[teacher.id] >= maxWeek) continue;
-      // منع نفس المادة لنفس الصف في نفس اليوم
+      if(tDayCnt[teacher.id][d] >= maxDay) continue;
+      if(tWeekCnt[teacher.id] >= maxWeek) continue;
       if((classSubjectDay[task.classId][task.subject][d] || 0) >= 1) continue;
-
       for(let p = 1; p <= periods; p++){
         if(unavail.includes(d + '-' + p)) continue;
         if(grid[task.classId][d][p]) continue;
-        if(teacherBusy[teacher.id][d][p]) continue;
-
-        // حساب أولوية المكان
+        if(tBusy[teacher.id][d][p]) continue;
         let priority = 0;
-        // فضّل الأيام التي فيها حصص أقل للمعلم (توزيع متساوٍ)
-        priority -= teacherDayCnt[teacher.id][d] * 100;
-        // فضّل الأيام التي فيها حصص أقل للصف
+        priority -= tDayCnt[teacher.id][d] * 100;
         let classDayCount = 0;
         for(let pp = 1; pp <= periods; pp++) if(grid[task.classId][d][pp]) classDayCount++;
         priority -= classDayCount * 50;
-        // عشوائية خفيفة
         priority += Math.random() * 10;
-
         candidates.push({ d, p, priority });
       }
     }
-
-    if(candidates.length === 0){
-      unplaced.push(task);
-      continue;
-    }
-
-    // اختر الأفضل
+    if(candidates.length === 0){ unplaced.push(task); continue; }
     candidates.sort((a, b) => b.priority - a.priority);
     const best = candidates[0];
-
     grid[task.classId][best.d][best.p] = { teacherId: teacher.id, subject: task.subject };
-    teacherBusy[teacher.id][best.d][best.p] = true;
-    teacherDayCnt[teacher.id][best.d]++;
-    teacherWeekCnt[teacher.id]++;
+    tBusy[teacher.id][best.d][best.p] = true;
+    tDayCnt[teacher.id][best.d]++;
+    tWeekCnt[teacher.id]++;
     classSubjectDay[task.classId][task.subject][best.d] = (classSubjectDay[task.classId][task.subject][best.d] || 0) + 1;
   }
-
   return { grid, unplaced };
 }
 
@@ -1383,20 +1474,16 @@ function generateSchedule(){
     if(state.classes.length === 0){ toast(t('noClasses'), 'error'); return; }
     if(state.requirements.length === 0){ toast(t('needClassOrSubject'), 'error'); return; }
 
-    // ⚡ تحقق مسبق: هل التوليد ممكن أصلًا؟
     const preErrors = analyzeConstraints().filter(a => a.type === 'error');
     if(preErrors.length > 0){
-      // اظهر جميع الأخطاء في رسالة واحدة
-      const msg = preErrors.map(e => '• ' + e.text).join('\n');
-      alert('لا يمكن التوليد بسبب:\n\n' + msg + '\n\nعالج المشاكل ثم أعد المحاولة.');
+      alert(t('cannotGenerate') + '\n\n' + preErrors.map(e => '• ' + e.text).join('\n') + '\n\n' + t('fixThenRetry'));
       return;
     }
 
-    // ⚡ محاولات متعددة، نأخذ الأفضل
     let best = null;
     const startTime = Date.now();
     for(let i = 0; i < 150; i++){
-      if(Date.now() - startTime > 6000) break; // 6 ثواني حد أقصى
+      if(Date.now() - startTime > 6000) break;
       const r = tryGenerate();
       if(!best || r.unplaced.length < best.unplaced.length) best = r;
       if(best.unplaced.length === 0) break;
@@ -1405,7 +1492,6 @@ function generateSchedule(){
     state.schedule = best;
     save();
 
-    // انتقل لتبويب الجدول
     document.querySelectorAll('.tabs button').forEach(x => x.classList.remove('active'));
     document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('active'));
     document.querySelector('[data-tab="schedule"]').classList.add('active');
@@ -1415,19 +1501,13 @@ function generateSchedule(){
     if(best.unplaced.length === 0){
       toast(t('generated'), 'success');
     } else {
-      // اشرح لماذا لم يتم التوليد الكامل
       const reasons = analyzeConstraints().filter(a => a.type === 'error');
       let msg = best.unplaced.length + ' ' + t('partialGen');
-      if(reasons.length > 0){
-        msg += '\n' + reasons.slice(0, 3).map(r => '• ' + r.text).join('\n');
-      }
-      alert('تم التوليد جزئيًا:\n\n' + msg);
+      if(reasons.length > 0) msg += '\n' + reasons.slice(0, 3).map(r => '• ' + r.text).join('\n');
+      alert(t('partialGenerated') + '\n\n' + msg);
       toast(best.unplaced.length + ' ' + t('partialGen'), 'error');
     }
-  }catch(e){
-    console.error(e);
-    toast(t('error') + ': ' + e.message, 'error');
-  }
+  }catch(e){ console.error(e); toast(t('error') + ': ' + e.message, 'error'); }
 }
 
 document.getElementById('generate-btn').addEventListener('click', () => {
@@ -1438,7 +1518,7 @@ document.getElementById('generate-btn').addEventListener('click', () => {
     const btn = document.getElementById('generate-btn');
     btn.disabled = true;
     const orig = btn.innerHTML;
-    btn.innerHTML = '<span class="spinner"></span> جاري التوليد...';
+    btn.innerHTML = '<span class="spinner"></span> ' + t('generating');
     setTimeout(() => {
       try{ generateSchedule(); }catch(e){ console.error(e); }
       btn.innerHTML = orig;
@@ -1447,7 +1527,7 @@ document.getElementById('generate-btn').addEventListener('click', () => {
   }catch(e){ console.error(e); }
 });
 
-/* ===== SCHEDULE DISPLAY ===== */
+/* ============ SCHEDULE DISPLAY ============ */
 function renderScheduleDisplay(){
   try{
     const el = document.getElementById('schedule-display');
@@ -1455,7 +1535,7 @@ function renderScheduleDisplay(){
     const view = document.getElementById('schedule-view').value;
     const id = document.getElementById('schedule-entity').value;
     if(!state.schedule || !state.schedule.grid){
-      el.innerHTML = '<div class="empty-state"><svg><use href="#i-calendar"/></svg><p>' + t('noSchedule') + '</p><p style="font-size:12px;margin-top:6px">' + t('noScheduleHint') + '</p></div>';
+      el.innerHTML = '<div class="empty-state"><svg><use href="#i-calendar"/></svg><p>' + t('noSchedule') + '</p><p style="font-size:11px;margin-top:6px">' + t('noScheduleHint') + '</p></div>';
       return;
     }
     if(!id){ el.innerHTML = '<div class="empty-state"><p>' + t('selectEntity') + '</p></div>'; return; }
@@ -1504,24 +1584,19 @@ function renderScheduleDisplay(){
 document.getElementById('schedule-view').addEventListener('change', renderScheduleSelect);
 document.getElementById('schedule-entity').addEventListener('change', renderScheduleDisplay);
 
-/* ===== PRINT ===== */
+/* ============ PRINT ============ */
 function applyPrintStyle(){
   const size = document.getElementById('print-size').value;
   const orientation = document.getElementById('print-orientation').value;
-  let fontSize, headPad, cellPad;
-  if(size === 'A3'){
-    fontSize = orientation === 'portrait' ? '12pt' : '14pt';
-    headPad = '10pt 8pt'; cellPad = '12pt 8pt';
-  } else {
-    fontSize = orientation === 'portrait' ? '8pt' : '10pt';
-    headPad = '6pt 4pt'; cellPad = '8pt 4pt';
-  }
+  let fs, hp, cp;
+  if(size === 'A3'){ fs = orientation === 'portrait' ? '12pt' : '14pt'; hp = '10pt 8pt'; cp = '12pt 8pt'; }
+  else { fs = orientation === 'portrait' ? '8pt' : '10pt'; hp = '6pt 4pt'; cp = '8pt 4pt'; }
   const old = document.getElementById('dynamic-page-style');
   if(old) old.remove();
   const style = document.createElement('style');
   style.id = 'dynamic-page-style';
   style.textContent = '@page { size: ' + size + ' ' + orientation + '; margin: ' + (orientation === 'portrait' ? '1cm' : '0.6cm') + '; }' +
-    '@media print { .schedule-table { font-size: ' + fontSize + ' !important; } .schedule-table th { padding: ' + headPad + ' !important; font-size: ' + fontSize + ' !important; } .schedule-table td { padding: ' + cellPad + ' !important; } .schedule-table .subject-name { font-size: ' + fontSize + ' !important; } .schedule-table .teacher-name { font-size: calc(' + fontSize + ' * 0.85) !important; } }';
+    '@media print { .schedule-table { font-size: ' + fs + ' !important; } .schedule-table th { padding: ' + hp + ' !important; font-size: ' + fs + ' !important; } .schedule-table td { padding: ' + cp + ' !important; } .schedule-table .subject-name { font-size: ' + fs + ' !important; } .schedule-table .teacher-name { font-size: calc(' + fs + ' * 0.85) !important; } }';
   document.head.appendChild(style);
 }
 document.getElementById('print-btn').addEventListener('click', () => {
@@ -1532,11 +1607,11 @@ document.getElementById('print-btn').addEventListener('click', () => {
 document.getElementById('pdf-btn').addEventListener('click', () => {
   if(!state.schedule){ toast(t('noData'), 'error'); return; }
   applyPrintStyle();
-  toast('اختر "حفظ كـ PDF" من نافذة الطباعة', 'success');
+  toast(currentLang === 'ar' ? 'اختر "حفظ كـ PDF"' : 'Choose "Save as PDF"', 'success');
   setTimeout(() => window.print(), 250);
 });
 
-/* ===== EXPORTS ===== */
+/* ============ EXPORTS ============ */
 function buildScheduleMatrix(view, id){
   const periods = Math.max(1, state.settings.periods || 7);
   const dayKeys = getDayKeys();
@@ -1617,7 +1692,7 @@ document.getElementById('png-btn').addEventListener('click', () => {
   }catch(e){ console.error(e); }
 });
 
-/* ===== SHARE ===== */
+/* ============ SHARE ============ */
 document.getElementById('share-btn').addEventListener('click', () => {
   try{
     const role = document.getElementById('share-role').value || 'editor';
@@ -1656,7 +1731,7 @@ function loadFromURL(){
   }catch(e){ console.error(e); return false; }
 }
 
-/* ===== REPORTS ===== */
+/* ============ REPORTS ============ */
 function renderReports(){
   try{
     let totalRequired = 0, totalPlaced = 0;
@@ -1676,41 +1751,36 @@ function renderReports(){
     document.getElementById('report-total-placed').textContent = totalPlaced;
     document.getElementById('report-warnings').textContent = warnings.filter(w => w.type !== 'success').length;
 
-    const teacherChart = document.getElementById('teacher-chart');
+    const tc = document.getElementById('teacher-chart');
     if(state.teachers.length === 0){
-      teacherChart.innerHTML = '<div class="empty-state"><p>' + t('noTeachers') + '</p></div>';
+      tc.innerHTML = '<div class="empty-state"><p>' + t('noTeachers') + '</p></div>';
     } else {
-      teacherChart.innerHTML = state.teachers.map(tc => {
-        const hours = state.requirements.filter(r => r.teacherId === tc.id).reduce((s,r) => s + (parseInt(r.weekly)||0), 0);
-        const wDays = (tc.workingDays || []).filter(k => getDayKeys().includes(k)).length;
-        // ⚡ حساب مباشر
-        const cap = (tc.maxDay || 6) * wDays;
+      tc.innerHTML = state.teachers.map(t => {
+        const hours = state.requirements.filter(r => r.teacherId === t.id).reduce((s,r) => s + (parseInt(r.weekly)||0), 0);
+        const wDays = (t.workingDays || []).filter(k => getDayKeys().includes(k)).length;
+        const cap = (t.maxDay || 6) * wDays;
         const pct = cap > 0 ? Math.min(100, (hours / cap) * 100) : 0;
         const cls = hours > cap ? 'danger' : hours > cap * 0.85 ? 'warn' : '';
-        return '<div class="chart-bar-container"><div class="chart-bar-label"><span>' + esc(tc.name) + '</span>' +
-          '<span>' + hours + ' / ' + cap + '</span></div>' +
-          '<div class="chart-bar"><div class="chart-bar-fill ' + cls + '" style="width:' + pct + '%"></div></div></div>';
+        return '<div class="chart-bar-container"><div class="chart-bar-label"><span>' + esc(t.name) + '</span><span>' + hours + ' / ' + cap + '</span></div><div class="chart-bar"><div class="chart-bar-fill ' + cls + '" style="width:' + pct + '%"></div></div></div>';
       }).join('');
     }
 
-    const classChart = document.getElementById('class-chart');
+    const cc = document.getElementById('class-chart');
     if(state.classes.length === 0){
-      classChart.innerHTML = '<div class="empty-state"><p>' + t('noClasses') + '</p></div>';
+      cc.innerHTML = '<div class="empty-state"><p>' + t('noClasses') + '</p></div>';
     } else {
       const slots = (state.settings.days||5) * (state.settings.periods||7);
-      classChart.innerHTML = state.classes.map(c => {
+      cc.innerHTML = state.classes.map(c => {
         const hours = state.requirements.filter(r => r.classId === c.id).reduce((s,r) => s + (parseInt(r.weekly)||0), 0);
         const pct = Math.min(100, (hours / slots) * 100);
         const cls = hours > slots ? 'danger' : hours > slots * 0.9 ? 'warn' : '';
-        return '<div class="chart-bar-container"><div class="chart-bar-label"><span>' + esc(c.name) + '</span>' +
-          '<span>' + hours + ' / ' + slots + '</span></div>' +
-          '<div class="chart-bar"><div class="chart-bar-fill ' + cls + '" style="width:' + pct + '%"></div></div></div>';
+        return '<div class="chart-bar-container"><div class="chart-bar-label"><span>' + esc(c.name) + '</span><span>' + hours + ' / ' + slots + '</span></div><div class="chart-bar"><div class="chart-bar-fill ' + cls + '" style="width:' + pct + '%"></div></div></div>';
       }).join('');
     }
 
     const wl = document.getElementById('warnings-list');
     if(warnings.length === 0){
-      wl.innerHTML = '<div class="alert alert-success"><svg><use href="#i-check-circle"/></svg><span>كل البيانات متوازنة</span></div>';
+      wl.innerHTML = '<div class="alert alert-success"><svg><use href="#i-check-circle"/></svg><span>' + (currentLang==='ar'?'كل البيانات متوازنة':'All data balanced') + '</span></div>';
     } else {
       const icons = { error:'i-x-circle', warning:'i-alert', success:'i-check-circle', info:'i-info' };
       wl.innerHTML = warnings.map(w => '<div class="alert alert-' + w.type + '"><svg><use href="#' + icons[w.type] + '"/></svg><span>' + w.text + '</span></div>').join('');
@@ -1718,7 +1788,7 @@ function renderReports(){
   }catch(e){ console.error(e); }
 }
 
-/* ===== SETTINGS ===== */
+/* ============ SETTINGS ============ */
 function renderSettings(){
   try{
     document.getElementById('term-name').value = state.calendar.term || '';
@@ -1730,14 +1800,13 @@ function renderSettings(){
 function renderHolidays(){
   const el = document.getElementById('holidays-list');
   const list = state.calendar.holidays || [];
-  if(list.length === 0){ el.innerHTML = '<div class="empty-state" style="padding:24px"><p>' + t('noHolidays') + '</p></div>'; return; }
+  if(list.length === 0){ el.innerHTML = '<div class="empty-state" style="padding:20px"><p>' + t('noHolidays') + '</p></div>'; return; }
   el.innerHTML = list.map((h, i) =>
-    '<div class="holiday-item"><span>🎉 ' + esc(h.name) + ' — ' + esc(h.date) + '</span>' +
-    '<button onclick="deleteHoliday(' + i + ')">حذف</button></div>'
+    '<div class="holiday-item"><span>🎉 ' + esc(h.name) + ' — ' + esc(h.date) + '</span><button onclick="deleteHoliday(' + i + ')">' + t('delete') + '</button></div>'
   ).join('');
 }
 window.deleteHoliday = (i) => {
-  if(state.role === 'viewer'){ toast('لا تملك صلاحية', 'error'); return; }
+  if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
   state.calendar.holidays.splice(i, 1); save(); renderHolidays();
 };
 document.getElementById('save-term-btn').addEventListener('click', () => {
@@ -1752,7 +1821,7 @@ document.getElementById('add-holiday-btn').addEventListener('click', () => {
   try{
     const name = document.getElementById('holiday-name').value.trim();
     const date = document.getElementById('holiday-date').value;
-    if(!name || !date){ toast('ادخل الاسم والتاريخ', 'error'); return; }
+    if(!name || !date){ toast(t('needName'), 'error'); return; }
     if(!state.calendar.holidays) state.calendar.holidays = [];
     state.calendar.holidays.push({ name, date });
     document.getElementById('holiday-name').value = '';
@@ -1761,16 +1830,14 @@ document.getElementById('add-holiday-btn').addEventListener('click', () => {
   }catch(e){}
 });
 
-/* ===== BACKUP ===== */
+/* ============ BACKUP ============ */
 document.getElementById('backup-btn').addEventListener('click', () => {
   try{
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'jadwal-backup-' + new Date().toISOString().slice(0,10) + '.json';
-    a.click(); URL.revokeObjectURL(url);
-    toast(t('downloaded'), 'success');
+    a.href = url; a.download = 'jadwal-backup-' + new Date().toISOString().slice(0,10) + '.json'; a.click();
+    URL.revokeObjectURL(url); toast(t('downloaded'), 'success');
   }catch(e){ console.error(e); }
 });
 document.getElementById('restore-btn').addEventListener('click', () => document.getElementById('restore-input').click());
@@ -1790,9 +1857,9 @@ document.getElementById('restore-input').addEventListener('change', (e) => {
   e.target.value = '';
 });
 
-/* ===== RESET ===== */
+/* ============ RESET ============ */
 document.getElementById('reset-btn').addEventListener('click', () => {
-  if(state.role === 'viewer'){ toast('لا تملك صلاحية', 'error'); return; }
+  if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
   if(!confirm(t('deleteConfirmReset'))) return;
   state = defaultState();
   saveNow();
@@ -1801,7 +1868,13 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   render(); toast(t('deleted'));
 });
 
-/* ===== INIT ===== */
+/* ============ ROLE ============ */
+function applyRole(){
+  const isViewer = state.role === 'viewer';
+  document.querySelectorAll('[data-admin-only]').forEach(el => { el.style.display = isViewer ? 'none' : ''; });
+}
+
+/* ============ INIT ============ */
 function init(){
   try{
     updateThemeIcon();
