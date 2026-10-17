@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light" data-color="emerald">
+<html lang="ar" dir="rtl" data-theme="light" data-color="emerald" data-template="modern">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -9,12 +9,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
+/* ===== الألوان الهادئة ===== */
 [data-color="emerald"]{--hue:160;--hue2:175}
-[data-color="blue"]{--hue:217;--hue2:200}
-[data-color="purple"]{--hue:262;--hue2:285}
-[data-color="orange"]{--hue:25;--hue2:15}
-[data-color="rose"]{--hue:350;--hue2:330}
+[data-color="mint"]{--hue:145;--hue2:155}
+[data-color="sky"]{--hue:205;--hue2:215}
+[data-color="lavender"]{--hue:260;--hue2:275}
+[data-color="peach"]{--hue:15;--hue2:5}
+[data-color="sand"]{--hue:35;--hue2:45}
 [data-color="slate"]{--hue:215;--hue2:220}
+
 :root{
   --radius:18px;--radius-sm:12px;--tr:cubic-bezier(.4,0,.2,1);
   --primary:hsl(var(--hue),72%,45%);
@@ -26,14 +29,14 @@
   --success:#10b981;--warning:#f59e0b;--danger:#ef4444;--info:#3b82f6;
 }
 [data-theme="light"]{
-  --bg1:hsl(var(--hue),90%,97%);--bg2:hsl(var(--hue),85%,92%);
-  --bg3:hsl(var(--hue),80%,85%);--bg4:hsl(var(--hue),75%,74%);
-  --surface:rgba(255,255,255,0.72);--surface-solid:#fff;
-  --surface-hover:rgba(255,255,255,0.92);--surface-dim:rgba(255,255,255,0.45);
+  --bg1:hsl(var(--hue),90%,98%);--bg2:hsl(var(--hue),85%,94%);
+  --bg3:hsl(var(--hue),80%,88%);--bg4:hsl(var(--hue),75%,80%);
+  --surface:rgba(255,255,255,0.75);--surface-solid:#fff;
+  --surface-hover:rgba(255,255,255,0.95);--surface-dim:rgba(255,255,255,0.5);
   --text:hsl(var(--hue),65%,12%);--text-dim:hsl(var(--hue),55%,30%);--text-mute:#6b7280;
-  --shadow:0 4px 24px hsla(var(--hue),60%,40%,0.15);
-  --shadow-hover:0 12px 40px hsla(var(--hue),60%,40%,0.25);
-  --orb-opacity:0.35;
+  --shadow:0 4px 24px hsla(var(--hue),60%,40%,0.1);
+  --shadow-hover:0 12px 40px hsla(var(--hue),60%,40%,0.2);
+  --orb-opacity:0.3;
 }
 [data-theme="dark"]{
   --bg1:hsl(var(--hue),50%,7%);--bg2:hsl(var(--hue),45%,10%);
@@ -47,6 +50,7 @@
   --border:hsla(var(--hue),60%,50%,0.18);--border-strong:hsla(var(--hue),60%,50%,0.32);
   --orb-opacity:0.15;
 }
+
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Tajawal',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 35%,var(--bg3) 70%,var(--bg4) 100%);background-size:200% 200%;animation:bgShift 20s ease infinite;color:var(--text);min-height:100vh;padding:16px;overflow-x:hidden;position:relative;transition:background .4s}
 @keyframes bgShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
@@ -57,6 +61,7 @@ body{font-family:'Tajawal',sans-serif;background:linear-gradient(135deg,var(--bg
 .orb-3{width:320px;height:320px;background:hsl(var(--hue2),72%,65%);top:45%;left:35%;animation-delay:-12s}
 @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-40px) scale(1.08)}66%{transform:translate(-30px,30px) scale(.92)}}
 .app{max-width:1280px;margin:0 auto;position:relative;z-index:1;width:100%}
+
 header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:16px 18px;background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);flex-wrap:nowrap;transition:all .4s}
 .logo-badge{width:46px;height:46px;min-width:46px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px hsla(var(--hue),72%,45%,0.4);flex-shrink:0}
 .logo-badge svg{width:24px;height:24px;stroke:#fff;stroke-width:2;fill:none}
@@ -68,7 +73,7 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .icon-toggle:hover{background:var(--surface-hover);border-color:var(--primary);transform:translateY(-1px)}
 .icon-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none}
 .color-popover{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:14px;padding:10px;display:none;gap:8px;box-shadow:0 12px 40px rgba(0,0,0,0.2);z-index:100}
-.color-popover.show{display:flex;flex-wrap:wrap;max-width:220px}
+.color-popover.show{display:flex;flex-wrap:wrap;max-width:240px}
 .color-circle{width:32px;height:32px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .2s;flex-shrink:0}
 .color-circle:hover{transform:scale(1.15)}
 .color-circle.active{border-color:var(--text);box-shadow:0 0 0 3px var(--surface)}
@@ -89,19 +94,17 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .card h2{margin-bottom:14px;font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px;color:var(--text)}
 .card h2 svg{width:18px;height:18px;stroke:var(--primary);fill:none;flex-shrink:0}
 
+/* Stats */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
 .stat-card{background:var(--surface);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);padding:16px 12px;text-align:center;position:relative;box-shadow:var(--shadow);transition:all .3s var(--tr)}
 .stat-card.clickable{cursor:pointer}
 .stat-card.clickable:hover{transform:translateY(-4px);border-color:var(--primary);box-shadow:0 12px 40px hsla(var(--hue),72%,45%,0.3);background:var(--surface-hover)}
-.stat-card.clickable:active{transform:translateY(-2px)}
-.stat-card.clickable::after{content:'→';position:absolute;top:8px;left:8px;font-size:12px;color:var(--primary);opacity:0;transition:opacity .3s}
-.stat-card.clickable:hover::after{opacity:1}
 .stat-icon-badge{width:42px;height:42px;border-radius:12px;background:hsla(var(--hue),60%,45%,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;transition:all .3s}
 .stat-icon-badge svg{width:20px;height:20px;stroke:var(--primary);fill:none}
-.stat-card:hover .stat-icon-badge{transform:scale(1.1) rotate(-5deg)}
 .stat-value{font-size:28px;font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .stat-label{color:var(--text-dim);font-size:11px;font-weight:700;margin-top:3px}
 
+/* Forms */
 .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:10px}
 .form-group{margin-bottom:8px}
 .form-group label{display:block;margin-bottom:6px;color:var(--text-dim);font-size:12px;font-weight:800}
@@ -111,6 +114,18 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .form-group select option{background:var(--surface-solid);color:var(--text)}
 .form-hint{color:var(--text-mute);font-size:11px;margin-top:4px;font-weight:500;line-height:1.5}
 
+/* Fix Date Input */
+input[type="date"] {
+  direction: ltr;
+  text-align: right;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Buttons */
 .btn{padding:10px 18px;border-radius:var(--radius-sm);border:none;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;transition:all .25s var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:7px}
 .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0}
 .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 4px 16px hsla(var(--hue),72%,45%,0.4)}
@@ -127,6 +142,7 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .btn-sm svg{width:13px;height:13px}
 .btn-row{display:flex;gap:7px;flex-wrap:wrap}
 
+/* Lists */
 .list{display:flex;flex-direction:column;gap:8px}
 .list-item{display:flex;align-items:flex-start;justify-content:space-between;padding:13px 15px;background:var(--surface-dim);border-radius:var(--radius-sm);border:1px solid var(--border);transition:all .25s var(--tr);gap:10px}
 .list-item:hover{background:var(--surface-hover);border-color:var(--border-strong)}
@@ -165,15 +181,34 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .alert-success{background:hsla(160,72%,45%,0.1);border-color:hsla(160,72%,45%,0.35);color:var(--success)}
 .alert-info{background:hsla(217,90%,55%,0.1);border-color:hsla(217,90%,55%,0.35);color:var(--info)}
 
+/* الجدول - القوالب */
 .schedule-table{width:100%;border-collapse:separate;border-spacing:3px;margin-top:12px;min-width:560px;table-layout:fixed}
 .schedule-table th,.schedule-table td{padding:9px 5px;border-radius:8px;text-align:center;font-size:11px;word-wrap:break-word}
-.schedule-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:800}
+.schedule-table th{font-weight:800}
 .schedule-table th:first-child{width:70px}
-.schedule-table .day-cell{background:hsla(var(--hue),72%,45%,0.15);color:var(--primary);font-weight:800;white-space:nowrap}
-.schedule-table .slot-filled{background:hsla(var(--hue),72%,55%,0.12);color:var(--primary2);transition:transform .2s}
-[data-theme="dark"] .schedule-table .slot-filled{color:var(--primary-light)}
-.schedule-table .slot-filled:hover{background:hsla(var(--hue),72%,55%,0.25);transform:scale(1.02)}
-.schedule-table .slot-empty{background:var(--surface-dim);color:var(--text-mute)}
+
+/* قالب Modern */
+[data-template="modern"] .schedule-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff}
+[data-template="modern"] .schedule-table .day-cell{background:hsla(var(--hue),72%,45%,0.15);color:var(--primary);font-weight:800;white-space:nowrap}
+[data-template="modern"] .schedule-table .slot-filled{background:hsla(var(--hue),72%,55%,0.12);color:var(--primary2);transition:transform .2s}
+[data-theme="dark"][data-template="modern"] .schedule-table .slot-filled{color:var(--primary-light)}
+[data-template="modern"] .schedule-table .slot-empty{background:var(--surface-dim);color:var(--text-mute)}
+
+/* قالب Classic */
+[data-template="classic"] .schedule-table{border-spacing:0;border:1px solid var(--border-strong)}
+[data-template="classic"] .schedule-table th{background:var(--surface-solid);color:var(--text);border:1px solid var(--border-strong);border-radius:0}
+[data-template="classic"] .schedule-table td{border:1px solid var(--border);border-radius:0}
+[data-template="classic"] .schedule-table .day-cell{background:var(--surface-dim);color:var(--text);font-weight:800}
+[data-template="classic"] .schedule-table .slot-filled{background:transparent}
+[data-template="classic"] .schedule-table .slot-empty{background:transparent}
+
+/* قالب Minimal */
+[data-template="minimal"] .schedule-table{border-spacing:0 6px}
+[data-template="minimal"] .schedule-table th{background:transparent;color:var(--primary);border-bottom:2px solid var(--primary);border-radius:0;padding-bottom:6px}
+[data-template="minimal"] .schedule-table .day-cell{background:transparent;color:var(--text);font-weight:800;border-left:2px solid var(--border-strong)}
+[data-template="minimal"] .schedule-table .slot-filled{background:transparent;border-bottom:1px solid var(--border)}
+[data-template="minimal"] .schedule-table .slot-empty{background:transparent;border-bottom:1px dashed var(--border)}
+
 .schedule-table .subject-name{font-weight:800;display:block;margin-bottom:2px;font-size:11px}
 .schedule-table .teacher-name{font-size:10px;opacity:.7;font-weight:600;display:block}
 .table-scroll{overflow-x:auto;border-radius:var(--radius-sm);-webkit-overflow-scrolling:touch}
@@ -183,6 +218,7 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .toast.error{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 10px 36px rgba(239,68,68,0.5)}
 .toast.success{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 10px 36px rgba(16,185,129,0.5)}
 
+/* Modals */
 .modal{position:fixed;inset:0;background:hsla(var(--hue),60%,5%,0.7);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;z-index:2000;padding:16px;overflow-y:auto}
 .modal.show{display:flex;animation:panelFade .3s}
 .modal-content{background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:var(--radius);max-width:760px;width:100%;max-height:90vh;overflow-y:auto;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,0.4);margin:auto}
@@ -196,6 +232,7 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .modal-footer{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--border)}
 .modal-footer p{color:var(--text-dim);font-size:11px;flex:1;min-width:120px}
 
+/* Teacher Modal Specifics */
 .teacher-section{padding:12px 0;border-bottom:1px solid var(--border)}
 .teacher-section:last-of-type{border-bottom:none;padding-bottom:0}
 .teacher-section h3{font-size:11px;font-weight:800;color:var(--text-dim);margin-bottom:10px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.4px}
@@ -260,6 +297,7 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
 .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* Media Queries */
 @media(min-width:1024px){
   body{padding:24px}
   header{padding:20px 24px;gap:18px}
@@ -372,6 +410,7 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
 <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
 <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
 <symbol id="i-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></symbol>
 </defs></svg>
 
 <div class="orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
@@ -389,10 +428,11 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
       <button class="icon-toggle" id="lang-btn" data-i18n-title="changeLang"><svg><use href="#i-globe"/></svg></button>
       <div class="color-popover" id="color-popover">
         <div class="color-circle" data-color-pick="emerald" style="background:#10b981"></div>
-        <div class="color-circle" data-color-pick="blue" style="background:#3b82f6"></div>
-        <div class="color-circle" data-color-pick="purple" style="background:#8b5cf6"></div>
-        <div class="color-circle" data-color-pick="orange" style="background:#f97316"></div>
-        <div class="color-circle" data-color-pick="rose" style="background:#f43f5e"></div>
+        <div class="color-circle" data-color-pick="mint" style="background:#34d399"></div>
+        <div class="color-circle" data-color-pick="sky" style="background:#3b82f6"></div>
+        <div class="color-circle" data-color-pick="lavender" style="background:#8b5cf6"></div>
+        <div class="color-circle" data-color-pick="peach" style="background:#f97316"></div>
+        <div class="color-circle" data-color-pick="sand" style="background:#eab308"></div>
         <div class="color-circle" data-color-pick="slate" style="background:#64748b"></div>
       </div>
     </div>
@@ -543,6 +583,21 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
         <button class="btn btn-primary" id="add-holiday-btn"><svg><use href="#i-plus"/></svg> <span data-i18n="add">إضافة</span></button>
         <div id="holidays-list" style="margin-top:14px"></div>
       </div>
+      
+      <!-- قالب الجدول -->
+      <div class="card">
+        <h2><svg><use href="#i-layers"/></svg> قالب الجدول (Table Template)</h2>
+        <div class="form-row">
+          <div class="form-group"><label>شكل الجدول</label>
+            <select id="template-selector">
+              <option value="modern">عصري (Modern)</option>
+              <option value="classic">كلاسيكي (Classic)</option>
+              <option value="minimal">بسيط (Minimal)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
       <div class="card" data-admin-only>
         <h2><svg><use href="#i-save"/></svg> <span data-i18n="backup">نسخ احتياطي</span></h2>
         <div class="btn-row">
@@ -551,6 +606,15 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
           <input type="file" id="restore-input" accept=".json" style="display:none">
         </div>
       </div>
+      
+      <!-- التواصل -->
+      <div class="card" style="text-align:center; padding: 24px;">
+        <p style="color:var(--text-dim); font-size: 14px; margin-bottom: 12px;">📱 للتواصل والدعم الفني</p>
+        <a href="https://t.me/HJS_98" target="_blank" class="btn btn-primary" style="text-decoration:none; display: inline-flex; width: auto;">
+          <svg><use href="#i-send"/></svg> Telegram: @HJS_98
+        </a>
+      </div>
+
       <div class="card" data-admin-only>
         <h2><svg><use href="#i-alert"/></svg> <span data-i18n="dangerZone">منطقة الخطر</span></h2>
         <button class="btn btn-danger" id="reset-btn"><svg><use href="#i-trash"/></svg> <span data-i18n="resetAll">حذف الكل</span></button>
@@ -596,7 +660,7 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
       <h3><svg><use href="#i-book"/></svg> <span data-i18n="assignments">الصفوف والمواد</span></h3>
       <div id="tm-assignments" class="assignments-list"></div>
       <button type="button" class="btn btn-secondary btn-sm" onclick="addAssignmentRow()"><svg><use href="#i-plus"/></svg> <span data-i18n="addAssignment">إضافة صف/مادة</span></button>
-      <div class="form-hint" style="margin-top:8px" data-i18n="assignmentsHint">حدد عدد الحصص لكل مادة (فارغ = المستخدم يحدد)</div>
+      <div class="form-hint" style="margin-top:8px" data-i18n="assignmentsHint">حدد عدد الحصص لكل مادة</div>
     </div>
 
     <div class="summary-panel">
@@ -778,7 +842,7 @@ const defaultState = () => ({
   schedule: null,
   settings: { periods: 7, days: 5 },
   calendar: { term:'', startDate:'', endDate:'', holidays:[] },
-  role: 'admin'
+  role: 'admin', template: 'modern'
 });
 let state = defaultState();
 
@@ -798,6 +862,7 @@ function load(){
     if(!state.teachers) state.teachers = [];
     if(!state.classes) state.classes = [];
     if(!state.requirements) state.requirements = [];
+    if(!state.template) state.template = 'modern';
 
     state.teachers = state.teachers.filter(tc => tc && tc.id && tc.name).map(tc => {
       const wd = Array.isArray(tc.workingDays) && tc.workingDays.length > 0 ? tc.workingDays : ['sun','mon','tue','wed','thu'];
@@ -833,9 +898,10 @@ function toast(msg, type=''){
 }
 function debounce(fn, ms){ let t; return function(...a){ clearTimeout(t); t = setTimeout(() => fn.apply(this,a), ms); }; }
 
-/* ============ THEME/COLOR ============ */
+/* ============ THEME/COLOR/TEMPLATE ============ */
 document.documentElement.setAttribute('data-theme', localStorage.getItem('jadwal-theme') || 'light');
 document.documentElement.setAttribute('data-color', localStorage.getItem('jadwal-color') || 'emerald');
+document.documentElement.setAttribute('data-template', localStorage.getItem('jadwal-template') || 'modern');
 
 function updateThemeIcon(){
   const theme = document.documentElement.getAttribute('data-theme');
@@ -866,17 +932,27 @@ document.querySelectorAll('[data-color-pick]').forEach(c => {
     document.documentElement.setAttribute('data-color', color);
     localStorage.setItem('jadwal-color', color);
     document.getElementById('color-popover').classList.remove('show');
+    markActiveColor();
     toast(currentLang === 'ar' ? 'تم تغيير اللون ✓' : 'Color changed ✓', 'success');
   });
 });
 
-/* Mark active color */
 function markActiveColor(){
   const cur = document.documentElement.getAttribute('data-color');
   document.querySelectorAll('[data-color-pick]').forEach(c => {
     c.classList.toggle('active', c.dataset.colorPick === cur);
   });
 }
+
+/* Template */
+document.getElementById('template-selector').addEventListener('change', (e) => {
+  const val = e.target.value;
+  document.documentElement.setAttribute('data-template', val);
+  localStorage.setItem('jadwal-template', val);
+  state.template = val;
+  save();
+  renderScheduleDisplay();
+});
 
 /* ============ TABS ============ */
 function goToTab(name){
@@ -1485,8 +1561,14 @@ function renderScheduleDisplay(){
         return null;
       };
     }
-    let html = '<h2>' + title + '</h2><div class="table-scroll"><table class="schedule-table"><thead><tr><th>#</th>';
-    for(let p = 1; p <= periods; p++) html += '<th>' + p + '</th>';
+    
+    // Fixed Headers
+    const namesAr = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر'];
+    let html = '<h2>' + title + '</h2><div class="table-scroll"><table class="schedule-table"><thead><tr><th></th>';
+    for(let p = 1; p <= periods; p++) {
+       const label = currentLang === 'ar' ? 'الدرس ' + (namesAr[p-1] || p) : 'Lesson ' + p;
+       html += '<th>' + label + '</th>';
+    }
     html += '</tr></thead><tbody>';
     dayKeys.forEach(d => {
       html += '<tr><td class="day-cell">' + esc(dayName(d)) + '</td>';
@@ -1506,7 +1588,6 @@ document.getElementById('schedule-entity').addEventListener('change', renderSche
 
 /* ============ PRINT - COMPLETE REWRITE ============ */
 function buildMiniScheduleHTML(view, id, opts){
-  // opts: { size, colorMode, compact }
   const periods = Math.max(1, state.settings.periods || 7);
   const dayKeys = getDayKeys();
   const grid = state.schedule?.grid || {};
@@ -1541,36 +1622,47 @@ function buildMiniScheduleHTML(view, id, opts){
 
   // Colors
   const primaryHue = getComputedStyle(document.documentElement).getPropertyValue('--hue').trim() || '160';
-  const colors = colorMode === 'bw' ? {
-    primary: '#000000',
-    headerBg: '#333333',
-    headerText: '#ffffff',
-    dayBg: '#e5e5e5',
-    filledBg: '#f5f5f5',
-    emptyBg: '#ffffff',
-    border: '#999999',
-    text: '#000000',
-    subText: '#333333'
-  } : {
-    primary: `hsl(${primaryHue}, 72%, 40%)`,
-    headerBg: `hsl(${primaryHue}, 72%, 45%)`,
-    headerText: '#ffffff',
-    dayBg: `hsl(${primaryHue}, 85%, 92%)`,
-    filledBg: `hsl(${primaryHue}, 80%, 95%)`,
-    emptyBg: '#ffffff',
-    border: `hsl(${primaryHue}, 50%, 70%)`,
-    text: `hsl(${primaryHue}, 60%, 15%)`,
-    subText: `hsl(${primaryHue}, 50%, 35%)`
-  };
+  const template = document.documentElement.getAttribute('data-template') || 'modern';
+  
+  let colors = {};
+  if (colorMode === 'bw') {
+    colors = {
+      primary: '#000000', headerBg: '#333333', headerText: '#ffffff',
+      dayBg: '#e5e5e5', filledBg: '#f5f5f5', emptyBg: '#ffffff',
+      border: '#999999', text: '#000000', subText: '#333333'
+    };
+  } else {
+    colors = {
+      primary: `hsl(${primaryHue}, 72%, 40%)`,
+      headerBg: template === 'classic' ? '#ffffff' : (template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 72%, 45%)`),
+      headerText: template === 'classic' ? `hsl(${primaryHue}, 60%, 15%)` : (template === 'minimal' ? `hsl(${primaryHue}, 72%, 45%)` : '#ffffff'),
+      dayBg: template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 85%, 92%)`,
+      filledBg: template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 80%, 95%)`,
+      emptyBg: '#ffffff',
+      border: template === 'classic' ? `hsl(${primaryHue}, 50%, 70%)` : (template === 'minimal' ? '#e5e7eb' : `transparent`),
+      text: `hsl(${primaryHue}, 60%, 15%)`,
+      subText: `hsl(${primaryHue}, 50%, 35%)`
+    };
+  }
 
   const fs = size === 'A3' ? (opts.compact ? '7pt' : '9pt') : (opts.compact ? '6pt' : '8pt');
   const subFs = size === 'A3' ? (opts.compact ? '6pt' : '7pt') : (opts.compact ? '5pt' : '6pt');
   const titleFs = size === 'A3' ? '11pt' : '9pt';
   const cellPad = opts.compact ? '2pt 1pt' : '3pt 2pt';
 
+  const namesAr = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر'];
+  
   let html = `<div class="mini-schedule"><div class="mini-title">${esc(title)}</div>`;
   html += `<table class="mini-table"><thead><tr><th class="corner"></th>`;
-  for(let p = 1; p <= periods; p++) html += `<th>${p}</th>`;
+  for(let p = 1; p <= periods; p++) {
+    let label = p;
+    if (!opts.compact) {
+       label = currentLang === 'ar' ? 'الدرس ' + (namesAr[p-1] || p) : 'Lesson ' + p;
+    } else {
+       label = 'ح' + p;
+    }
+    html += `<th>${label}</th>`;
+  }
   html += `</tr></thead><tbody>`;
   dayKeys.forEach(d => {
     html += `<tr><td class="day-cell">${esc(dayName(d))}</td>`;
@@ -1595,48 +1687,61 @@ function openPrintWindow(scope){
       return;
     }
 
-    const size = document.getElementById('print-size').value; // A4/A3
-    const orient = document.getElementById('print-orientation').value; // landscape/portrait
-    const colorMode = document.getElementById('print-color').value; // color/bw
+    const size = document.getElementById('print-size').value;
+    const orient = document.getElementById('print-orientation').value;
+    const colorMode = document.getElementById('print-color').value;
 
-    // Determine content
     let content = '';
     let pageConfig = '';
 
     if(scope === 'all'){
-      // Print ALL teachers
       if(state.teachers.length === 0){ toast(t('noTeachers'), 'error'); return; }
-
-      // Determine layout strategy
       const isA3 = size === 'A3';
       const isLandscape = orient === 'landscape';
       const teacherCount = state.teachers.length;
 
       if(isA3 && isLandscape){
         // A3 landscape = all in one page, grid layout
-        // Up to 4 columns for max density
-        let cols;
-        if(teacherCount <= 4) cols = 2;
-        else if(teacherCount <= 9) cols = 3;
-        else cols = 4;
+        let cols = 2;
+        if (teacherCount > 4 && teacherCount <= 9) cols = 3;
+        else if (teacherCount > 9) cols = 4;
         const compact = teacherCount > 6;
-        content = `<div class="print-grid" style="grid-template-columns: repeat(${cols}, 1fr); gap: ${compact ? '6px' : '10px'};">`;
+        
+        // Adjust font sizes dynamically based on count to fill page
+        let fs, subFs, titleFs, cellPad;
+        if (teacherCount <= 4) {
+          fs = '11pt'; subFs = '9pt'; titleFs = '15pt'; cellPad = '6px 4px';
+        } else if (teacherCount <= 9) {
+          fs = '8pt'; subFs = '7pt'; titleFs = '11pt'; cellPad = '4px 2px';
+        } else {
+          fs = '6pt'; subFs = '5pt'; titleFs = '9pt'; cellPad = '2px 1px';
+        }
+
+        content = `<div class="print-grid" style="grid-template-columns: repeat(${cols}, 1fr); gap: 15px; height: 100vh; align-content: stretch;">`;
         state.teachers.forEach(tc => {
-          content += `<div class="print-item">${buildMiniScheduleHTML('teacher', tc.id, { size, colorMode, compact })}</div>`;
+          content += `<div class="print-item" style="display: flex; flex-direction: column; justify-content: center;">${buildMiniScheduleHTML('teacher', tc.id, { size, colorMode, compact })}</div>`;
         });
         content += `</div>`;
         pageConfig = `@page { size: A3 landscape; margin: 0.5cm; }`;
+        
+        // Override CSS for this specific print
+        content = `<style>
+          .mini-table th { font-size: ${fs}; padding: ${cellPad}; }
+          .mini-table td { font-size: ${fs}; padding: ${cellPad}; }
+          .mini-table .subject-name { font-size: ${fs}; }
+          .mini-table .teacher-name { font-size: ${subFs}; }
+          .mini-title { font-size: ${titleFs}; }
+        </style>` + content;
+
       } else if(isA3 && !isLandscape){
-        // A3 portrait - 2 cols
         const compact = teacherCount > 4;
-        content = `<div class="print-grid" style="grid-template-columns: repeat(2, 1fr); gap: 8px;">`;
+        content = `<div class="print-grid" style="grid-template-columns: repeat(2, 1fr); gap: 10px;">`;
         state.teachers.forEach(tc => {
           content += `<div class="print-item">${buildMiniScheduleHTML('teacher', tc.id, { size, colorMode, compact })}</div>`;
         });
         content += `</div>`;
         pageConfig = `@page { size: A3 portrait; margin: 0.8cm; }`;
       } else if(!isA3 && isLandscape){
-        // A4 landscape - 2 cols
         content = `<div class="print-grid" style="grid-template-columns: repeat(2, 1fr); gap: 8px;">`;
         state.teachers.forEach(tc => {
           content += `<div class="print-item">${buildMiniScheduleHTML('teacher', tc.id, { size, colorMode, compact: true })}</div>`;
@@ -1644,7 +1749,6 @@ function openPrintWindow(scope){
         content += `</div>`;
         pageConfig = `@page { size: A4 landscape; margin: 0.6cm; }`;
       } else {
-        // A4 portrait - page break per teacher
         state.teachers.forEach((tc, i) => {
           if(i > 0) content += '<div style="page-break-before: always; height: 0;"></div>';
           content += `<div class="print-item">${buildMiniScheduleHTML('teacher', tc.id, { size, colorMode, compact: false })}</div>`;
@@ -1652,7 +1756,6 @@ function openPrintWindow(scope){
         pageConfig = `@page { size: A4 portrait; margin: 1cm; }`;
       }
     } else {
-      // Print current view (single)
       const view = document.getElementById('schedule-view').value;
       const id = document.getElementById('schedule-entity').value;
       if(!id){ toast(t('selectEntity'), 'error'); return; }
@@ -1660,34 +1763,29 @@ function openPrintWindow(scope){
       pageConfig = `@page { size: ${size} ${orient}; margin: ${orient === 'portrait' ? '1cm' : '0.6cm'}; }`;
     }
 
-    // Get font sizes
     const titleFs = size === 'A3' ? '11pt' : '10pt';
     const fs = size === 'A3' ? '8pt' : '7pt';
     const subFs = size === 'A3' ? '7pt' : '6pt';
 
-    // Colors for the print
     const primaryHue = getComputedStyle(document.documentElement).getPropertyValue('--hue').trim() || '160';
-    const colors = colorMode === 'bw' ? {
-      headerBg: '#333333',
-      headerText: '#ffffff',
-      dayBg: '#e5e5e5',
-      filledBg: '#f5f5f5',
-      emptyBg: '#ffffff',
-      border: '#999999',
-      text: '#000000',
-      subText: '#333333'
-    } : {
-      headerBg: `hsl(${primaryHue}, 72%, 45%)`,
-      headerText: '#ffffff',
-      dayBg: `hsl(${primaryHue}, 85%, 92%)`,
-      filledBg: `hsl(${primaryHue}, 80%, 95%)`,
-      emptyBg: '#ffffff',
-      border: `hsl(${primaryHue}, 50%, 70%)`,
-      text: `hsl(${primaryHue}, 60%, 15%)`,
-      subText: `hsl(${primaryHue}, 50%, 35%)`
-    };
+    const template = document.documentElement.getAttribute('data-template') || 'modern';
+    
+    let colors = {};
+    if (colorMode === 'bw') {
+      colors = { headerBg: '#333333', headerText: '#ffffff', dayBg: '#e5e5e5', filledBg: '#f5f5f5', emptyBg: '#ffffff', border: '#999999', text: '#000000', subText: '#333333' };
+    } else {
+      colors = {
+        headerBg: template === 'classic' ? '#ffffff' : (template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 72%, 45%)`),
+        headerText: template === 'classic' ? `hsl(${primaryHue}, 60%, 15%)` : (template === 'minimal' ? `hsl(${primaryHue}, 72%, 45%)` : '#ffffff'),
+        dayBg: template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 85%, 92%)`,
+        filledBg: template === 'minimal' ? 'transparent' : `hsl(${primaryHue}, 80%, 95%)`,
+        emptyBg: '#ffffff',
+        border: template === 'classic' ? `hsl(${primaryHue}, 50%, 70%)` : (template === 'minimal' ? '#e5e7eb' : `transparent`),
+        text: `hsl(${primaryHue}, 60%, 15%)`,
+        subText: `hsl(${primaryHue}, 50%, 35%)`
+      };
+    }
 
-    // Full HTML document for print
     const html = `<!DOCTYPE html>
 <html lang="${currentLang}" dir="${currentLang === 'ar' ? 'rtl' : 'ltr'}">
 <head>
@@ -1722,7 +1820,7 @@ body {
   font-weight: 800;
   text-align: center;
   margin-bottom: 3px;
-  color: ${colors.headerBg};
+  color: ${colors.headerBg === 'transparent' ? colors.headerText : colors.headerBg};
   padding: 2px 4px;
   background: ${colors.dayBg};
   border-radius: 4px;
@@ -1738,7 +1836,7 @@ body {
   font-size: ${fs};
   font-weight: 700;
   padding: 3px 1px;
-  border: 1px solid ${colors.headerBg};
+  border: 1px solid ${colors.headerBg === 'transparent' ? colors.headerText : colors.headerBg};
   text-align: center;
 }
 .mini-table th.corner {
@@ -1817,7 +1915,6 @@ window.onafterprint = function(){
 document.getElementById('print-current-btn').addEventListener('click', () => openPrintWindow('current'));
 document.getElementById('print-all-btn').addEventListener('click', () => openPrintWindow('all'));
 
-/* Legacy print buttons - redirect to new */
 document.getElementById('print-btn')?.addEventListener('click', () => openPrintWindow('current'));
 document.getElementById('pdf-btn')?.addEventListener('click', () => openPrintWindow('current'));
 
@@ -1856,7 +1953,6 @@ function getCurrentEntityName(){
   return tc ? tc.name : 'teacher';
 }
 
-// Excel Current - single sheet
 document.getElementById('excel-current-btn').addEventListener('click', () => {
   try{
     const view = document.getElementById('schedule-view').value;
@@ -1872,13 +1968,11 @@ document.getElementById('excel-current-btn').addEventListener('click', () => {
   }catch(e){ console.error(e); toast(t('error'), 'error'); }
 });
 
-// Excel All - multi-sheet + summary
 document.getElementById('excel-all-btn').addEventListener('click', () => {
   try{
     if(!state.schedule || typeof XLSX === 'undefined'){ toast(t('noData'), 'error'); return; }
     const wb = XLSX.utils.book_new();
 
-    // 1. Summary sheet
     const summaryRows = [
       [currentLang === 'ar' ? 'ملخص شامل' : 'Summary'],
       [],
@@ -1897,7 +1991,6 @@ document.getElementById('excel-all-btn').addEventListener('click', () => {
       const wDays = (tc.workingDays || getDayKeys()).length;
       const capacity = (tc.maxDay || 6) * wDays;
 
-      // Count placed hours for teacher
       let placed = 0;
       const dayKeys = getDayKeys();
       state.classes.forEach(c => {
@@ -1925,15 +2018,12 @@ document.getElementById('excel-all-btn').addEventListener('click', () => {
     summaryWs['!cols'] = [{ wch: 20 }, { wch: 12 }, { wch: 12 }, { wch: 12 }, { wch: 15 }, { wch: 15 }, { wch: 15 }];
     XLSX.utils.book_append_sheet(wb, summaryWs, currentLang === 'ar' ? 'ملخص' : 'Summary');
 
-    // 2. Teachers sheets
     state.teachers.forEach(tc => {
       const matrix = buildScheduleMatrix('teacher', tc.id);
       const ws = XLSX.utils.aoa_to_sheet(matrix);
       ws['!cols'] = [{ wch: 12 }].concat(Array(matrix[0].length - 1).fill({ wch: 16 }));
-      // Clean sheet name - remove special chars, max 31 chars
       let sheetName = tc.name.replace(/[*?:/\\\[\]]/g, '').substring(0, 28);
       if(!sheetName) sheetName = 'Teacher';
-      // Ensure unique
       let n = 1;
       let finalName = sheetName;
       while(wb.SheetNames.includes(finalName)){
@@ -1942,7 +2032,6 @@ document.getElementById('excel-all-btn').addEventListener('click', () => {
       XLSX.utils.book_append_sheet(wb, ws, finalName);
     });
 
-    // 3. Classes sheets
     state.classes.forEach(c => {
       const matrix = buildScheduleMatrix('class', c.id);
       const ws = XLSX.utils.aoa_to_sheet(matrix);
@@ -1963,7 +2052,6 @@ document.getElementById('excel-all-btn').addEventListener('click', () => {
   }catch(e){ console.error(e); toast(t('error') + ': ' + e.message, 'error'); }
 });
 
-/* ============ CSV ============ */
 document.getElementById('csv-btn').addEventListener('click', () => {
   try{
     const view = document.getElementById('schedule-view').value;
@@ -1980,24 +2068,62 @@ document.getElementById('csv-btn').addEventListener('click', () => {
   }catch(e){}
 });
 
-/* ============ PNG ============ */
+/* ============ PNG EXPORT (FIXED) ============ */
 document.getElementById('png-btn').addEventListener('click', () => {
   try{
     if(!state.schedule || typeof html2canvas === 'undefined'){ toast(t('noData'), 'error'); return; }
+    
+    // Create a clone for capturing to avoid scroll clipping
     const el = document.getElementById('schedule-display');
-    const savedBg = el.style.background;
-    el.style.background = document.documentElement.getAttribute('data-theme') === 'light' ? '#ffffff' : '#041f1c';
-    el.style.padding = '30px'; el.style.borderRadius = '16px';
-    html2canvas(el, { backgroundColor: null, scale: 2 }).then(canvas => {
-      canvas.toBlob(blob => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = 'schedule_' + getCurrentEntityName() + '.png'; a.click();
-        URL.revokeObjectURL(url); toast(t('downloaded'), 'success');
-        el.style.background = savedBg; el.style.padding = ''; el.style.borderRadius = '';
+    const clone = el.cloneNode(true);
+    
+    // Create off-screen wrapper
+    const wrapper = document.createElement('div');
+    wrapper.style.position = 'fixed';
+    wrapper.style.left = '-9999px';
+    wrapper.style.top = '0';
+    wrapper.style.background = document.documentElement.getAttribute('data-theme') === 'light' ? '#ffffff' : '#041f1c';
+    wrapper.style.padding = '40px';
+    wrapper.style.borderRadius = '16px';
+    wrapper.style.width = 'max-content';
+    wrapper.style.minWidth = '800px';
+    
+    // Fix internal scroll container
+    const scroller = clone.querySelector('.table-scroll');
+    if(scroller) {
+      scroller.style.overflow = 'visible';
+      scroller.style.width = 'auto';
+    }
+    
+    // Ensure table expands fully
+    const table = clone.querySelector('.schedule-table');
+    if(table) {
+      table.style.minWidth = '100%';
+      table.style.width = '100%';
+      table.style.tableLayout = 'auto'; // Let it expand
+    }
+    
+    wrapper.appendChild(clone);
+    document.body.appendChild(wrapper);
+    
+    // Small delay to ensure rendering
+    setTimeout(() => {
+      html2canvas(wrapper, { backgroundColor: null, scale: 2 }).then(canvas => {
+        canvas.toBlob(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url; a.download = 'schedule_' + getCurrentEntityName() + '.png'; a.click();
+          URL.revokeObjectURL(url); toast(t('downloaded'), 'success');
+          document.body.removeChild(wrapper);
+        });
+      }).catch((err) => { 
+        console.error(err);
+        document.body.removeChild(wrapper);
+        toast(t('error'), 'error'); 
       });
-    }).catch(() => { el.style.background = savedBg; el.style.padding = ''; el.style.borderRadius = ''; });
-  }catch(e){}
+    }, 100);
+    
+  }catch(e){ console.error(e); toast(t('error'), 'error'); }
 });
 
 /* ============ SHARE ============ */
@@ -2099,6 +2225,7 @@ function renderSettings(){
     document.getElementById('term-name').value = state.calendar.term || '';
     document.getElementById('term-start').value = state.calendar.startDate || '';
     document.getElementById('term-end').value = state.calendar.endDate || '';
+    document.getElementById('template-selector').value = state.template || 'modern';
     renderHolidays();
   }catch(e){}
 }
@@ -2176,6 +2303,7 @@ function init(){
     load();
     document.getElementById('periods-count').value = state.settings.periods || 7;
     document.getElementById('days-count').value = state.settings.days || 5;
+    document.getElementById('template-selector').value = state.template || 'modern';
     applyLanguage();
   }catch(e){
     console.error(e);
