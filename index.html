@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="light" data-color="emerald" data-template="modern">
+<html lang="ar" dir="rtl" data-theme="light" data-color="emerald">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -68,11 +68,11 @@ header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:16px 
 .header-text{flex:1;min-width:0;overflow:hidden}
 header h1{font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.header-actions{display:flex;gap:6px;flex-shrink:0;position:relative}
+.header-actions{display:flex;gap:6px;flex-shrink:0;position:relative;z-index:9999 !important}
 .icon-toggle{width:38px;height:38px;border-radius:10px;border:1px solid var(--border-strong);background:var(--surface-dim);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s var(--tr)}
 .icon-toggle:hover{background:var(--surface-hover);border-color:var(--primary);transform:translateY(-1px)}
 .icon-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none}
-.color-popover{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:14px;padding:10px;display:none;gap:8px;box-shadow:0 12px 40px rgba(0,0,0,0.2);z-index:100}
+.color-popover{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:14px;padding:10px;display:none;gap:8px;box-shadow:0 12px 40px rgba(0,0,0,0.2);z-index:99999 !important}
 .color-popover.show{display:flex;flex-wrap:wrap;max-width:240px}
 .color-circle{width:32px;height:32px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .2s;flex-shrink:0}
 .color-circle:hover{transform:scale(1.15)}
@@ -112,6 +112,7 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .form-group select option{background:var(--surface-solid);color:var(--text)}
 .form-hint{color:var(--text-mute);font-size:11px;margin-top:4px;font-weight:500;line-height:1.5}
 
+/* Fix Date Input */
 input[type="date"] {
   direction: ltr;
   text-align: right;
@@ -120,6 +121,10 @@ input[type="date"] {
 html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   margin-left: 0;
   margin-right: auto;
+}
+input[type="date"]::-webkit-datetime-edit {
+  display: inline-block;
+  padding: 0 4px;
 }
 
 .btn{padding:10px 18px;border-radius:var(--radius-sm);border:none;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;transition:all .25s var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:7px}
@@ -181,25 +186,11 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .schedule-table th{font-weight:800}
 .schedule-table th:first-child{width:70px}
 
-[data-template="modern"] .schedule-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff}
-[data-template="modern"] .schedule-table .day-cell{background:hsla(var(--hue),72%,45%,0.15);color:var(--primary);font-weight:800;white-space:nowrap}
-[data-template="modern"] .schedule-table .slot-filled{background:hsla(var(--hue),72%,55%,0.12);color:var(--primary2);transition:transform .2s}
-[data-theme="dark"][data-template="modern"] .schedule-table .slot-filled{color:var(--primary-light)}
-[data-template="modern"] .schedule-table .slot-empty{background:var(--surface-dim);color:var(--text-mute)}
-
-[data-template="classic"] .schedule-table{border-spacing:0;border:1px solid var(--border-strong)}
-[data-template="classic"] .schedule-table th{background:var(--surface-solid);color:var(--text);border:1px solid var(--border-strong);border-radius:0}
-[data-template="classic"] .schedule-table td{border:1px solid var(--border);border-radius:0}
-[data-template="classic"] .schedule-table .day-cell{background:var(--surface-dim);color:var(--text);font-weight:800}
-[data-template="classic"] .schedule-table .slot-filled{background:transparent}
-[data-template="classic"] .schedule-table .slot-empty{background:transparent}
-
-[data-template="minimal"] .schedule-table{border-spacing:0 6px}
-[data-template="minimal"] .schedule-table th{background:transparent;color:var(--primary);border-bottom:2px solid var(--primary);border-radius:0;padding-bottom:6px}
-[data-template="minimal"] .schedule-table .day-cell{background:transparent;color:var(--text);font-weight:800;border-left:2px solid var(--border-strong)}
-[data-template="minimal"] .schedule-table .slot-filled{background:transparent;border-bottom:1px solid var(--border)}
-[data-template="minimal"] .schedule-table .slot-empty{background:transparent;border-bottom:1px dashed var(--border)}
-
+.schedule-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff}
+.schedule-table .day-cell{background:hsla(var(--hue),72%,45%,0.15);color:var(--primary);font-weight:800;white-space:nowrap}
+.schedule-table .slot-filled{background:hsla(var(--hue),72%,55%,0.12);color:var(--primary2);transition:transform .2s}
+[data-theme="dark"] .schedule-table .slot-filled{color:var(--primary-light)}
+.schedule-table .slot-empty{background:var(--surface-dim);color:var(--text-mute)}
 .schedule-table .subject-name{font-weight:800;display:block;margin-bottom:2px;font-size:11px}
 .schedule-table .teacher-name{font-size:10px;opacity:.7;font-weight:600;display:block}
 .table-scroll{overflow-x:auto;border-radius:var(--radius-sm);-webkit-overflow-scrolling:touch}
@@ -522,15 +513,7 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
             <select id="print-orientation"><option value="landscape" data-i18n="landscape">أفقي (عرضي)</option><option value="portrait" data-i18n="portrait">عمودي (طولي)</option></select>
           </div>
           <div class="form-group"><label data-i18n="colorMode">الألوان</label>
-            <select id="print-color"><option value="color" data-i18n="colorOn">ألوان</option><option value="bw" data-i18n="colorOff">أبيض/أسود</option></select>
-          </div>
-          <div class="form-group"><label>ستايل الجدول</label>
-            <select id="print-template">
-              <option value="modern">ملون (Modern)</option>
-              <option value="bw">أبيض وأسود (B&W)</option>
-              <option value="classic">كلاسيكي (Classic)</option>
-              <option value="minimal">أخضر فاتح (Green)</option>
-            </select>
+            <select id="print-color"><option value="color" data-i18n="colorOn">ألوان (حسب الواجهة)</option><option value="bw" data-i18n="colorOff">أبيض/أسود</option></select>
           </div>
         </div>
         <div class="btn-row">
@@ -703,7 +686,7 @@ const I18N = {
     viewBy:'عرض حسب', viewByClass:'الصف', viewByTeacher:'المعلم', select:'اختر',
     printOptions:'خيارات الطباعة', paperSize:'حجم الورق', orientation:'الاتجاه',
     landscape:'أفقي (عرضي)', portrait:'عمودي (طولي)',
-    colorMode:'الألوان', colorOn:'ألوان', colorOff:'أبيض/أسود',
+    colorMode:'الألوان', colorOn:'ألوان (حسب الواجهة)', colorOff:'أبيض/أسود',
     printCurrent:'طباعة الحالي', printAll:'طباعة الكل',
     excelCurrent:'Excel الحالي', excelAll:'Excel شامل',
     totalRequired:'المطلوب', totalPlaced:'الموزعة', warningsCount:'تحذيرات',
@@ -767,7 +750,7 @@ const I18N = {
     viewBy:'View by', viewByClass:'Class', viewByTeacher:'Teacher', select:'Select',
     printOptions:'Print Options', paperSize:'Paper size', orientation:'Orientation',
     landscape:'Landscape', portrait:'Portrait',
-    colorMode:'Colors', colorOn:'Color', colorOff:'B&W',
+    colorMode:'Colors', colorOn:'Color (theme)', colorOff:'B&W',
     printCurrent:'Print Current', printAll:'Print All',
     excelCurrent:'Excel Current', excelAll:'Excel All',
     totalRequired:'Required', totalPlaced:'Placed', warningsCount:'Warnings',
@@ -1581,26 +1564,13 @@ function buildMiniScheduleHTML(view, id, opts){
   }
 
   const primaryHue = getComputedStyle(document.documentElement).getPropertyValue('--hue').trim() || '160';
-  const printTemplate = document.getElementById('print-template').value;
   
   let colors = {};
-  if (colorMode === 'bw' || printTemplate === 'bw') {
+  if (colorMode === 'bw') {
     colors = {
       primary: '#000000', headerBg: '#333333', headerText: '#ffffff',
       dayBg: '#e5e5e5', filledBg: '#f5f5f5', emptyBg: '#ffffff',
       border: '#999999', text: '#000000', subText: '#333333'
-    };
-  } else if (printTemplate === 'classic') {
-    colors = {
-      primary: '#000000', headerBg: '#ffffff', headerText: '#000000',
-      dayBg: '#ffffff', filledBg: '#ffffff', emptyBg: '#ffffff',
-      border: '#000000', text: '#000000', subText: '#333333'
-    };
-  } else if (printTemplate === 'minimal') {
-     colors = {
-      primary: `hsl(${primaryHue}, 72%, 40%)`, headerBg: '#ffffff', headerText: `hsl(${primaryHue}, 72%, 40%)`,
-      dayBg: '#ffffff', filledBg: '#ffffff', emptyBg: '#ffffff',
-      border: '#e5e7eb', text: `hsl(${primaryHue}, 60%, 15%)`, subText: `hsl(${primaryHue}, 50%, 35%)`
     };
   } else {
     colors = {
@@ -1736,15 +1706,10 @@ function openPrintWindow(scope){
     const subFs = size === 'A3' ? '7pt' : '6pt';
 
     const primaryHue = getComputedStyle(document.documentElement).getPropertyValue('--hue').trim() || '160';
-    const printTemplate = document.getElementById('print-template').value;
     
     let colors = {};
-    if (colorMode === 'bw' || printTemplate === 'bw') {
+    if (colorMode === 'bw') {
       colors = { headerBg: '#333333', headerText: '#ffffff', dayBg: '#e5e5e5', filledBg: '#f5f5f5', emptyBg: '#ffffff', border: '#999999', text: '#000000', subText: '#333333' };
-    } else if (printTemplate === 'classic') {
-      colors = { headerBg: '#ffffff', headerText: '#000000', dayBg: '#ffffff', filledBg: '#ffffff', emptyBg: '#ffffff', border: '#000000', text: '#000000', subText: '#333333' };
-    } else if (printTemplate === 'minimal') {
-      colors = { headerBg: '#ffffff', headerText: `hsl(${primaryHue}, 72%, 40%)`, dayBg: '#ffffff', filledBg: '#ffffff', emptyBg: '#ffffff', border: '#e5e7eb', text: `hsl(${primaryHue}, 60%, 15%)`, subText: `hsl(${primaryHue}, 50%, 35%)` };
     } else {
       colors = {
         headerBg: `hsl(${primaryHue}, 72%, 45%)`, headerText: '#ffffff', dayBg: `hsl(${primaryHue}, 85%, 92%)`, filledBg: `hsl(${primaryHue}, 80%, 95%)`, emptyBg: '#ffffff', border: `hsl(${primaryHue}, 50%, 70%)`, text: `hsl(${primaryHue}, 60%, 15%)`, subText: `hsl(${primaryHue}, 50%, 35%)`
@@ -1775,10 +1740,11 @@ body {
   break-inside: avoid;
   page-break-inside: avoid;
   overflow: hidden;
+  position: relative;
 }
 .mini-schedule {
   width: 100%;
-  margin-bottom: 4px;
+  margin-bottom: 20px;
 }
 .mini-title {
   font-size: ${titleFs};
@@ -1847,13 +1813,28 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.print-signature {
+  text-align: center;
+  font-size: 9pt;
+  color: #666;
+  margin-top: 15px;
+  font-weight: 600;
+}
+.print-signature span {
+  display: inline-block;
+  padding: 4px 12px;
+  background: #f3f4f6;
+  border-radius: 20px;
+  color: #374151;
+}
 </style>
 </head>
 <body>
 ${content}
+<div class="print-signature"><span>تم التصميم بواسطة Jadwal · ${currentLang === 'ar' ? 'للتواصل:' : 'Contact:'} @HJS_98</span></div>
 <script>
 window.onload = function(){
-  setTimeout(function(){ window.print(); }, 300);
+  setTimeout(function(){ window.print(); }, 500);
 };
 window.onafterprint = function(){
   setTimeout(function(){ window.close(); }, 100);
