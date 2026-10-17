@@ -11,210 +11,86 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-/* ============================================================
-   THEMES
-   ============================================================ */
-:root{
-  --radius:20px;--radius-sm:14px;
-  --transition:cubic-bezier(.4,0,.2,1);
-}
+:root{--radius:20px;--radius-sm:14px;--tr:cubic-bezier(.4,0,.2,1)}
 [data-theme="light"]{
   --bg1:#ecfdf5;--bg2:#d1fae5;--bg3:#a7f3d0;--bg4:#6ee7b7;
-  --primary:#10b981;--primary2:#059669;--primary-light:#34d399;
-  --accent:#14b8a6;
-  --surface:rgba(255,255,255,0.7);
-  --surface-solid:#ffffff;
-  --surface-hover:rgba(255,255,255,0.92);
-  --surface-dim:rgba(255,255,255,0.45);
-  --border:rgba(16,185,129,0.18);
-  --border-strong:rgba(16,185,129,0.35);
+  --primary:#10b981;--primary2:#059669;--primary-light:#34d399;--accent:#14b8a6;
+  --surface:rgba(255,255,255,0.7);--surface-solid:#fff;--surface-hover:rgba(255,255,255,0.92);--surface-dim:rgba(255,255,255,0.45);
+  --border:rgba(16,185,129,0.18);--border-strong:rgba(16,185,129,0.35);
   --text:#064e3b;--text-dim:#047857;--text-mute:#6b7280;
   --success:#10b981;--warning:#f59e0b;--danger:#ef4444;--info:#3b82f6;
-  --shadow:0 4px 24px rgba(16,185,129,0.12);
-  --shadow-hover:0 12px 40px rgba(16,185,129,0.22);
+  --shadow:0 4px 24px rgba(16,185,129,0.12);--shadow-hover:0 12px 40px rgba(16,185,129,0.22);
   --orb-opacity:0.35;
 }
 [data-theme="dark"]{
   --bg1:#041f1c;--bg2:#052e2b;--bg3:#062e26;--bg4:#0f1e1a;
-  --primary:#34d399;--primary2:#10b981;--primary-light:#6ee7b7;
-  --accent:#2dd4bf;
-  --surface:rgba(255,255,255,0.05);
-  --surface-solid:#12241f;
-  --surface-hover:rgba(255,255,255,0.09);
-  --surface-dim:rgba(255,255,255,0.03);
-  --border:rgba(52,211,153,0.15);
-  --border-strong:rgba(52,211,153,0.3);
+  --primary:#34d399;--primary2:#10b981;--primary-light:#6ee7b7;--accent:#2dd4bf;
+  --surface:rgba(255,255,255,0.05);--surface-solid:#12241f;--surface-hover:rgba(255,255,255,0.09);--surface-dim:rgba(255,255,255,0.03);
+  --border:rgba(52,211,153,0.15);--border-strong:rgba(52,211,153,0.3);
   --text:#d1fae5;--text-dim:#6ee7b7;--text-mute:#6b7280;
   --success:#34d399;--warning:#fbbf24;--danger:#f87171;--info:#60a5fa;
-  --shadow:0 4px 24px rgba(0,0,0,0.3);
-  --shadow-hover:0 12px 40px rgba(0,0,0,0.5);
+  --shadow:0 4px 24px rgba(0,0,0,0.3);--shadow-hover:0 12px 40px rgba(0,0,0,0.5);
   --orb-opacity:0.18;
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
-
-/* Smooth theme transitions */
-body,.card,.stat-card,header,.tabs,.list-item,.modal-content,.toast,.form-group input,.form-group select,.btn,.badge{
-  transition:background-color .4s var(--transition),border-color .4s var(--transition),color .4s var(--transition),box-shadow .4s var(--transition);
-}
-
-body{
-  font-family:'Tajawal','Inter',sans-serif;
-  background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 35%,var(--bg3) 70%,var(--bg4) 100%);
-  background-size:200% 200%;
-  animation:bgShift 20s ease infinite;
-  color:var(--text);min-height:100vh;padding:20px;overflow-x:hidden;
-  position:relative;
-}
-@keyframes bgShift{
-  0%,100%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-}
-
-/* Decorative floating orbs */
+body,.card,.stat-card,header,.tabs,.list-item,.modal-content,.toast,.form-group input,.form-group select,.btn,.badge{transition:background-color .4s var(--tr),border-color .4s var(--tr),color .4s var(--tr),box-shadow .4s var(--tr)}
+body{font-family:'Tajawal','Inter',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 35%,var(--bg3) 70%,var(--bg4) 100%);background-size:200% 200%;animation:bgShift 20s ease infinite;color:var(--text);min-height:100vh;padding:20px;overflow-x:hidden;position:relative}
+@keyframes bgShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 .orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--orb-opacity);animation:float 22s ease-in-out infinite}
 .orb-1{width:420px;height:420px;background:#34d399;top:-120px;right:-120px}
 .orb-2{width:520px;height:520px;background:#6ee7b7;bottom:-180px;left:-120px;animation-delay:-6s}
 .orb-3{width:320px;height:320px;background:#a7f3d0;top:45%;left:35%;animation-delay:-12s}
-@keyframes float{
-  0%,100%{transform:translate(0,0) scale(1)}
-  33%{transform:translate(40px,-40px) scale(1.08)}
-  66%{transform:translate(-30px,30px) scale(.92)}
-}
-
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-40px) scale(1.08)}66%{transform:translate(-30px,30px) scale(.92)}}
 .app{max-width:1280px;margin:0 auto;position:relative;z-index:1}
 
-/* ===== HEADER ===== */
-header{
-  display:flex;align-items:center;gap:18px;margin-bottom:28px;padding:22px 26px;
-  background:var(--surface);backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid var(--border);border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
+header{display:flex;align-items:center;gap:18px;margin-bottom:28px;padding:22px 26px;background:var(--surface);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
 header:hover{border-color:var(--border-strong);box-shadow:var(--shadow-hover)}
 .logo{font-size:46px;filter:drop-shadow(0 4px 16px rgba(16,185,129,0.4));animation:logoFloat 4s ease-in-out infinite}
 @keyframes logoFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(3deg)}}
 .header-text{flex:1;min-width:0}
-header h1{
-  font-size:28px;font-weight:900;letter-spacing:-0.5px;
-  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 50%,var(--accent) 100%);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
+header h1{font-size:28px;font-weight:900;letter-spacing:-0.5px;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 50%,var(--accent) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 header p{color:var(--text-dim);font-size:13px;margin-top:2px;font-weight:600}
 .header-actions{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
-.role-badge{
-  padding:7px 14px;border-radius:999px;font-size:12px;font-weight:800;
-  background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(16,185,129,0.08));
-  color:var(--primary);border:1px solid var(--border-strong);
-  display:flex;align-items:center;gap:6px;
-}
-.icon-toggle{
-  width:42px;height:42px;border-radius:50%;border:1px solid var(--border-strong);
-  background:var(--surface-dim);color:var(--text);
-  font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all .3s var(--transition);
-}
+.role-badge{padding:7px 14px;border-radius:999px;font-size:12px;font-weight:800;background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(16,185,129,0.08));color:var(--primary);border:1px solid var(--border-strong);display:flex;align-items:center;gap:6px}
+.icon-toggle{width:42px;height:42px;border-radius:50%;border:1px solid var(--border-strong);background:var(--surface-dim);color:var(--text);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s var(--tr)}
 .icon-toggle:hover{background:var(--surface-hover);transform:translateY(-2px) scale(1.05);box-shadow:var(--shadow-hover)}
-.lang-btn{
-  padding:0 16px;height:42px;border-radius:999px;border:1px solid var(--border-strong);
-  background:var(--surface-dim);color:var(--text);font-family:inherit;font-weight:800;
-  font-size:13px;cursor:pointer;transition:all .3s var(--transition);
-  display:flex;align-items:center;gap:6px;
-}
+.lang-btn{padding:0 16px;height:42px;border-radius:999px;border:1px solid var(--border-strong);background:var(--surface-dim);color:var(--text);font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;transition:all .3s var(--tr);display:flex;align-items:center;gap:6px}
 .lang-btn:hover{background:var(--surface-hover);transform:translateY(-2px)}
 
-/* ===== TABS ===== */
-.tabs{
-  display:flex;gap:6px;overflow-x:auto;padding:8px;
-  background:var(--surface);backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid var(--border);border-radius:999px;margin-bottom:22px;
-  box-shadow:var(--shadow);scrollbar-width:none;
-}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:8px;background:var(--surface);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);border-radius:999px;margin-bottom:22px;box-shadow:var(--shadow);scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tabs button{
-  flex:1;min-width:max-content;padding:12px 18px;background:transparent;border:none;
-  color:var(--text-dim);border-radius:999px;cursor:pointer;font-family:inherit;
-  font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;
-  gap:8px;transition:all .3s var(--transition);white-space:nowrap;
-}
-.tabs button.active{
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:#fff;box-shadow:0 6px 24px rgba(16,185,129,0.4);
-}
+.tabs button{flex:1;min-width:max-content;padding:12px 18px;background:transparent;border:none;color:var(--text-dim);border-radius:999px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .3s var(--tr);white-space:nowrap}
+.tabs button.active{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 6px 24px rgba(16,185,129,0.4)}
 .tabs button:hover:not(.active){color:var(--text);background:var(--surface-dim)}
 
-/* ===== PANELS & CARDS ===== */
 .tab-panel{display:none;animation:panelFade .4s ease}
 .tab-panel.active{display:block}
 @keyframes panelFade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.card{
-  background:var(--surface);backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid var(--border);border-radius:var(--radius);
-  padding:24px;margin-bottom:18px;
-  box-shadow:var(--shadow);
-  transition:all .3s var(--transition);
-}
+.card{background:var(--surface);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:18px;box-shadow:var(--shadow);transition:all .3s var(--tr)}
 .card:hover{border-color:var(--border-strong);box-shadow:var(--shadow-hover);transform:translateY(-1px)}
 .card h2{margin-bottom:18px;font-size:19px;font-weight:800;display:flex;align-items:center;gap:10px;color:var(--text)}
 
-/* ===== STATS ===== */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:18px}
-.stat-card{
-  background:var(--surface);backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid var(--border);border-radius:var(--radius);
-  padding:22px 18px;text-align:center;position:relative;overflow:hidden;
-  box-shadow:var(--shadow);transition:all .4s var(--transition);
-}
-.stat-card::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(52,211,153,0.05));
-  opacity:0;transition:opacity .4s;
-}
+.stat-card{background:var(--surface);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--border);border-radius:var(--radius);padding:22px 18px;text-align:center;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:all .4s var(--tr)}
+.stat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(52,211,153,0.05));opacity:0;transition:opacity .4s}
 .stat-card:hover{transform:translateY(-4px);border-color:var(--border-strong);box-shadow:var(--shadow-hover)}
 .stat-card:hover::before{opacity:1}
 .stat-icon{font-size:34px;margin-bottom:6px;position:relative;transition:transform .3s}
 .stat-card:hover .stat-icon{transform:scale(1.15) rotate(-5deg)}
-.stat-value{
-  font-size:36px;font-weight:900;position:relative;line-height:1.1;
-  background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
+.stat-value{font-size:36px;font-weight:900;position:relative;line-height:1.1;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .stat-label{color:var(--text-dim);font-size:13px;position:relative;font-weight:700;margin-top:4px}
 
-/* ===== FORMS ===== */
 .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:14px}
 .form-group label{display:block;margin-bottom:8px;color:var(--text-dim);font-size:13px;font-weight:700}
-.form-group input,.form-group select{
-  width:100%;padding:12px 16px;
-  background:var(--surface-dim);border:1px solid var(--border-strong);
-  border-radius:var(--radius-sm);color:var(--text);
-  font-family:inherit;font-size:15px;transition:all .3s var(--transition);
-}
-.form-group input:focus,.form-group select:focus{
-  outline:none;border-color:var(--primary);
-  box-shadow:0 0 0 4px rgba(16,185,129,0.15);
-  background:var(--surface-hover);
-}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 16px;background:var(--surface-dim);border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:15px;transition:all .3s var(--tr)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(16,185,129,0.15);background:var(--surface-hover)}
 .form-group input::placeholder{color:var(--text-mute)}
 .form-group select option{background:var(--surface-solid);color:var(--text)}
 
-/* ===== BUTTONS ===== */
-.btn{
-  padding:12px 22px;border-radius:var(--radius-sm);border:none;
-  font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;
-  transition:all .25s var(--transition);
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  position:relative;overflow:hidden;
-}
-.btn-primary{
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:#fff;box-shadow:0 4px 20px rgba(16,185,129,0.4);
-}
+.btn{padding:12px 22px;border-radius:var(--radius-sm);border:none;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:all .25s var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:8px;position:relative;overflow:hidden}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 4px 20px rgba(16,185,129,0.4)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(16,185,129,0.55)}
 .btn-primary:disabled{opacity:.6;cursor:wait;transform:none}
 .btn-large{width:100%;padding:18px;font-size:16px;margin-top:8px}
@@ -224,59 +100,37 @@ header p{color:var(--text-dim);font-size:13px;margin-top:2px;font-weight:600}
 .btn-success:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(16,185,129,0.55)}
 .btn-danger{background:rgba(239,68,68,0.12);color:var(--danger);border:1px solid rgba(239,68,68,0.35)}
 .btn-danger:hover{background:rgba(239,68,68,0.22);border-color:var(--danger)}
+.btn-sm{padding:8px 14px;font-size:12px}
 .btn-row{display:flex;gap:10px;flex-wrap:wrap}
 
-/* ===== LISTS ===== */
 .list{display:flex;flex-direction:column;gap:10px}
-.list-item{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px 18px;background:var(--surface-dim);
-  border-radius:var(--radius-sm);border:1px solid var(--border);
-  transition:all .3s var(--transition);gap:12px;
-}
+.list-item{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 18px;background:var(--surface-dim);border-radius:var(--radius-sm);border:1px solid var(--border);transition:all .3s var(--tr);gap:12px}
 .list-item:hover{background:var(--surface-hover);border-color:var(--border-strong);transform:translateX(-2px)}
 .list-item .info{flex:1;min-width:0}
-.list-item .title{font-weight:800;font-size:15px;margin-bottom:6px;word-break:break-word;color:var(--text)}
-.list-item .meta{display:flex;gap:6px;flex-wrap:wrap}
-.list-item .actions{display:flex;gap:6px;flex-shrink:0}
+.list-item .title{font-weight:800;font-size:15px;margin-bottom:6px;word-break:break-word;color:var(--text);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.list-item .meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.list-item .actions{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap}
+.list-item .assignments-preview{display:flex;flex-direction:column;gap:4px;margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)}
+.assign-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--surface);border-radius:8px;font-size:12px;font-weight:600;border:1px solid var(--border);color:var(--text)}
+.assign-chip .week{opacity:.7;font-size:11px}
 
-/* ===== BADGES ===== */
-.badge{
-  display:inline-flex;align-items:center;gap:4px;
-  padding:4px 12px;border-radius:999px;
-  font-size:12px;font-weight:700;white-space:nowrap;
-}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
 .badge-primary{background:rgba(16,185,129,0.15);color:var(--primary);border:1px solid var(--border-strong)}
 .badge-success{background:rgba(16,185,129,0.15);color:var(--success);border:1px solid rgba(16,185,129,0.3)}
 .badge-warning{background:rgba(245,158,11,0.15);color:var(--warning);border:1px solid rgba(245,158,11,0.3)}
 .badge-danger{background:rgba(239,68,68,0.15);color:var(--danger);border:1px solid rgba(239,68,68,0.3)}
 .badge-info{background:rgba(59,130,246,0.15);color:var(--info);border:1px solid rgba(59,130,246,0.3)}
 
-/* ===== SMALL BUTTONS ===== */
-.icon-btn{
-  padding:8px 12px;background:var(--surface-dim);border:1px solid var(--border-strong);
-  color:var(--text);border-radius:10px;cursor:pointer;font-family:inherit;
-  font-weight:700;transition:all .25s;font-size:15px;line-height:1;
-}
+.icon-btn{padding:8px 12px;background:var(--surface-dim);border:1px solid var(--border-strong);color:var(--text);border-radius:10px;cursor:pointer;font-family:inherit;font-weight:700;transition:all .25s;font-size:15px;line-height:1}
 .icon-btn:hover{background:var(--surface-hover);border-color:var(--primary);transform:scale(1.05)}
-.delete-btn{
-  padding:8px 14px;background:transparent;
-  border:1px solid rgba(239,68,68,0.3);color:var(--danger);
-  border-radius:10px;cursor:pointer;font-family:inherit;
-  font-weight:700;transition:all .25s;font-size:12px;
-}
+.delete-btn{padding:8px 14px;background:transparent;border:1px solid rgba(239,68,68,0.3);color:var(--danger);border-radius:10px;cursor:pointer;font-family:inherit;font-weight:700;transition:all .25s;font-size:12px}
 .delete-btn:hover{background:rgba(239,68,68,0.12);border-color:var(--danger)}
 
-/* ===== EMPTY & ALERTS ===== */
 .empty-state{text-align:center;padding:50px 20px;color:var(--text-mute)}
 .empty-state .icon{font-size:52px;margin-bottom:14px;opacity:.55;display:block}
 .empty-state p{font-size:15px;font-weight:500}
-.alert{
-  padding:14px 18px;border-radius:var(--radius-sm);margin-bottom:10px;
-  display:flex;align-items:flex-start;gap:12px;
-  font-size:14px;font-weight:600;line-height:1.5;
-  border:1px solid;animation:alertSlide .4s ease;
-}
+
+.alert{padding:14px 18px;border-radius:var(--radius-sm);margin-bottom:10px;display:flex;align-items:flex-start;gap:12px;font-size:14px;font-weight:600;line-height:1.5;border:1px solid;animation:alertSlide .4s ease}
 @keyframes alertSlide{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:none}}
 .alert-icon{font-size:20px;flex-shrink:0;line-height:1.3}
 .alert-error{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.35);color:var(--danger)}
@@ -284,20 +138,11 @@ header p{color:var(--text-dim);font-size:13px;margin-top:2px;font-weight:600}
 .alert-success{background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.35);color:var(--success)}
 .alert-info{background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.35);color:var(--info)}
 
-/* ===== SCHEDULE TABLE ===== */
 .schedule-table{width:100%;border-collapse:separate;border-spacing:5px;margin-top:16px;min-width:700px}
 .schedule-table th,.schedule-table td{padding:12px 8px;border-radius:10px;text-align:center;font-size:13px}
-.schedule-table th{
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:#fff;font-weight:800;
-}
-.schedule-table .day-cell{
-  background:rgba(16,185,129,0.15);color:var(--primary);font-weight:800;white-space:nowrap;
-}
-.schedule-table .slot-filled{
-  background:rgba(52,211,153,0.12);color:var(--primary2);
-  transition:transform .2s,background .3s;
-}
+.schedule-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:800}
+.schedule-table .day-cell{background:rgba(16,185,129,0.15);color:var(--primary);font-weight:800;white-space:nowrap}
+.schedule-table .slot-filled{background:rgba(52,211,153,0.12);color:var(--primary2);transition:transform .2s,background .3s}
 [data-theme="dark"] .schedule-table .slot-filled{color:var(--primary-light)}
 .schedule-table .slot-filled:hover{background:rgba(52,211,153,0.25);transform:scale(1.03)}
 .schedule-table .slot-empty{background:var(--surface-dim);color:var(--text-mute)}
@@ -305,47 +150,23 @@ header p{color:var(--text-dim);font-size:13px;margin-top:2px;font-weight:600}
 .schedule-table .teacher-name{font-size:11px;opacity:.75;font-weight:600}
 .table-scroll{overflow-x:auto;border-radius:var(--radius-sm);padding:2px}
 
-/* ===== TOAST ===== */
-.toast{
-  position:fixed;bottom:30px;left:50%;
-  transform:translateX(-50%) translateY(120px);
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  color:#fff;padding:14px 28px;border-radius:14px;
-  font-weight:700;box-shadow:0 10px 40px rgba(16,185,129,0.5);
-  transition:transform .4s var(--transition);
-  z-index:3000;max-width:90vw;text-align:center;font-size:14px;
-}
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(120px);background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;padding:14px 28px;border-radius:14px;font-weight:700;box-shadow:0 10px 40px rgba(16,185,129,0.5);transition:transform .4s var(--tr);z-index:3000;max-width:90vw;text-align:center;font-size:14px}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .toast.error{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 10px 40px rgba(239,68,68,0.5)}
 .toast.success{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 10px 40px rgba(16,185,129,0.5)}
 
-/* ===== MODAL ===== */
-.modal{
-  position:fixed;inset:0;background:rgba(4,31,28,0.65);
-  backdrop-filter:blur(8px);display:none;
-  align-items:center;justify-content:center;z-index:2000;padding:20px;
-}
+.modal{position:fixed;inset:0;background:rgba(4,31,28,0.65);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;z-index:2000;padding:20px;overflow-y:auto}
 [data-theme="light"] .modal{background:rgba(6,78,59,0.35)}
 .modal.show{display:flex;animation:panelFade .3s}
-.modal-content{
-  background:var(--surface-solid);
-  border:1px solid var(--border-strong);
-  border-radius:var(--radius);max-width:800px;width:100%;
-  max-height:90vh;overflow:auto;padding:26px;
-  box-shadow:0 24px 80px rgba(0,0,0,0.4);
-}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:10px}
+.modal-content{background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:var(--radius);max-width:800px;width:100%;max-height:90vh;overflow:auto;padding:26px;box-shadow:0 24px 80px rgba(0,0,0,0.4);margin:auto}
+.modal-content.modal-lg{max-width:920px}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:10px;position:sticky;top:-26px;background:var(--surface-solid);padding:8px 0;border-bottom:1px solid var(--border);margin:-8px 0 16px}
 .modal-header h2{font-size:18px;font-weight:800;color:var(--text)}
-.modal-close{
-  background:transparent;border:none;color:var(--text);font-size:22px;
-  cursor:pointer;width:38px;height:38px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0;
-}
+.modal-close{background:transparent;border:none;color:var(--text);font-size:22px;cursor:pointer;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
 .modal-close:hover{background:var(--surface-hover);transform:rotate(90deg)}
-.modal-footer{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.modal-footer{margin-top:20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--border)}
 .modal-footer p{color:var(--text-dim);font-size:13px}
 
-/* ===== UNAVAILABILITY TABLE ===== */
 .unavail-table{width:100%;border-collapse:separate;border-spacing:5px}
 .unavail-table th,.unavail-table td{padding:11px 6px;text-align:center;border-radius:10px;font-size:13px}
 .unavail-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:800}
@@ -355,50 +176,42 @@ header p{color:var(--text-dim);font-size:13px;margin-top:2px;font-weight:600}
 .unavail-table td.unavail{background:rgba(239,68,68,0.2);color:var(--danger);cursor:pointer;font-weight:800;transition:all .2s}
 .unavail-table td.unavail:hover{background:rgba(239,68,68,0.35);transform:scale(1.08)}
 
-/* ===== SHARE BOX ===== */
 .share-box{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
-.share-box input{
-  flex:1;min-width:200px;padding:12px 16px;
-  background:var(--surface-dim);border:1px solid var(--border-strong);
-  border-radius:var(--radius-sm);color:var(--text);
-  font-family:inherit;font-size:13px;direction:ltr;text-align:left;
-}
+.share-box input{flex:1;min-width:200px;padding:12px 16px;background:var(--surface-dim);border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:13px;direction:ltr;text-align:left}
 
-/* ===== REPORTS ===== */
-.chart-bar-container{
-  background:var(--surface-dim);border-radius:12px;
-  padding:14px 16px;margin-bottom:8px;
-  border:1px solid var(--border);
-}
+.chart-bar-container{background:var(--surface-dim);border-radius:12px;padding:14px 16px;margin-bottom:8px;border:1px solid var(--border)}
 .chart-bar-label{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;font-weight:700;color:var(--text)}
 .chart-bar{height:10px;background:var(--surface-dim);border-radius:6px;overflow:hidden}
-.chart-bar-fill{
-  height:100%;border-radius:6px;transition:width .8s var(--transition);
-  background:linear-gradient(90deg,var(--primary),var(--primary-light));
-}
+.chart-bar-fill{height:100%;border-radius:6px;transition:width .8s var(--tr);background:linear-gradient(90deg,var(--primary),var(--primary-light))}
 .chart-bar-fill.warn{background:linear-gradient(90deg,#f59e0b,#f97316)}
 .chart-bar-fill.danger{background:linear-gradient(90deg,#ef4444,#dc2626)}
 
-/* ===== CALENDAR ===== */
-.holiday-item{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:10px 14px;background:var(--surface-dim);
-  border-radius:10px;margin-bottom:8px;border:1px solid var(--border);
-  font-size:14px;color:var(--text);
-}
-.holiday-item button{
-  background:transparent;border:1px solid rgba(239,68,68,0.3);
-  color:var(--danger);padding:4px 10px;border-radius:8px;cursor:pointer;
-  font-family:inherit;font-weight:700;font-size:12px;transition:all .2s;
-}
+.holiday-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--surface-dim);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);font-size:14px;color:var(--text)}
+.holiday-item button{background:transparent;border:1px solid rgba(239,68,68,0.3);color:var(--danger);padding:4px 10px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;transition:all .2s}
 .holiday-item button:hover{background:rgba(239,68,68,0.15)}
 
-/* ===== STEPS ===== */
 .steps{padding-right:24px;line-height:2.2;color:var(--text-dim);font-size:14px}
 .steps b{color:var(--text);font-weight:800}
 html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
 
-/* ===== PRINT ===== */
+/* Teacher Modal */
+.teacher-section{padding:16px 0;border-bottom:1px solid var(--border)}
+.teacher-section:last-child{border-bottom:none}
+.teacher-section h3{font-size:14px;font-weight:800;color:var(--text-dim);margin-bottom:12px;display:flex;align-items:center;gap:8px;text-transform:uppercase;letter-spacing:.5px;font-size:12px}
+.days-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.day-checkbox{position:relative;cursor:pointer}
+.day-checkbox input{position:absolute;opacity:0;pointer-events:none}
+.day-checkbox label{display:flex;align-items:center;justify-content:center;gap:6px;padding:12px 16px;background:var(--surface-dim);border:2px solid var(--border);border-radius:12px;font-weight:700;font-size:13px;color:var(--text-dim);transition:all .2s;cursor:pointer}
+.day-checkbox input:checked + label{background:rgba(16,185,129,0.15);border-color:var(--primary);color:var(--primary)}
+.day-checkbox input:checked + label::before{content:'✓';font-weight:900}
+
+.assignments-list{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.assignment-row{display:grid;grid-template-columns:1.5fr 1.5fr 80px 40px;gap:8px;align-items:center;background:var(--surface-dim);padding:10px;border-radius:12px;border:1px solid var(--border);animation:panelFade .3s}
+.assignment-row select,.assignment-row input{padding:10px 12px;background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:8px;color:var(--text);font-family:inherit;font-size:13px;width:100%}
+.assignment-row select:focus,.assignment-row input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(16,185,129,0.15)}
+.assignment-row .remove-btn{padding:8px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:var(--danger);border-radius:8px;cursor:pointer;font-size:14px;line-height:1;transition:all .2s;font-weight:800}
+.assignment-row .remove-btn:hover{background:rgba(239,68,68,0.3);transform:scale(1.05)}
+
 @media print{
   body *{visibility:hidden}
   #schedule-display,#schedule-display *{visibility:visible}
@@ -415,11 +228,7 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
   .table-scroll{overflow:visible!important}
 }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:900px){
-  header{flex-wrap:wrap}
-  .header-actions{width:100%;justify-content:center}
-}
+@media(max-width:900px){header{flex-wrap:wrap}.header-actions{width:100%;justify-content:center}}
 @media(max-width:768px){
   body{padding:12px}
   header{flex-direction:column;text-align:center;padding:16px;gap:12px}
@@ -434,10 +243,10 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
   .unavail-table th,.unavail-table td{padding:8px 4px;font-size:11px}
   .list-item{flex-wrap:wrap}
   .form-row{grid-template-columns:1fr}
+  .assignment-row{grid-template-columns:1fr;gap:6px}
+  .days-grid{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:400px){
-  .tabs button{flex:1 1 100%}
-}
+@media(max-width:400px){.tabs button{flex:1 1 100%}}
 </style>
 </head>
 <body>
@@ -465,7 +274,6 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
     <button data-tab="home" class="active" data-i18n="tabHome">🏠 <span>الرئيسية</span></button>
     <button data-tab="teachers" data-i18n="tabTeachers">👨‍🏫 <span>المعلمون</span></button>
     <button data-tab="classes" data-i18n="tabClasses">🏫 <span>الصفوف</span></button>
-    <button data-tab="requirements" data-i18n="tabReq">📚 <span>المواد</span></button>
     <button data-tab="schedule" data-i18n="tabSchedule">📅 <span>الجدول</span></button>
     <button data-tab="reports" data-i18n="tabReports">📊 <span>التقارير</span></button>
     <button data-tab="settings" data-i18n="tabSettings">⚙️ <span>الإعدادات</span></button>
@@ -477,7 +285,7 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
       <div class="stats">
         <div class="stat-card"><div class="stat-icon">👨‍🏫</div><div class="stat-value" id="stat-teachers">0</div><div class="stat-label" data-i18n="labelTeachers">معلم</div></div>
         <div class="stat-card"><div class="stat-icon">🏫</div><div class="stat-value" id="stat-classes">0</div><div class="stat-label" data-i18n="labelClasses">صف</div></div>
-        <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-value" id="stat-requirements">0</div><div class="stat-label" data-i18n="labelSubjects">مادة</div></div>
+        <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-value" id="stat-requirements">0</div><div class="stat-label" data-i18n="labelAssignments">تعيين</div></div>
         <div class="stat-card"><div class="stat-icon">⏰</div><div class="stat-value" id="stat-hours">0</div><div class="stat-label" data-i18n="labelWeekly">حصة أسبوعيًا</div></div>
       </div>
       <div id="alerts-container"></div>
@@ -500,8 +308,8 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
         <div class="form-row">
           <div class="form-group"><label data-i18n="shareRole">نوع الصلاحية</label>
             <select id="share-role">
-              <option value="editor" data-i18n="roleEditor">محرر — يمكنه التعديل</option>
-              <option value="viewer" data-i18n="roleViewer">مشاهد — عرض فقط</option>
+              <option value="editor" data-i18n="roleEditor">محرر</option>
+              <option value="viewer" data-i18n="roleViewer">مشاهد</option>
             </select>
           </div>
         </div>
@@ -515,13 +323,11 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
       <div class="card">
         <h2><span>💡</span> <span data-i18n="howToUse">كيف تستخدم البرنامج؟</span></h2>
         <ol class="steps">
-          <li data-i18n="step1">أضف المعلمين مع سقف الحصص</li>
-          <li data-i18n="step2">اضغط ⏰ على أي معلم لتحديد أوقات عدم توفره</li>
-          <li data-i18n="step3">أضف الصفوف وحدّد المرحلة</li>
-          <li data-i18n="step4">أضف المواد لكل صف</li>
-          <li data-i18n="step5">اختر أيام الدراسة والحصص اليومية</li>
-          <li data-i18n="step6">اضغط توليد الجدول</li>
-          <li data-i18n="step7">اطبع أو حمّل PDF أو Excel</li>
+          <li data-i18n="step1">أضف الصفوف أولاً</li>
+          <li data-i18n="step2">أضف المعلم وأدخل كل معلوماته (المرحلة، أيام الدوام، المواد والصفوف)</li>
+          <li data-i18n="step3">حدد أوقات عدم توفر المعلم</li>
+          <li data-i18n="step4">اضغط توليد الجدول</li>
+          <li data-i18n="step5">اطبع أو حمّل PDF/Excel/PNG</li>
         </ol>
       </div>
     </section>
@@ -529,16 +335,12 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
     <!-- TEACHERS -->
     <section id="teachers" class="tab-panel">
       <div class="card" data-admin-only>
-        <h2><span>➕</span> <span data-i18n="addTeacher">إضافة معلم</span></h2>
-        <div class="form-row">
-          <div class="form-group"><label data-i18n="teacherName">اسم المعلم</label><input type="text" id="teacher-name"></div>
-          <div class="form-group"><label data-i18n="maxDaily">أقصى حصص يوميًا</label><input type="number" id="teacher-max-day" min="1" max="12" value="6"></div>
-          <div class="form-group"><label data-i18n="maxWeekly">أقصى حصص أسبوعيًا</label><input type="number" id="teacher-max-week" min="1" max="40" value="24"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+          <h2 style="margin:0"><span>👨‍🏫</span> <span data-i18n="teachersList">قائمة المعلمين</span></h2>
+          <button class="btn btn-primary" id="add-teacher-btn">➕ <span data-i18n="addTeacher">إضافة معلم</span></button>
         </div>
-        <button class="btn btn-primary" id="add-teacher-btn">+ <span data-i18n="add">إضافة</span></button>
       </div>
       <div class="card">
-        <h2><span>👨‍🏫</span> <span data-i18n="teachersList">قائمة المعلمين</span></h2>
         <div id="teachers-list" class="list"></div>
       </div>
     </section>
@@ -548,7 +350,7 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
       <div class="card" data-admin-only>
         <h2><span>➕</span> <span data-i18n="addClass">إضافة صف</span></h2>
         <div class="form-row">
-          <div class="form-group"><label data-i18n="className">اسم الصف</label><input type="text" id="class-name"></div>
+          <div class="form-group"><label data-i18n="className">اسم الصف</label><input type="text" id="class-name" placeholder=""></div>
           <div class="form-group"><label data-i18n="stage">المرحلة</label>
             <select id="class-stage">
               <option value="primary" data-i18n="primary">ابتدائي</option>
@@ -565,24 +367,6 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
       </div>
     </section>
 
-    <!-- REQUIREMENTS -->
-    <section id="requirements" class="tab-panel">
-      <div class="card" data-admin-only>
-        <h2><span>➕</span> <span data-i18n="addSubject">إضافة مادة لصف</span></h2>
-        <div class="form-row">
-          <div class="form-group"><label data-i18n="classLabel">الصف</label><select id="req-class"></select></div>
-          <div class="form-group"><label data-i18n="subject">المادة</label><input type="text" id="req-subject"></div>
-          <div class="form-group"><label data-i18n="teacherLabel">المعلم</label><select id="req-teacher"></select></div>
-          <div class="form-group"><label data-i18n="weeklyHours">عدد الحصص أسبوعيًا</label><input type="number" id="req-weekly" min="1" max="15" value="4"></div>
-        </div>
-        <button class="btn btn-primary" id="add-req-btn">+ <span data-i18n="add">إضافة</span></button>
-      </div>
-      <div class="card">
-        <h2><span>📚</span> <span data-i18n="subjectsList">قائمة المواد</span></h2>
-        <div id="req-list" class="list"></div>
-      </div>
-    </section>
-
     <!-- SCHEDULE -->
     <section id="schedule" class="tab-panel">
       <div class="card">
@@ -595,16 +379,10 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
           </div>
           <div class="form-group"><label data-i18n="select">اختر</label><select id="schedule-entity"></select></div>
           <div class="form-group"><label data-i18n="paperSize">حجم الورق</label>
-            <select id="print-size">
-              <option value="A4">A4 (210 × 297 mm)</option>
-              <option value="A3">A3 (297 × 420 mm)</option>
-            </select>
+            <select id="print-size"><option value="A4">A4</option><option value="A3">A3</option></select>
           </div>
           <div class="form-group"><label data-i18n="orientation">اتجاه الورق</label>
-            <select id="print-orientation">
-              <option value="landscape" data-i18n="landscape">أفقي</option>
-              <option value="portrait" data-i18n="portrait">عمودي</option>
-            </select>
+            <select id="print-orientation"><option value="landscape" data-i18n="landscape">أفقي</option><option value="portrait" data-i18n="portrait">عمودي</option></select>
           </div>
         </div>
         <div class="btn-row">
@@ -621,37 +399,28 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
     <!-- REPORTS -->
     <section id="reports" class="tab-panel">
       <div class="stats">
-        <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-value" id="report-total-required">0</div><div class="stat-label" data-i18n="totalRequired">إجمالي الحصص المطلوبة</div></div>
-        <div class="stat-card"><div class="stat-icon">🎯</div><div class="stat-value" id="report-total-placed">0</div><div class="stat-label" data-i18n="totalPlaced">الحصص الموزعة</div></div>
+        <div class="stat-card"><div class="stat-icon">📈</div><div class="stat-value" id="report-total-required">0</div><div class="stat-label" data-i18n="totalRequired">إجمالي المطلوب</div></div>
+        <div class="stat-card"><div class="stat-icon">🎯</div><div class="stat-value" id="report-total-placed">0</div><div class="stat-label" data-i18n="totalPlaced">الموزعة</div></div>
         <div class="stat-card"><div class="stat-icon">⚠️</div><div class="stat-value" id="report-warnings">0</div><div class="stat-label" data-i18n="warningsCount">تحذيرات</div></div>
       </div>
-      <div class="card">
-        <h2><span>👨‍🏫</span> <span data-i18n="teachersDistribution">توزيع حصص المعلمين</span></h2>
-        <div id="teacher-chart"></div>
-      </div>
-      <div class="card">
-        <h2><span>🏫</span> <span data-i18n="classesDistribution">توزيع حصص الصفوف</span></h2>
-        <div id="class-chart"></div>
-      </div>
-      <div class="card">
-        <h2><span>⚠️</span> <span data-i18n="warningsList">قائمة التحذيرات</span></h2>
-        <div id="warnings-list"></div>
-      </div>
+      <div class="card"><h2><span>👨‍🏫</span> <span data-i18n="teachersDistribution">توزيع حصص المعلمين</span></h2><div id="teacher-chart"></div></div>
+      <div class="card"><h2><span>🏫</span> <span data-i18n="classesDistribution">توزيع حصص الصفوف</span></h2><div id="class-chart"></div></div>
+      <div class="card"><h2><span>⚠️</span> <span data-i18n="warningsList">التحذيرات</span></h2><div id="warnings-list"></div></div>
     </section>
 
     <!-- SETTINGS -->
     <section id="settings" class="tab-panel">
       <div class="card">
-        <h2><span>📅</span> <span data-i18n="termInfo">بيانات الفصل الدراسي</span></h2>
+        <h2><span>📅</span> <span data-i18n="termInfo">بيانات الفصل</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="termName">اسم الفصل</label><input type="text" id="term-name"></div>
-          <div class="form-group"><label data-i18n="startDate">تاريخ البداية</label><input type="date" id="term-start"></div>
-          <div class="form-group"><label data-i18n="endDate">تاريخ النهاية</label><input type="date" id="term-end"></div>
+          <div class="form-group"><label data-i18n="startDate">البداية</label><input type="date" id="term-start"></div>
+          <div class="form-group"><label data-i18n="endDate">النهاية</label><input type="date" id="term-end"></div>
         </div>
         <button class="btn btn-primary" id="save-term-btn">💾 <span data-i18n="save">حفظ</span></button>
       </div>
       <div class="card">
-        <h2><span>🎉</span> <span data-i18n="holidays">العطل والمناسبات</span></h2>
+        <h2><span>🎉</span> <span data-i18n="holidays">العطل</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="holidayName">اسم المناسبة</label><input type="text" id="holiday-name"></div>
           <div class="form-group"><label data-i18n="holidayDate">التاريخ</label><input type="date" id="holiday-date"></div>
@@ -660,23 +429,64 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
         <div id="holidays-list" style="margin-top:20px"></div>
       </div>
       <div class="card" data-admin-only>
-        <h2><span>💾</span> <span data-i18n="backup">النسخ الاحتياطي</span></h2>
-        <p style="color:var(--text-dim);margin-bottom:16px;font-size:13px" data-i18n="backupDesc">احفظ نسخة كاملة من بياناتك أو استعدها.</p>
+        <h2><span>💾</span> <span data-i18n="backup">نسخ احتياطي</span></h2>
         <div class="btn-row">
-          <button class="btn btn-primary" id="backup-btn">📤 <span data-i18n="downloadBackup">تحميل نسخة احتياطية</span></button>
-          <button class="btn btn-secondary" id="restore-btn">📥 <span data-i18n="restoreBackup">استعادة من ملف</span></button>
+          <button class="btn btn-primary" id="backup-btn">📤 <span data-i18n="downloadBackup">تحميل</span></button>
+          <button class="btn btn-secondary" id="restore-btn">📥 <span data-i18n="restoreBackup">استعادة</span></button>
           <input type="file" id="restore-input" accept=".json" style="display:none">
         </div>
       </div>
       <div class="card" data-admin-only>
         <h2><span>🗑️</span> <span data-i18n="dangerZone">منطقة الخطر</span></h2>
-        <button class="btn btn-danger" id="reset-btn">🗑️ <span data-i18n="resetAll">حذف جميع البيانات</span></button>
+        <button class="btn btn-danger" id="reset-btn">🗑️ <span data-i18n="resetAll">حذف الكل</span></button>
       </div>
     </section>
   </main>
 </div>
 
-<!-- MODAL -->
+<!-- TEACHER MODAL -->
+<div id="teacher-modal" class="modal">
+  <div class="modal-content modal-lg">
+    <div class="modal-header">
+      <h2 id="tm-title">➕ إضافة معلم</h2>
+      <button class="modal-close" onclick="closeTeacherModal()">✕</button>
+    </div>
+
+    <div class="teacher-section">
+      <h3>👤 <span data-i18n="basicInfo">المعلومات الأساسية</span></h3>
+      <div class="form-row">
+        <div class="form-group"><label data-i18n="teacherName">اسم المعلم</label><input type="text" id="tm-name" placeholder=""></div>
+        <div class="form-group"><label data-i18n="stage">المرحلة</label>
+          <select id="tm-stage">
+            <option value="primary" data-i18n="primary">ابتدائي</option>
+            <option value="middle" data-i18n="middle">متوسط</option>
+            <option value="secondary" data-i18n="secondary">إعدادي</option>
+          </select>
+        </div>
+        <div class="form-group"><label data-i18n="maxDaily">أقصى حصص يوميًا</label><input type="number" id="tm-max-day" value="6" min="1" max="12"></div>
+        <div class="form-group"><label data-i18n="maxWeekly">أقصى حصص أسبوعيًا</label><input type="number" id="tm-max-week" value="24" min="1" max="40"></div>
+      </div>
+    </div>
+
+    <div class="teacher-section">
+      <h3>📅 <span data-i18n="workingDays">أيام الدوام</span></h3>
+      <div id="tm-working-days" class="days-grid"></div>
+    </div>
+
+    <div class="teacher-section">
+      <h3>📚 <span data-i18n="assignments">الصفوف والمواد</span></h3>
+      <div id="tm-assignments" class="assignments-list"></div>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="addAssignmentRow()">➕ <span data-i18n="addAssignment">إضافة صف/مادة</span></button>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeTeacherModal()" data-i18n="cancel">إلغاء</button>
+      <button class="btn btn-primary" onclick="saveTeacherFromModal()">💾 <span data-i18n="save">حفظ</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- UNAVAILABILITY MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -685,7 +495,7 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
     </div>
     <div id="modal-grid"></div>
     <div class="modal-footer">
-      <p data-i18n="unavailHint">انقر على أي حصة لتحويلها بين متاح ✓ ومحظور ✕</p>
+      <p data-i18n="unavailHint">انقر لتبديل الحالة بين متاح ✓ ومحظور ✕</p>
       <button class="btn btn-primary" id="modal-save" data-i18n="saveClose">حفظ وإغلاق</button>
     </div>
   </div>
@@ -700,8 +510,8 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:24px}
 const savedTheme = localStorage.getItem('jadwal-theme') || 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 function updateThemeIcon(){
-  const theme = document.documentElement.getAttribute('data-theme');
-  document.getElementById('theme-icon').textContent = theme === 'light' ? '🌙' : '☀️';
+  const th = document.documentElement.getAttribute('data-theme');
+  document.getElementById('theme-icon').textContent = th === 'light' ? '🌙' : '☀️';
 }
 document.getElementById('theme-btn').addEventListener('click', () => {
   const cur = document.documentElement.getAttribute('data-theme');
@@ -711,91 +521,104 @@ document.getElementById('theme-btn').addEventListener('click', () => {
   updateThemeIcon();
 });
 
+/* ===== DAY KEYS (ثابتة لا تتغير مع اللغة) ===== */
+const ALL_DAY_KEYS = ['sun','mon','tue','wed','thu','sat'];
+const DAY_NAMES = {
+  ar:{sun:'الأحد',mon:'الاثنين',tue:'الثلاثاء',wed:'الأربعاء',thu:'الخميس',sat:'السبت'},
+  en:{sun:'Sunday',mon:'Monday',tue:'Tuesday',wed:'Wednesday',thu:'Thursday',sat:'Saturday'}
+};
+
 /* ===== I18N ===== */
 const I18N = {
   ar:{
     appTag:'إدارة الجدول الدراسي بذكاء',roleAdmin:'مدير',roleEditor:'محرر',roleViewer:'مشاهد',
-    tabHome:'الرئيسية',tabTeachers:'المعلمون',tabClasses:'الصفوف',tabReq:'المواد',tabSchedule:'الجدول',tabReports:'التقارير',tabSettings:'الإعدادات',
-    labelTeachers:'معلم',labelClasses:'صف',labelSubjects:'مادة',labelWeekly:'حصة أسبوعيًا',
+    tabHome:'الرئيسية',tabTeachers:'المعلمون',tabClasses:'الصفوف',tabSchedule:'الجدول',tabReports:'التقارير',tabSettings:'الإعدادات',
+    labelTeachers:'معلم',labelClasses:'صف',labelAssignments:'تعيين',labelWeekly:'حصة أسبوعيًا',
     genSettings:'إعدادات التوليد',periodsPerDay:'عدد الحصص في اليوم',schoolDays:'أيام الدراسة',
     days5:'5 أيام (الأحد - الخميس)',days6:'6 أيام (إضافة السبت)',
     generate:'توليد الجدول تلقائيًا',generating:'جاري التوليد...',
-    shareTitle:'مشاركة البيانات',shareDesc:'أنشئ رابطًا يحتوي كل بياناتك وشاركه.',
-    shareRole:'نوع الصلاحية',createLink:'إنشاء رابط المشاركة',copy:'نسخ',
+    shareTitle:'مشاركة البيانات',shareDesc:'أنشئ رابطًا يحتوي كل بياناتك.',shareRole:'نوع الصلاحية',
+    createLink:'إنشاء رابط المشاركة',copy:'نسخ',
     howToUse:'كيف تستخدم البرنامج؟',
-    step1:'أضف المعلمين مع سقف الحصص',step2:'اضغط ⏰ على أي معلم لتحديد أوقات عدم توفره',
-    step3:'أضف الصفوف وحدّد المرحلة',step4:'أضف المواد لكل صف',
-    step5:'اختر أيام الدراسة والحصص اليومية',step6:'اضغط توليد الجدول',step7:'اطبع أو حمّل PDF أو Excel',
-    addTeacher:'إضافة معلم',teacherName:'اسم المعلم',maxDaily:'أقصى حصص يوميًا',maxWeekly:'أقصى حصص أسبوعيًا',
-    add:'إضافة',teachersList:'قائمة المعلمين',addClass:'إضافة صف',className:'اسم الصف',stage:'المرحلة',
+    step1:'أضف الصفوف أولاً',step2:'أضف المعلم وأدخل كل معلوماته',step3:'حدد أوقات عدم توفره',
+    step4:'اضغط توليد الجدول',step5:'اطبع أو حمّل PDF/Excel/PNG',
+    addTeacher:'إضافة معلم',editTeacher:'تعديل معلم',
+    teacherName:'اسم المعلم',maxDaily:'أقصى حصص يوميًا',maxWeekly:'أقصى حصص أسبوعيًا',
+    add:'إضافة',teachersList:'قائمة المعلمين',
+    basicInfo:'المعلومات الأساسية',workingDays:'أيام الدوام',assignments:'الصفوف والمواد',
+    addAssignment:'إضافة صف/مادة',cancel:'إلغاء',save:'حفظ',
+    addClass:'إضافة صف',className:'اسم الصف',stage:'المرحلة',
     primary:'ابتدائي',middle:'متوسط',secondary:'إعدادي',classesList:'قائمة الصفوف',
-    addSubject:'إضافة مادة لصف',classLabel:'الصف',subject:'المادة',teacherLabel:'المعلم',weeklyHours:'عدد الحصص أسبوعيًا',
-    subjectsList:'قائمة المواد',viewBy:'عرض حسب',viewByClass:'الصف',viewByTeacher:'المعلم',select:'اختر',
+    viewBy:'عرض حسب',viewByClass:'الصف',viewByTeacher:'المعلم',select:'اختر',
     paperSize:'حجم الورق',orientation:'اتجاه الورق',landscape:'أفقي',portrait:'عمودي',print:'طباعة',
-    totalRequired:'إجمالي الحصص المطلوبة',totalPlaced:'الحصص الموزعة',warningsCount:'تحذيرات',
-    teachersDistribution:'توزيع حصص المعلمين',classesDistribution:'توزيع حصص الصفوف',warningsList:'قائمة التحذيرات',
-    termInfo:'بيانات الفصل الدراسي',termName:'اسم الفصل',startDate:'تاريخ البداية',endDate:'تاريخ النهاية',save:'حفظ',
-    holidays:'العطل والمناسبات',holidayName:'اسم المناسبة',holidayDate:'التاريخ',backup:'النسخ الاحتياطي',
-    backupDesc:'احفظ نسخة كاملة من بياناتك أو استعدها.',downloadBackup:'تحميل نسخة احتياطية',restoreBackup:'استعادة من ملف',
-    dangerZone:'منطقة الخطر',resetAll:'حذف جميع البيانات',unavailTitle:'أوقات عدم التوفر',
-    unavailHint:'انقر على أي حصة لتحويلها بين متاح ✓ ومحظور ✕',saveClose:'حفظ وإغلاق',
-    noTeachers:'لا يوجد معلمون بعد',noClasses:'لا توجد صفوف بعد',noSubjects:'لا توجد مواد بعد',
+    totalRequired:'إجمالي المطلوب',totalPlaced:'الموزعة',warningsCount:'تحذيرات',
+    teachersDistribution:'توزيع حصص المعلمين',classesDistribution:'توزيع حصص الصفوف',warningsList:'التحذيرات',
+    termInfo:'بيانات الفصل',termName:'اسم الفصل',startDate:'البداية',endDate:'النهاية',
+    holidays:'العطل',holidayName:'اسم المناسبة',holidayDate:'التاريخ',
+    backup:'نسخ احتياطي',downloadBackup:'تحميل',restoreBackup:'استعادة',
+    dangerZone:'منطقة الخطر',resetAll:'حذف الكل',
+    unavailTitle:'أوقات عدم التوفر',unavailHint:'انقر لتبديل الحالة بين متاح ✓ ومحظور ✕',saveClose:'حفظ وإغلاق',
+    noTeachers:'لا يوجد معلمون بعد',noClasses:'لا توجد صفوف بعد',noAssignments:'لا توجد تعيينات',
     noSchedule:'لم يتم توليد الجدول بعد',noScheduleHint:'اذهب للرئيسية واضغط توليد الجدول',
-    teacherSchedule:'جدول المعلم',classSchedule:'جدول الصف',delete:'حذف',
+    teacherSchedule:'جدول المعلم',classSchedule:'جدول الصف',delete:'حذف',edit:'تعديل',
     deleteConfirmTeacher:'حذف هذا المعلم وكل مواده؟',deleteConfirmClass:'حذف هذا الصف وكل مواده؟',
-    deleteConfirmReset:'هل أنت متأكد من حذف جميع البيانات؟ لا يمكن التراجع.',
-    nameRequired:'ادخل الاسم',exists:'موجود مسبقًا',added:'تم الإضافة ✓',deleted:'تم الحذف',
+    deleteConfirmReset:'هل أنت متأكد من حذف جميع البيانات؟',
+    nameRequired:'ادخل الاسم',exists:'موجود مسبقًا',added:'تم الإضافة ✓',updated:'تم التحديث ✓',deleted:'تم الحذف',
     generated:'تم التوليد بنجاح ✓',partialGen:'حصة غير موزعة',error:'حدث خطأ',
     noDataToExport:'لا يوجد جدول للتصدير',addTeachersFirst:'أضف معلمين أولاً',addClassesFirst:'أضف صفوفًا أولاً',
-    addSubjectsFirst:'أضف مواد أولاً',allGood:'كل البيانات متوازنة — جاهز للتوليد ✓',
-    unavailable:'محظورة',hours:'حصة',moreThanAvailable:'يحتاج {n} حصة لكن المتاح {a} فقط',
-    exceedsMax:'يحتاج {n} حصة لكن الحد الأقصى {m}',printOpened:'جاري فتح نافذة الطباعة...',
-    savePdfHint:'اختر "حفظ كـ PDF" من نافذة الطباعة',downloaded:'تم التحميل ✓',invalidFile:'ملف غير صالح',
-    restored:'تمت الاستعادة بنجاح ✓',importedFromLink:'تم استيراد البيانات من الرابط ✓',
-    termSaved:'تم حفظ بيانات الفصل ✓',holidayAdded:'تمت إضافة المناسبة ✓',noHolidays:'لا توجد عطل مسجلة',
-    shareReady:'رابط المشاركة جاهز ✓',selectEntity:'اختر عنصرًا للعرض',copied:'تم النسخ ✓',saved:'تم الحفظ ✓'
+    allGood:'كل البيانات متوازنة ✓',unavailable:'محظورة',hours:'حصة',
+    moreThanAvailable:'يحتاج {n} حصة لكن المتاح {a}',exceedsMax:'يحتاج {n} لكن الحد {m}',
+    printOpened:'فتح نافذة الطباعة...',savePdfHint:'اختر "حفظ كـ PDF"',downloaded:'تم التحميل ✓',
+    invalidFile:'ملف غير صالح',restored:'تمت الاستعادة ✓',importedFromLink:'تم الاستيراد من الرابط ✓',
+    termSaved:'تم حفظ بيانات الفصل ✓',holidayAdded:'تمت إضافة المناسبة ✓',noHolidays:'لا توجد عطل',
+    shareReady:'رابط المشاركة جاهز ✓',selectEntity:'اختر عنصرًا',copied:'تم النسخ ✓',saved:'تم الحفظ ✓',
+    needClassOrSubject:'اختر صفًا واكتب المادة',needName:'ادخل اسم المعلم',
+    needWorkingDays:'اختر يوم دوام واحد على الأقل',works:'يعمل',weeklyHours:'حصة/أسبوع',noWeek:'بدون حصص'
   },
   en:{
     appTag:'Smart School Scheduling',roleAdmin:'Admin',roleEditor:'Editor',roleViewer:'Viewer',
-    tabHome:'Home',tabTeachers:'Teachers',tabClasses:'Classes',tabReq:'Subjects',tabSchedule:'Schedule',tabReports:'Reports',tabSettings:'Settings',
-    labelTeachers:'Teachers',labelClasses:'Classes',labelSubjects:'Subjects',labelWeekly:'Weekly Hours',
+    tabHome:'Home',tabTeachers:'Teachers',tabClasses:'Classes',tabSchedule:'Schedule',tabReports:'Reports',tabSettings:'Settings',
+    labelTeachers:'Teachers',labelClasses:'Classes',labelAssignments:'Assignments',labelWeekly:'Weekly',
     genSettings:'Generation Settings',periodsPerDay:'Periods per Day',schoolDays:'School Days',
     days5:'5 Days (Sun - Thu)',days6:'6 Days (add Saturday)',
     generate:'Generate Schedule',generating:'Generating...',
-    shareTitle:'Share Data',shareDesc:'Create a link with all your data.',
-    shareRole:'Access Level',createLink:'Create Share Link',copy:'Copy',
+    shareTitle:'Share Data',shareDesc:'Create a link with all your data.',shareRole:'Access Level',
+    createLink:'Create Share Link',copy:'Copy',
     howToUse:'How to Use?',
-    step1:'Add teachers with hour limits',step2:'Click ⏰ on a teacher to set unavailable times',
-    step3:'Add classes and choose the stage',step4:'Add subjects per class',
-    step5:'Choose school days and periods',step6:'Click Generate Schedule',step7:'Print or download PDF/Excel',
-    addTeacher:'Add Teacher',teacherName:'Teacher Name',maxDaily:'Max Daily',maxWeekly:'Max Weekly',
-    add:'Add',teachersList:'Teachers List',addClass:'Add Class',className:'Class Name',stage:'Stage',
+    step1:'Add classes first',step2:'Add teacher with all info',step3:'Set unavailability',
+    step4:'Generate schedule',step5:'Print or download PDF/Excel/PNG',
+    addTeacher:'Add Teacher',editTeacher:'Edit Teacher',
+    teacherName:'Teacher Name',maxDaily:'Max Daily',maxWeekly:'Max Weekly',
+    add:'Add',teachersList:'Teachers List',
+    basicInfo:'Basic Info',workingDays:'Working Days',assignments:'Classes & Subjects',
+    addAssignment:'Add Class/Subject',cancel:'Cancel',save:'Save',
+    addClass:'Add Class',className:'Class Name',stage:'Stage',
     primary:'Primary',middle:'Middle',secondary:'Secondary',classesList:'Classes List',
-    addSubject:'Add Subject',classLabel:'Class',subject:'Subject',teacherLabel:'Teacher',weeklyHours:'Weekly Hours',
-    subjectsList:'Subjects List',viewBy:'View By',viewByClass:'Class',viewByTeacher:'Teacher',select:'Select',
+    viewBy:'View By',viewByClass:'Class',viewByTeacher:'Teacher',select:'Select',
     paperSize:'Paper Size',orientation:'Orientation',landscape:'Landscape',portrait:'Portrait',print:'Print',
-    totalRequired:'Total Required',totalPlaced:'Placed Hours',warningsCount:'Warnings',
-    teachersDistribution:'Teachers Hours',classesDistribution:'Classes Hours',warningsList:'Warnings List',
-    termInfo:'Term Information',termName:'Term Name',startDate:'Start Date',endDate:'End Date',save:'Save',
-    holidays:'Holidays',holidayName:'Holiday Name',holidayDate:'Date',backup:'Backup',
-    backupDesc:'Save a full backup or restore from file.',downloadBackup:'Download Backup',restoreBackup:'Restore',
-    dangerZone:'Danger Zone',resetAll:'Delete All Data',unavailTitle:'Unavailable Times',
-    unavailHint:'Click any period to toggle available ✓ / blocked ✕',saveClose:'Save & Close',
-    noTeachers:'No teachers yet',noClasses:'No classes yet',noSubjects:'No subjects yet',
+    totalRequired:'Total Required',totalPlaced:'Placed',warningsCount:'Warnings',
+    teachersDistribution:'Teachers Hours',classesDistribution:'Classes Hours',warningsList:'Warnings',
+    termInfo:'Term Info',termName:'Term Name',startDate:'Start Date',endDate:'End Date',
+    holidays:'Holidays',holidayName:'Holiday Name',holidayDate:'Date',
+    backup:'Backup',downloadBackup:'Download',restoreBackup:'Restore',
+    dangerZone:'Danger Zone',resetAll:'Delete All',
+    unavailTitle:'Unavailable Times',unavailHint:'Click to toggle ✓ / ✕',saveClose:'Save & Close',
+    noTeachers:'No teachers yet',noClasses:'No classes yet',noAssignments:'No assignments',
     noSchedule:'Schedule not generated yet',noScheduleHint:'Go to Home and click Generate',
-    teacherSchedule:'Teacher Schedule',classSchedule:'Class Schedule',delete:'Delete',
+    teacherSchedule:'Teacher Schedule',classSchedule:'Class Schedule',delete:'Delete',edit:'Edit',
     deleteConfirmTeacher:'Delete this teacher and all subjects?',deleteConfirmClass:'Delete this class and all subjects?',
-    deleteConfirmReset:'Are you sure you want to delete all data?',
-    nameRequired:'Name is required',exists:'Already exists',added:'Added ✓',deleted:'Deleted',
+    deleteConfirmReset:'Delete all data?',
+    nameRequired:'Name required',exists:'Already exists',added:'Added ✓',updated:'Updated ✓',deleted:'Deleted',
     generated:'Generated ✓',partialGen:'unplaced hours',error:'Error',
     noDataToExport:'No schedule to export',addTeachersFirst:'Add teachers first',addClassesFirst:'Add classes first',
-    addSubjectsFirst:'Add subjects first',allGood:'All data balanced — ready ✓',
-    unavailable:'Blocked',hours:'hours',moreThanAvailable:'Needs {n} but only {a} available',
-    exceedsMax:'Needs {n} but max is {m}',printOpened:'Opening print dialog...',
-    savePdfHint:'Choose "Save as PDF"',downloaded:'Downloaded ✓',invalidFile:'Invalid file',
-    restored:'Restored ✓',importedFromLink:'Imported from link ✓',
-    termSaved:'Term saved ✓',holidayAdded:'Holiday added ✓',noHolidays:'No holidays recorded',
-    shareReady:'Share link ready ✓',selectEntity:'Select an item',copied:'Copied ✓',saved:'Saved ✓'
+    allGood:'All data balanced ✓',unavailable:'Blocked',hours:'hours',
+    moreThanAvailable:'Needs {n} but {a} available',exceedsMax:'Needs {n} but max {m}',
+    printOpened:'Opening print...',savePdfHint:'Choose "Save as PDF"',downloaded:'Downloaded ✓',
+    invalidFile:'Invalid file',restored:'Restored ✓',importedFromLink:'Imported from link ✓',
+    termSaved:'Term saved ✓',holidayAdded:'Holiday added ✓',noHolidays:'No holidays',
+    shareReady:'Share link ready ✓',selectEntity:'Select an item',copied:'Copied ✓',saved:'Saved ✓',
+    needClassOrSubject:'Select class and enter subject',needName:'Enter teacher name',
+    needWorkingDays:'Choose at least one working day',works:'Works',weeklyHours:'hrs/week',noWeek:'No hours'
   }
 };
 
@@ -803,31 +626,23 @@ let currentLang = localStorage.getItem('jadwal-lang') || 'ar';
 const t = (k) => (I18N[currentLang] && I18N[currentLang][k]) || k;
 const tf = (k, v) => { let s = t(k); Object.keys(v||{}).forEach(x => { s = s.replace('{'+x+'}', v[x]); }); return s; };
 
-/* ===== DAYS ===== */
-const ALL_DAYS = {
-  ar:['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','السبت'],
-  en:['Sunday','Monday','Tuesday','Wednesday','Thursday','Saturday']
-};
-let DAYS = ALL_DAYS[currentLang].slice(0, 5);
+/* ===== HELPERS ===== */
+const getDayKeys = () => ALL_DAY_KEYS.slice(0, state.settings.days || 5);
+const dayName = (key) => DAY_NAMES[currentLang][key] || key;
 
 /* ===== STATE ===== */
 const defaultState = () => ({
   teachers: [], classes: [], requirements: [],
   schedule: null,
   settings: { periods: 7, days: 5 },
-  calendar: { term: '', startDate: '', endDate: '', holidays: [] },
+  calendar: { term:'', startDate:'', endDate:'', holidays:[] },
   role: 'admin'
 });
 let state = defaultState();
 
-function updateDays(){ DAYS = ALL_DAYS[currentLang].slice(0, state.settings.days || 5); }
-
 /* ===== STORAGE ===== */
 let saveTimer = null;
-function save(){
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => { try{ localStorage.setItem('jadwal-state', JSON.stringify(state)); }catch(e){} }, 300);
-}
+function save(){ clearTimeout(saveTimer); saveTimer = setTimeout(() => { try{ localStorage.setItem('jadwal-state', JSON.stringify(state)); }catch(e){} }, 300); }
 function saveNow(){ clearTimeout(saveTimer); try{ localStorage.setItem('jadwal-state', JSON.stringify(state)); }catch(e){} }
 function load(){
   try{
@@ -871,26 +686,42 @@ function applyLanguage(){
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
   document.getElementById('lang-label').textContent = currentLang === 'ar' ? 'EN' : 'ع';
+  // Simple text nodes with data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const span = el.querySelector('span:not([data-i18n])');
+    if(el.tagName === 'BUTTON' && span && !el.classList.contains('modal-close')){
+      span.textContent = t(key);
+    } else if(!el.querySelector('*')){
+      el.textContent = t(key);
+    } else {
+      // has child elements, update only text
+      const lastText = [...el.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+      if(lastText) lastText.textContent = ' ' + t(key);
+    }
+  });
+  // Specific ones
   document.querySelectorAll('.tabs button').forEach(b => {
-    const key = b.dataset.i18n;
-    if(key){ const span = b.querySelector('span'); if(span) span.textContent = t(key); }
+    if(b.dataset.i18n){ const s = b.querySelector('span'); if(s) s.textContent = t(b.dataset.i18n); }
   });
   document.querySelectorAll('label[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
-  document.querySelectorAll('h2 [data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
-  document.querySelectorAll('.header-text [data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
   document.querySelectorAll('option[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('.stat-label[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('h2 span[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
   document.querySelectorAll('.card > p[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
   document.querySelectorAll('.steps li[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
-  document.querySelectorAll('.stat-label[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
-  document.querySelectorAll('button[data-i18n] span').forEach(el => {
-    const btn = el.closest('button');
-    if(btn) el.textContent = t(el.parentElement.dataset.i18n);
-  });
   document.querySelectorAll('.modal-footer p[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('.modal-header h2 [data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
   document.querySelectorAll('.modal-footer button[data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
-  document.querySelectorAll('.modal-header [data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('h3 [data-i18n]').forEach(el => el.textContent = t(el.dataset.i18n));
+  // Update teacher modal title if open
+  if(document.getElementById('teacher-modal').classList.contains('show')){
+    const editId = document.getElementById('tm-title').dataset.editId;
+    document.getElementById('tm-title').textContent = editId ? '✏️ ' + t('editTeacher') : '➕ ' + t('addTeacher');
+    renderWorkingDaysCheckboxes();
+    renderAssignmentsRows();
+  }
   updateRoleBadge();
-  updateDays();
   render();
 }
 
@@ -914,20 +745,192 @@ function updateRoleBadge(){
   badge.innerHTML = icon + ' <span>' + t(label) + '</span>';
 }
 
-/* ===== CRUD ===== */
-document.getElementById('add-teacher-btn').addEventListener('click', () => {
-  if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
-  const name = document.getElementById('teacher-name').value.trim();
-  const maxDay = parseInt(document.getElementById('teacher-max-day').value) || 6;
-  const maxWeek = parseInt(document.getElementById('teacher-max-week').value) || 24;
-  if(!name){ toast(t('nameRequired'), 'error'); return; }
-  if(state.teachers.some(x => x.name === name)){ toast(t('exists'), 'error'); return; }
-  state.teachers.push({ id: genId(), name, maxDay, maxWeek, unavailable: [] });
-  document.getElementById('teacher-name').value = '';
-  save(); render();
-  toast(t('added'), 'success');
-});
+/* ===== TEACHER MODAL ===== */
+function openTeacherModal(editId){
+  const modal = document.getElementById('teacher-modal');
+  const titleEl = document.getElementById('tm-title');
 
+  // Clear form
+  document.getElementById('tm-name').value = '';
+  document.getElementById('tm-stage').value = 'primary';
+  document.getElementById('tm-max-day').value = 6;
+  document.getElementById('tm-max-week').value = 24;
+
+  // Clear assignments
+  document.getElementById('tm-assignments').innerHTML = '';
+
+  if(editId){
+    const teacher = state.teachers.find(x => x.id === editId);
+    if(!teacher) return;
+    titleEl.dataset.editId = editId;
+    titleEl.textContent = '✏️ ' + t('editTeacher');
+    document.getElementById('tm-name').value = teacher.name;
+    document.getElementById('tm-stage').value = teacher.stage || 'primary';
+    document.getElementById('tm-max-day').value = teacher.maxDay;
+    document.getElementById('tm-max-week').value = teacher.maxWeek;
+    // Working days
+    tmWorkingDays = (teacher.workingDays || getDayKeys()).slice();
+    // Assignments
+    const teacherReqs = state.requirements.filter(r => r.teacherId === editId);
+    tmAssignments = teacherReqs.map(r => ({ classId: r.classId, subject: r.subject, weekly: r.weekly }));
+    if(tmAssignments.length === 0) tmAssignments.push({ classId:'', subject:'', weekly:4 });
+  } else {
+    delete titleEl.dataset.editId;
+    titleEl.textContent = '➕ ' + t('addTeacher');
+    tmWorkingDays = getDayKeys().slice();
+    tmAssignments = [{ classId:'', subject:'', weekly:4 }];
+  }
+
+  renderWorkingDaysCheckboxes();
+  renderAssignmentsRows();
+  modal.classList.add('show');
+}
+window.openTeacherModal = openTeacherModal;
+
+function closeTeacherModal(){
+  document.getElementById('teacher-modal').classList.remove('show');
+}
+window.closeTeacherModal = closeTeacherModal;
+
+let tmWorkingDays = [];
+let tmAssignments = [];
+
+function renderWorkingDaysCheckboxes(){
+  const el = document.getElementById('tm-working-days');
+  const dayKeys = getDayKeys();
+  // Filter tmWorkingDays to only include allowed days
+  tmWorkingDays = tmWorkingDays.filter(k => dayKeys.includes(k));
+  el.innerHTML = dayKeys.map(k => {
+    const checked = tmWorkingDays.includes(k);
+    return `<div class="day-checkbox">
+      <input type="checkbox" id="wd-${k}" data-day="${k}" ${checked?'checked':''}>
+      <label for="wd-${k}">${esc(dayName(k))}</label>
+    </div>`;
+  }).join('');
+  // Event delegation
+  el.querySelectorAll('input[data-day]').forEach(input => {
+    input.addEventListener('change', () => {
+      const k = input.dataset.day;
+      if(input.checked){
+        if(!tmWorkingDays.includes(k)) tmWorkingDays.push(k);
+      } else {
+        tmWorkingDays = tmWorkingDays.filter(x => x !== k);
+      }
+    });
+  });
+}
+
+function renderAssignmentsRows(){
+  const el = document.getElementById('tm-assignments');
+  if(tmAssignments.length === 0) tmAssignments.push({ classId:'', subject:'', weekly:4 });
+  el.innerHTML = tmAssignments.map((a, i) => `
+    <div class="assignment-row" data-index="${i}">
+      <select class="assign-class" data-i="${i}">
+        <option value="">-- ${t('classLabel')||'صف'} --</option>
+        ${state.classes.map(c => `<option value="${c.id}" ${a.classId===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}
+      </select>
+      <input type="text" class="assign-subject" data-i="${i}" value="${esc(a.subject)}" placeholder="${currentLang==='ar'?'المادة (مثال: رياضيات)':'Subject'}">
+      <input type="number" class="assign-weekly" data-i="${i}" value="${a.weekly||4}" min="1" max="15">
+      <button type="button" class="remove-btn" data-i="${i}" onclick="removeAssignmentRow(${i})">✕</button>
+    </div>
+  `).join('');
+  // Bind input events
+  el.querySelectorAll('.assign-class').forEach(s => {
+    s.addEventListener('change', (e) => {
+      const i = parseInt(e.target.dataset.i);
+      tmAssignments[i].classId = e.target.value;
+    });
+  });
+  el.querySelectorAll('.assign-subject').forEach(s => {
+    s.addEventListener('input', (e) => {
+      const i = parseInt(e.target.dataset.i);
+      tmAssignments[i].subject = e.target.value;
+    });
+  });
+  el.querySelectorAll('.assign-weekly').forEach(s => {
+    s.addEventListener('input', (e) => {
+      const i = parseInt(e.target.dataset.i);
+      tmAssignments[i].weekly = parseInt(e.target.value) || 4;
+    });
+  });
+}
+
+function addAssignmentRow(){
+  tmAssignments.push({ classId:'', subject:'', weekly:4 });
+  renderAssignmentsRows();
+}
+window.addAssignmentRow = addAssignmentRow;
+
+function removeAssignmentRow(i){
+  if(tmAssignments.length <= 1){
+    tmAssignments[0] = { classId:'', subject:'', weekly:4 };
+  } else {
+    tmAssignments.splice(i, 1);
+  }
+  renderAssignmentsRows();
+}
+window.removeAssignmentRow = removeAssignmentRow;
+
+function saveTeacherFromModal(){
+  if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
+  const name = document.getElementById('tm-name').value.trim();
+  const stage = document.getElementById('tm-stage').value;
+  const maxDay = parseInt(document.getElementById('tm-max-day').value) || 6;
+  const maxWeek = parseInt(document.getElementById('tm-max-week').value) || 24;
+
+  if(!name){ toast(t('needName'), 'error'); return; }
+  if(tmWorkingDays.length === 0){ toast(t('needWorkingDays'), 'error'); return; }
+
+  // Filter valid assignments
+  const validAssignments = tmAssignments.filter(a => a.classId && a.subject.trim());
+  // Check duplicate teacher name
+  const editId = document.getElementById('tm-title').dataset.editId;
+  if(state.teachers.some(x => x.name === name && x.id !== editId)){
+    toast(t('exists'), 'error'); return;
+  }
+
+  const teacherId = editId || genId();
+
+  if(editId){
+    // Update existing
+    const teacher = state.teachers.find(x => x.id === editId);
+    teacher.name = name;
+    teacher.stage = stage;
+    teacher.maxDay = maxDay;
+    teacher.maxWeek = maxWeek;
+    teacher.workingDays = tmWorkingDays.slice();
+    // Remove old requirements
+    state.requirements = state.requirements.filter(r => r.teacherId !== editId);
+  } else {
+    // Add new
+    state.teachers.push({
+      id: teacherId, name, stage,
+      maxDay, maxWeek,
+      workingDays: tmWorkingDays.slice(),
+      unavailable: []
+    });
+  }
+
+  // Add new requirements
+  validAssignments.forEach(a => {
+    state.requirements.push({
+      id: genId(),
+      teacherId: teacherId,
+      classId: a.classId,
+      subject: a.subject.trim(),
+      weekly: a.weekly || 4
+    });
+  });
+
+  state.schedule = null;
+  saveNow();
+  closeTeacherModal();
+  render();
+  toast(editId ? t('updated') : t('added'), 'success');
+}
+window.saveTeacherFromModal = saveTeacherFromModal;
+
+/* ===== CLASSES ===== */
 document.getElementById('add-class-btn').addEventListener('click', () => {
   if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
   const name = document.getElementById('class-name').value.trim();
@@ -940,26 +943,23 @@ document.getElementById('add-class-btn').addEventListener('click', () => {
   toast(t('added'), 'success');
 });
 
-document.getElementById('add-req-btn').addEventListener('click', () => {
+document.getElementById('add-teacher-btn').addEventListener('click', () => {
   if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
-  const classId = document.getElementById('req-class').value;
-  const subject = document.getElementById('req-subject').value.trim();
-  const teacherId = document.getElementById('req-teacher').value;
-  const weekly = parseInt(document.getElementById('req-weekly').value) || 4;
-  if(!classId || !subject || !teacherId){ toast(t('error'), 'error'); return; }
-  state.requirements.push({ id: genId(), classId, subject, teacherId, weekly });
-  document.getElementById('req-subject').value = '';
-  save(); render();
-  toast(t('added'), 'success');
+  if(state.classes.length === 0){
+    toast(t('addClassesFirst'), 'error');
+    return;
+  }
+  openTeacherModal(null);
 });
 
+/* ===== DELETE ===== */
 window.deleteTeacher = (id) => {
   if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
   if(!confirm(t('deleteConfirmTeacher'))) return;
   state.teachers = state.teachers.filter(x => x.id !== id);
   state.requirements = state.requirements.filter(x => x.teacherId !== id);
   state.schedule = null;
-  save(); render(); toast(t('deleted'));
+  saveNow(); render(); toast(t('deleted'));
 };
 window.deleteClass = (id) => {
   if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
@@ -967,16 +967,10 @@ window.deleteClass = (id) => {
   state.classes = state.classes.filter(x => x.id !== id);
   state.requirements = state.requirements.filter(x => x.classId !== id);
   state.schedule = null;
-  save(); render(); toast(t('deleted'));
-};
-window.deleteReq = (id) => {
-  if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
-  state.requirements = state.requirements.filter(x => x.id !== id);
-  state.schedule = null;
-  save(); render(); toast(t('deleted'));
+  saveNow(); render(); toast(t('deleted'));
 };
 
-/* ===== UNAVAILABILITY MODAL ===== */
+/* ===== UNAVAILABILITY ===== */
 let editingTeacherId = null;
 window.openUnavailModal = (teacherId) => {
   if(state.role === 'viewer'){ toast(t('error'), 'error'); return; }
@@ -987,16 +981,19 @@ window.openUnavailModal = (teacherId) => {
   renderUnavailGrid();
   document.getElementById('modal').classList.add('show');
 };
+
 function renderUnavailGrid(){
   const teacher = state.teachers.find(x => x.id === editingTeacherId);
   if(!teacher) return;
   const unavailable = teacher.unavailable || [];
   const periods = state.settings.periods;
+  // Only show teacher's working days
+  const teacherDays = (teacher.workingDays || getDayKeys()).filter(k => getDayKeys().includes(k));
   let html = '<div class="table-scroll"><table class="unavail-table"><thead><tr><th>#</th>';
   for(let p = 1; p <= periods; p++) html += '<th>' + p + '</th>';
   html += '</tr></thead><tbody>';
-  DAYS.forEach(d => {
-    html += '<tr><td class="day-cell">' + esc(d) + '</td>';
+  teacherDays.forEach(d => {
+    html += '<tr><td class="day-cell">' + esc(dayName(d)) + '</td>';
     for(let p = 1; p <= periods; p++){
       const key = d + '-' + p;
       const isBlocked = unavailable.includes(key);
@@ -1034,8 +1031,7 @@ function render(){
   document.getElementById('stat-classes').textContent = state.classes.length;
   document.getElementById('stat-requirements').textContent = state.requirements.length;
   document.getElementById('stat-hours').textContent = state.requirements.reduce((s,r) => s + r.weekly, 0);
-  renderTeachers(); renderClasses(); renderRequirements(); renderSelects(); renderScheduleSelect();
-  renderAlerts(); applyRole();
+  renderTeachers(); renderClasses(); renderScheduleSelect(); renderAlerts(); applyRole();
 }
 
 function renderTeachers(){
@@ -1045,15 +1041,36 @@ function renderTeachers(){
     return;
   }
   el.innerHTML = state.teachers.map(tc => {
-    const cnt = (tc.unavailable || []).length;
-    const unavailBadge = cnt > 0 ? '<span class="badge badge-danger">' + cnt + ' ' + t('unavailable') + '</span>' : '';
+    const teacherReqs = state.requirements.filter(r => r.teacherId === tc.id);
+    const totalWeekly = teacherReqs.reduce((s,r) => s + r.weekly, 0);
+    const workingDays = (tc.workingDays || getDayKeys()).filter(k => getDayKeys().includes(k));
+    const unavailCount = (tc.unavailable || []).length;
+    const stageLabel = { primary:'primary', middle:'middle', secondary:'secondary' };
+
+    const workingDaysBadges = workingDays.map(k => '<span class="badge badge-info">' + esc(dayName(k).slice(0,3)) + '</span>').join('');
+    const assignmentsHTML = teacherReqs.length > 0 ?
+      '<div class="assignments-preview">' + teacherReqs.map(r => {
+        const cls = state.classes.find(c => c.id === r.classId);
+        return '<span class="assign-chip">📖 ' + esc(r.subject) + ' · ' + esc(cls ? cls.name : '?') + ' <span class="week">(' + r.weekly + ' ' + t('hours') + ')</span></span>';
+      }).join('') + '</div>' : '<div class="assignments-preview"><span class="assign-chip" style="opacity:.6">' + t('noAssignments') + '</span></div>';
+
     const actions = state.role === 'viewer' ? '' :
-      '<div class="actions"><button class="icon-btn" onclick="openUnavailModal(\'' + tc.id + '\')" title="⏰">⏰</button>' +
-      '<button class="delete-btn" onclick="deleteTeacher(\'' + tc.id + '\')">' + t('delete') + '</button></div>';
-    return '<div class="list-item"><div class="info"><div class="title">' + esc(tc.name) + '</div>' +
-      '<div class="meta"><span class="badge badge-primary">' + tc.maxDay + ' ' + t('hours') + '</span>' +
-      '<span class="badge badge-success">' + tc.maxWeek + ' ' + t('hours') + '</span>' + unavailBadge +
-      '</div></div>' + actions + '</div>';
+      '<div class="actions">' +
+        '<button class="icon-btn" onclick="openTeacherModal(\'' + tc.id + '\')" title="' + t('edit') + '">✏️</button>' +
+        '<button class="icon-btn" onclick="openUnavailModal(\'' + tc.id + '\')" title="⏰">⏰</button>' +
+        '<button class="delete-btn" onclick="deleteTeacher(\'' + tc.id + '\')">' + t('delete') + '</button>' +
+      '</div>';
+
+    return '<div class="list-item"><div class="info">' +
+      '<div class="title">' + esc(tc.name) + ' <span class="badge badge-primary">' + t(stageLabel[tc.stage] || 'primary') + '</span></div>' +
+      '<div class="meta">' +
+        '<span class="badge badge-success">📊 ' + totalWeekly + ' ' + t('hours') + ' / ' + tc.maxWeek + '</span>' +
+        '<span class="badge badge-primary">👨‍🏫 ' + workingDays.length + ' ' + (currentLang==='ar'?'أيام':'days') + '</span>' +
+        (unavailCount > 0 ? '<span class="badge badge-danger">⏰ ' + unavailCount + ' ' + t('unavailable') + '</span>' : '') +
+      '</div>' +
+      '<div class="meta" style="margin-top:6px">' + workingDaysBadges + '</div>' +
+      assignmentsHTML +
+      '</div>' + actions + '</div>';
   }).join('');
 }
 
@@ -1063,38 +1080,18 @@ function renderClasses(){
     el.innerHTML = '<div class="empty-state"><span class="icon">🏫</span><p>' + t('noClasses') + '</p></div>';
     return;
   }
-  const stageLabel = { primary: 'primary', middle: 'middle', secondary: 'secondary' };
+  const stageLabel = { primary:'primary', middle:'middle', secondary:'secondary' };
   el.innerHTML = state.classes.map(c => {
+    const classReqs = state.requirements.filter(r => r.classId === c.id);
+    const totalWeekly = classReqs.reduce((s,r) => s + r.weekly, 0);
     const actions = state.role === 'viewer' ? '' :
       '<button class="delete-btn" onclick="deleteClass(\'' + c.id + '\')">' + t('delete') + '</button>';
-    return '<div class="list-item"><div class="info"><div class="title">' + esc(c.name) + '</div>' +
-      '<div class="meta"><span class="badge badge-primary">' + t(stageLabel[c.stage] || 'primary') + '</span></div>' +
+    return '<div class="list-item"><div class="info"><div class="title">' + esc(c.name) +
+      ' <span class="badge badge-primary">' + t(stageLabel[c.stage] || 'primary') + '</span></div>' +
+      '<div class="meta"><span class="badge badge-success">' + totalWeekly + ' ' + t('hours') + '</span>' +
+      '<span class="badge badge-info">' + classReqs.length + ' ' + t('labelAssignments') + '</span></div>' +
       '</div>' + actions + '</div>';
   }).join('');
-}
-
-function renderRequirements(){
-  const el = document.getElementById('req-list');
-  if(state.requirements.length === 0){
-    el.innerHTML = '<div class="empty-state"><span class="icon">📚</span><p>' + t('noSubjects') + '</p></div>';
-    return;
-  }
-  el.innerHTML = state.requirements.map(r => {
-    const c = state.classes.find(x => x.id === r.classId);
-    const tc = state.teachers.find(x => x.id === r.teacherId);
-    const actions = state.role === 'viewer' ? '' :
-      '<button class="delete-btn" onclick="deleteReq(\'' + r.id + '\')">' + t('delete') + '</button>';
-    return '<div class="list-item"><div class="info"><div class="title">' + esc(r.subject) + ' — ' + esc(c ? c.name : '?') + '</div>' +
-      '<div class="meta"><span class="badge badge-primary">' + esc(tc ? tc.name : '?') + '</span>' +
-      '<span class="badge badge-success">' + r.weekly + ' ' + t('hours') + '</span></div></div>' + actions + '</div>';
-  }).join('');
-}
-
-function renderSelects(){
-  document.getElementById('req-class').innerHTML = '<option value="">--</option>' +
-    state.classes.map(c => '<option value="' + c.id + '">' + esc(c.name) + '</option>').join('');
-  document.getElementById('req-teacher').innerHTML = '<option value="">--</option>' +
-    state.teachers.map(tc => '<option value="' + tc.id + '">' + esc(tc.name) + '</option>').join('');
 }
 
 function renderScheduleSelect(){
@@ -1118,46 +1115,49 @@ function analyzeConstraints(){
   const alerts = [];
   state.classes.forEach(cls => {
     const required = state.requirements.filter(r => r.classId === cls.id).reduce((s,r) => s + r.weekly, 0);
-    if(required > slotsPerClass) alerts.push({ type: 'error', text: '⚠️ ' + esc(cls.name) + ': ' + tf('moreThanAvailable', { n: required, a: slotsPerClass }) });
+    if(required > slotsPerClass) alerts.push({ type:'error', text:'⚠️ ' + esc(cls.name) + ': ' + tf('moreThanAvailable', { n: required, a: slotsPerClass }) });
   });
   state.teachers.forEach(tc => {
     const required = state.requirements.filter(r => r.teacherId === tc.id).reduce((s,r) => s + r.weekly, 0);
-    if(required > tc.maxWeek) alerts.push({ type: 'error', text: '⚠️ ' + esc(tc.name) + ': ' + tf('exceedsMax', { n: required, m: tc.maxWeek }) });
+    if(required > tc.maxWeek) alerts.push({ type:'error', text:'⚠️ ' + esc(tc.name) + ': ' + tf('exceedsMax', { n: required, m: tc.maxWeek }) });
+    // Working days check
+    const wDays = (tc.workingDays || []).length;
+    const maxCap = wDays * tc.maxDay;
+    if(required > maxCap){
+      alerts.push({ type:'warning', text:'⚠️ ' + esc(tc.name) + ': ' + required + ' > ' + maxCap + ' (' + wDays + '×' + tc.maxDay + ')' });
+    }
   });
   if(alerts.length === 0 && state.teachers.length > 0 && state.classes.length > 0 && state.requirements.length > 0){
-    alerts.push({ type: 'success', text: '✅ ' + t('allGood') });
+    alerts.push({ type:'success', text:'✅ ' + t('allGood') });
   }
   return alerts;
 }
-
 function renderAlerts(){
   const container = document.getElementById('alerts-container');
   if(!container) return;
   const alerts = analyzeConstraints();
   if(alerts.length === 0){ container.innerHTML = ''; return; }
   container.innerHTML = alerts.map(a => {
-    const icons = { error: '🚫', warning: '⚠️', success: '✅', info: 'ℹ️' };
+    const icons = { error:'🚫', warning:'⚠️', success:'✅', info:'ℹ️' };
     return '<div class="alert alert-' + a.type + '"><span class="alert-icon">' + icons[a.type] + '</span><span>' + a.text + '</span></div>';
   }).join('');
 }
 
 /* ===== GENERATION ===== */
-function shuffle(a){
-  for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i+1)); [a[i],a[j]] = [a[j],a[i]]; }
-  return a;
-}
+function shuffle(a){ for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
 
 function tryGenerate(){
   const periods = state.settings.periods;
+  const dayKeys = getDayKeys();
   const grid = {};
   state.classes.forEach(c => {
     grid[c.id] = {};
-    DAYS.forEach(d => { grid[c.id][d] = {}; for(let p = 1; p <= periods; p++) grid[c.id][d][p] = null; });
+    dayKeys.forEach(d => { grid[c.id][d] = {}; for(let p = 1; p <= periods; p++) grid[c.id][d][p] = null; });
   });
   const busy = {}, dayCnt = {}, weekCnt = {};
   state.teachers.forEach(tc => {
     busy[tc.id] = {}; dayCnt[tc.id] = {};
-    DAYS.forEach(d => {
+    dayKeys.forEach(d => {
       busy[tc.id][d] = {};
       for(let p = 1; p <= periods; p++) busy[tc.id][d][p] = false;
       dayCnt[tc.id][d] = 0;
@@ -1177,8 +1177,9 @@ function tryGenerate(){
     const teacher = state.teachers.find(x => x.id === task.teacherId);
     if(!teacher){ unplaced.push(task); continue; }
     const unavail = teacher.unavailable || [];
+    const workingDays = (teacher.workingDays || dayKeys).filter(k => dayKeys.includes(k));
     const valid = [];
-    for(const d of DAYS){
+    for(const d of workingDays){
       if(dayCnt[teacher.id][d] >= teacher.maxDay) continue;
       if(weekCnt[teacher.id] >= teacher.maxWeek) continue;
       for(let p = 1; p <= periods; p++){
@@ -1206,8 +1207,7 @@ function tryGenerate(){
 function generateSchedule(){
   if(state.teachers.length === 0){ toast(t('addTeachersFirst'), 'error'); return; }
   if(state.classes.length === 0){ toast(t('addClassesFirst'), 'error'); return; }
-  if(state.requirements.length === 0){ toast(t('addSubjectsFirst'), 'error'); return; }
-  updateDays();
+  if(state.requirements.length === 0){ toast(t('addClassesFirst'), 'error'); return; }
   let best = null;
   for(let i = 0; i < 80; i++){
     const r = tryGenerate();
@@ -1251,12 +1251,13 @@ function renderScheduleDisplay(){
   }
   if(!id){ el.innerHTML = '<div class="empty-state"><p>' + t('selectEntity') + '</p></div>'; return; }
   const periods = state.settings.periods;
+  const dayKeys = getDayKeys();
   const grid = state.schedule.grid;
   let title = '', dataFn;
   if(view === 'class'){
     const cls = state.classes.find(x => x.id === id);
     if(!cls){ el.innerHTML = '<div class="empty-state"><p>?</p></div>'; return; }
-    const stageLabel = { primary: 'primary', middle: 'middle', secondary: 'secondary' };
+    const stageLabel = { primary:'primary', middle:'middle', secondary:'secondary' };
     title = '📅 ' + t('classSchedule') + ' — ' + esc(cls.name) + ' (' + t(stageLabel[cls.stage] || 'primary') + ')';
     dataFn = (d,p) => {
       const cell = grid[id] && grid[id][d] && grid[id][d][p];
@@ -1279,8 +1280,8 @@ function renderScheduleDisplay(){
   let html = '<h2>' + title + '</h2><div class="table-scroll"><table class="schedule-table"><thead><tr><th>#</th>';
   for(let p = 1; p <= periods; p++) html += '<th>' + p + '</th>';
   html += '</tr></thead><tbody>';
-  DAYS.forEach(d => {
-    html += '<tr><td class="day-cell">' + esc(d) + '</td>';
+  dayKeys.forEach(d => {
+    html += '<tr><td class="day-cell">' + esc(dayName(d)) + '</td>';
     for(let p = 1; p <= periods; p++){
       const c = dataFn(d,p);
       if(c) html += '<td class="slot-filled"><span class="subject-name">' + esc(c.main) + '</span><span class="teacher-name">' + esc(c.sub) + '</span></td>';
@@ -1291,7 +1292,6 @@ function renderScheduleDisplay(){
   html += '</tbody></table></div>';
   el.innerHTML = html;
 }
-
 document.getElementById('schedule-view').addEventListener('change', renderScheduleSelect);
 document.getElementById('schedule-entity').addEventListener('change', renderScheduleDisplay);
 
@@ -1322,28 +1322,25 @@ function applyPrintStyle(){
     '}';
   document.head.appendChild(style);
 }
-
 document.getElementById('print-btn').addEventListener('click', () => {
   if(!state.schedule){ toast(t('noDataToExport'), 'error'); return; }
-  applyPrintStyle();
-  toast(t('printOpened'), 'success');
+  applyPrintStyle(); toast(t('printOpened'), 'success');
   setTimeout(() => window.print(), 250);
 });
-
 document.getElementById('pdf-btn').addEventListener('click', () => {
   if(!state.schedule){ toast(t('noDataToExport'), 'error'); return; }
-  applyPrintStyle();
-  toast(t('savePdfHint'), 'success');
+  applyPrintStyle(); toast(t('savePdfHint'), 'success');
   setTimeout(() => window.print(), 250);
 });
 
-/* ===== EXPORT ===== */
+/* ===== EXPORTS ===== */
 function buildScheduleMatrix(view, id){
   const periods = state.settings.periods;
+  const dayKeys = getDayKeys();
   const grid = state.schedule.grid;
   const rows = [['#'].concat(Array.from({length: periods}, (_, i) => 'P' + (i+1)))];
-  DAYS.forEach(d => {
-    const row = [d];
+  dayKeys.forEach(d => {
+    const row = [dayName(d)];
     for(let p = 1; p <= periods; p++){
       let txt = '';
       if(view === 'class'){
@@ -1369,7 +1366,6 @@ function getCurrentEntityName(){
   const tc = state.teachers.find(x => x.id === id);
   return tc ? tc.name : 'teacher';
 }
-
 document.getElementById('csv-btn').addEventListener('click', () => {
   const view = document.getElementById('schedule-view').value;
   const id = document.getElementById('schedule-entity').value;
@@ -1380,13 +1376,9 @@ document.getElementById('csv-btn').addEventListener('click', () => {
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'schedule_' + getCurrentEntityName() + '.csv';
-  a.click();
-  URL.revokeObjectURL(url);
-  toast(t('downloaded'), 'success');
+  a.href = url; a.download = 'schedule_' + getCurrentEntityName() + '.csv'; a.click();
+  URL.revokeObjectURL(url); toast(t('downloaded'), 'success');
 });
-
 document.getElementById('excel-btn').addEventListener('click', () => {
   const view = document.getElementById('schedule-view').value;
   const id = document.getElementById('schedule-entity').value;
@@ -1399,23 +1391,18 @@ document.getElementById('excel-btn').addEventListener('click', () => {
   XLSX.writeFile(wb, 'schedule_' + getCurrentEntityName() + '.xlsx');
   toast(t('downloaded'), 'success');
 });
-
 document.getElementById('png-btn').addEventListener('click', () => {
   if(!state.schedule || typeof html2canvas === 'undefined'){ toast(t('noDataToExport'), 'error'); return; }
   const el = document.getElementById('schedule-display');
   const savedBg = el.style.background;
   el.style.background = document.documentElement.getAttribute('data-theme') === 'light' ? '#ffffff' : '#041f1c';
-  el.style.padding = '30px';
-  el.style.borderRadius = '16px';
+  el.style.padding = '30px'; el.style.borderRadius = '16px';
   html2canvas(el, { backgroundColor: null, scale: 2, useCORS: true }).then(canvas => {
     canvas.toBlob(blob => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
-      a.href = url;
-      a.download = 'schedule_' + getCurrentEntityName() + '.png';
-      a.click();
-      URL.revokeObjectURL(url);
-      toast(t('downloaded'), 'success');
+      a.href = url; a.download = 'schedule_' + getCurrentEntityName() + '.png'; a.click();
+      URL.revokeObjectURL(url); toast(t('downloaded'), 'success');
       el.style.background = savedBg; el.style.padding = ''; el.style.borderRadius = '';
     });
   }).catch(() => {
@@ -1439,13 +1426,11 @@ document.getElementById('share-btn').addEventListener('click', () => {
     document.getElementById('share-url').select();
   }catch(e){ toast(t('error'), 'error'); }
 });
-
 document.getElementById('copy-url-btn').addEventListener('click', async () => {
   const input = document.getElementById('share-url');
   try{ await navigator.clipboard.writeText(input.value); toast(t('copied'), 'success'); }
   catch(e){ input.select(); document.execCommand('copy'); toast(t('copied'), 'success'); }
 });
-
 function loadFromURL(){
   try{
     const hash = window.location.hash;
@@ -1471,8 +1456,9 @@ function renderReports(){
   let totalRequired = 0, totalPlaced = 0;
   state.requirements.forEach(r => totalRequired += r.weekly);
   if(state.schedule){
+    const dayKeys = getDayKeys();
     state.classes.forEach(c => {
-      DAYS.forEach(d => {
+      dayKeys.forEach(d => {
         for(let p = 1; p <= state.settings.periods; p++){
           if(state.schedule.grid[c.id] && state.schedule.grid[c.id][d] && state.schedule.grid[c.id][d][p]) totalPlaced++;
         }
@@ -1518,7 +1504,7 @@ function renderReports(){
   if(warnings.length === 0){
     wl.innerHTML = '<div class="alert alert-success"><span class="alert-icon">✅</span><span>' + t('allGood') + '</span></div>';
   } else {
-    const icons = { error: '🚫', warning: '⚠️', success: '✅', info: 'ℹ️' };
+    const icons = { error:'🚫', warning:'⚠️', success:'✅', info:'ℹ️' };
     wl.innerHTML = warnings.map(w =>
       '<div class="alert alert-' + w.type + '"><span class="alert-icon">' + icons[w.type] + '</span><span>' + w.text + '</span></div>'
     ).join('');
@@ -1571,8 +1557,7 @@ document.getElementById('backup-btn').addEventListener('click', () => {
   const a = document.createElement('a');
   a.href = url;
   a.download = 'jadwal-backup-' + new Date().toISOString().slice(0,10) + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
+  a.click(); URL.revokeObjectURL(url);
   toast(t('downloaded'), 'success');
 });
 document.getElementById('restore-btn').addEventListener('click', () => document.getElementById('restore-input').click());
@@ -1600,7 +1585,7 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   saveNow();
   document.getElementById('periods-count').value = 7;
   document.getElementById('days-count').value = 5;
-  updateDays(); render(); toast(t('deleted'));
+  render(); toast(t('deleted'));
 });
 
 /* ===== INIT ===== */
@@ -1608,7 +1593,6 @@ function init(){
   updateThemeIcon();
   loadFromURL();
   load();
-  updateDays();
   document.getElementById('periods-count').value = state.settings.periods || 7;
   document.getElementById('days-count').value = state.settings.days || 5;
   applyLanguage();
@@ -1622,7 +1606,7 @@ document.getElementById('periods-count').addEventListener('change', debounce(() 
 }, 400));
 document.getElementById('days-count').addEventListener('change', debounce(() => {
   state.settings.days = parseInt(document.getElementById('days-count').value) || 5;
-  updateDays(); save(); render();
+  save(); render();
 }, 400));
 </script>
 </body>
