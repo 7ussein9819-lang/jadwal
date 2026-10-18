@@ -61,7 +61,6 @@
       <p data-i18n="appTag">إدارة الجدول الدراسي بذكاء</p>
     </div>
     <div class="header-actions">
-      <!-- أيقونة التلغرام المضافة حديثاً -->
       <a href="https://t.me/HJS_98" target="_blank" class="icon-toggle" title="Telegram" style="text-decoration:none;">
         <svg><use href="#i-send"/></svg>
       </a>
@@ -70,14 +69,15 @@
     </div>
   </header>
 
+  <!-- التبويبات المكبرة مع الإيموجي -->
   <div class="tabs-wrapper">
     <nav class="tabs">
-      <button data-tab="home" class="active"><svg><use href="#i-home"/></svg> <span data-i18n="tabHome">الرئيسية</span></button>
-      <button data-tab="teachers"><svg><use href="#i-users"/></svg> <span data-i18n="tabTeachers">المعلمون</span></button>
-      <button data-tab="classes"><svg><use href="#i-building"/></svg> <span data-i18n="tabClasses">الصفوف</span></button>
-      <button data-tab="schedule"><svg><use href="#i-calendar"/></svg> <span data-i18n="tabSchedule">الجدول</span></button>
-      <button data-tab="reports"><svg><use href="#i-chart"/></svg> <span data-i18n="tabReports">التقارير</span></button>
-      <button data-tab="settings"><svg><use href="#i-settings"/></svg> <span data-i18n="tabSettings">الإعدادات</span></button>
+      <button data-tab="home" class="active">🏠 <span data-i18n="tabHome">الرئيسية</span></button>
+      <button data-tab="teachers">👨‍🏫 <span data-i18n="tabTeachers">المعلمون</span></button>
+      <button data-tab="classes">🏫 <span data-i18n="tabClasses">الصفوف</span></button>
+      <button data-tab="schedule">📅 <span data-i18n="tabSchedule">الجدول</span></button>
+      <button data-tab="reports">📊 <span data-i18n="tabReports">التقارير</span></button>
+      <button data-tab="settings">⚙️ <span data-i18n="tabSettings">الإعدادات</span></button>
     </nav>
   </div>
 
@@ -91,31 +91,31 @@
       </div>
       <div id="alerts-container"></div>
       <div class="card">
-        <h2><svg><use href="#i-settings"/></svg> <span data-i18n="genSettings">إعدادات التوليد</span></h2>
+        <h2>⚙️ <span data-i18n="genSettings">إعدادات التوليد</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="periodsPerDay">عدد الحصص في اليوم</label><input type="number" id="periods-count" min="4" max="10" value="7"><div class="form-hint" data-i18n="periodsHint">عادة 6-8</div></div>
           <div class="form-group"><label data-i18n="schoolDays">أيام الدراسة</label>
             <select id="days-count"><option value="5" data-i18n="days5">5 أيام (أحد-خميس)</option><option value="6" data-i18n="days6">6 أيام (إضافة السبت)</option></select>
           </div>
         </div>
-        <button class="btn btn-primary btn-large" id="generate-btn"><svg><use href="#i-sparkles"/></svg> <span data-i18n="generate">توليد الجدول تلقائيًا</span></button>
+        <button class="btn btn-primary btn-large" id="generate-btn">✨ <span data-i18n="generate">توليد الجدول تلقائيًا</span></button>
       </div>
       <div class="card" data-admin-only>
-        <h2><svg><use href="#i-link"/></svg> <span data-i18n="shareTitle">مشاركة البيانات</span></h2>
+        <h2>🔗 <span data-i18n="shareTitle">مشاركة البيانات</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="shareRole">الصلاحية</label>
             <select id="share-role"><option value="editor" data-i18n="roleEditorOpt">محرر</option><option value="viewer" data-i18n="roleViewerOpt">مشاهد</option></select>
           </div>
         </div>
-        <button class="btn btn-primary" id="share-btn"><svg><use href="#i-link"/></svg> <span data-i18n="createLink">إنشاء رابط</span></button>
+        <button class="btn btn-primary" id="share-btn">📋 <span data-i18n="createLink">إنشاء رابط</span></button>
         <div class="share-box" id="share-box" style="display:none">
           <input type="text" id="share-url" readonly>
-          <button class="btn btn-secondary" id="copy-url-btn"><svg><use href="#i-copy"/></svg> <span data-i18n="copy">نسخ</span></button>
+          <button class="btn btn-secondary" id="copy-url-btn">📋 <span data-i18n="copy">نسخ</span></button>
         </div>
         <p id="share-hint" style="color:var(--text-dim);font-size:11px;margin-top:8px"></p>
       </div>
       <div class="card">
-        <h2><svg><use href="#i-info"/></svg> <span data-i18n="howToUse">كيف تستخدم؟</span></h2>
+        <h2>💡 <span data-i18n="howToUse">كيف تستخدم؟</span></h2>
         <ol class="steps">
           <li data-i18n="step1">أضف الصفوف أولاً</li>
           <li data-i18n="step2">أضف المعلم واملأ بياناته</li>
@@ -129,8 +129,8 @@
     <section id="teachers" class="tab-panel">
       <div class="card" data-admin-only>
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
-          <h2 style="margin:0"><svg><use href="#i-users"/></svg> <span data-i18n="teachersList">المعلمون</span></h2>
-          <button class="btn btn-primary" id="add-teacher-btn"><svg><use href="#i-plus"/></svg> <span data-i18n="addTeacher">إضافة</span></button>
+          <h2 style="margin:0">👨‍🏫 <span data-i18n="teachersList">المعلمون</span></h2>
+          <button class="btn btn-primary" id="add-teacher-btn">➕ <span data-i18n="addTeacher">إضافة</span></button>
         </div>
       </div>
       <div class="card"><div id="teachers-list" class="list"></div></div>
@@ -138,16 +138,16 @@
 
     <section id="classes" class="tab-panel">
       <div class="card" data-admin-only>
-        <h2><svg><use href="#i-plus"/></svg> <span data-i18n="addClass">إضافة صف</span></h2>
+        <h2>➕ <span data-i18n="addClass">إضافة صف</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="className">اسم الصف</label><input type="text" id="class-name" data-i18n-placeholder="classNamePlaceholder" placeholder="الأول أ"></div>
           <div class="form-group"><label data-i18n="stage">المرحلة</label>
             <select id="class-stage"><option value="primary" data-i18n="primary">ابتدائي</option><option value="middle" data-i18n="middle">متوسط</option><option value="secondary" data-i18n="secondary">إعدادي</option></select>
           </div>
         </div>
-        <button class="btn btn-primary" id="add-class-btn"><svg><use href="#i-plus"/></svg> <span data-i18n="add">إضافة</span></button>
+        <button class="btn btn-primary" id="add-class-btn">➕ <span data-i18n="add">إضافة</span></button>
       </div>
-      <div class="card"><h2><svg><use href="#i-building"/></svg> <span data-i18n="classesList">الصفوف</span></h2><div id="classes-list" class="list"></div></div>
+      <div class="card"><h2>🏫 <span data-i18n="classesList">الصفوف</span></h2><div id="classes-list" class="list"></div></div>
     </section>
 
     <section id="schedule" class="tab-panel">
@@ -157,7 +157,7 @@
           <div class="form-group"><label data-i18n="select">اختر</label><select id="schedule-entity"></select></div>
         </div>
 
-        <h2 style="margin-top:16px;margin-bottom:10px;font-size:13px"><svg><use href="#i-printer"/></svg> <span data-i18n="printOptions">خيارات الطباعة</span></h2>
+        <h2 style="margin-top:16px;margin-bottom:10px;font-size:13px">🖨️ <span data-i18n="printOptions">خيارات الطباعة</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="paperSize">حجم الورق</label>
             <select id="print-size"><option value="A4">A4 (210×297)</option><option value="A3">A3 (297×420)</option></select>
@@ -165,7 +165,6 @@
           <div class="form-group"><label data-i18n="orientation">الاتجاه</label>
             <select id="print-orientation"><option value="landscape" data-i18n="landscape">أفقي (عرضي)</option><option value="portrait" data-i18n="portrait">عمودي (طولي)</option></select>
           </div>
-          <!-- الألوان الخاصة بالجدول فقط -->
           <div class="form-group"><label data-i18n="colorMode">لون الجدول</label>
             <select id="table-color">
               <option value="theme" data-i18n="colorTheme">لون الواجهة الحالي</option>
@@ -180,16 +179,24 @@
           </div>
         </div>
         <div class="btn-row">
-          <button class="btn btn-primary" id="print-current-btn"><svg><use href="#i-printer"/></svg> <span data-i18n="printCurrent">طباعة الحالي</span></button>
-          <button class="btn btn-success" id="print-all-btn"><svg><use href="#i-layers"/></svg> <span data-i18n="printAll">طباعة الكل</span></button>
-          <button class="btn btn-secondary" id="csv-btn"><svg><use href="#i-download"/></svg> CSV</button>
-          <button class="btn btn-secondary" id="png-btn"><svg><use href="#i-image"/></svg> PNG</button>
+          <button class="btn btn-primary" id="print-current-btn">🖨️ <span data-i18n="printCurrent">طباعة الحالي</span></button>
+          <button class="btn btn-success" id="print-all-btn">📚 <span data-i18n="printAll">طباعة الكل</span></button>
+          <button class="btn btn-secondary" id="csv-btn">⬇️ CSV</button>
+          <button class="btn btn-secondary" id="png-btn">🖼️ PNG</button>
         </div>
 
-        <h2 style="margin-top:16px;margin-bottom:10px;font-size:13px"><svg><use href="#i-download"/></svg> Excel</h2>
+        <h2 style="margin-top:16px;margin-bottom:10px;font-size:13px">⬇️ Excel</h2>
         <div class="btn-row">
-          <button class="btn btn-secondary" id="excel-current-btn"><svg><use href="#i-file-text"/></svg> <span data-i18n="excelCurrent">Excel الحالي</span></button>
-          <button class="btn btn-success" id="excel-all-btn"><svg><use href="#i-package"/></svg> <span data-i18n="excelAll">Excel شامل</span></button>
+          <button class="btn btn-secondary" id="excel-current-btn">📄 <span data-i18n="excelCurrent">Excel الحالي</span></button>
+          <button class="btn btn-success" id="excel-all-btn">📦 <span data-i18n="excelAll">Excel شامل</span></button>
+        </div>
+
+        <!-- أزرار النسخ الاحتياطي والاستعادة تم نقلها هنا -->
+        <h2 style="margin-top:16px;margin-bottom:10px;font-size:13px">💾 <span data-i18n="backup">النسخ الاحتياطي</span></h2>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="backup-btn">📤 <span data-i18n="download">تحميل</span></button>
+          <button class="btn btn-secondary" id="restore-btn">📥 <span data-i18n="restore">استعادة</span></button>
+          <input type="file" id="restore-input" accept=".json" style="display:none">
         </div>
       </div>
       <div class="card"><div id="schedule-display"></div></div>
@@ -201,30 +208,28 @@
         <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-target"/></svg></div><div class="stat-value" id="report-total-placed">0</div><div class="stat-label" data-i18n="totalPlaced">الموزعة</div></div>
         <div class="stat-card"><div class="stat-icon-badge"><svg><use href="#i-alert"/></svg></div><div class="stat-value" id="report-warnings">0</div><div class="stat-label" data-i18n="warningsCount">تحذيرات</div></div>
       </div>
-      <div class="card"><h2><svg><use href="#i-users"/></svg> <span data-i18n="teachersDistribution">توزيع المعلمين</span></h2><div id="teacher-chart"></div></div>
-      <div class="card"><h2><svg><use href="#i-building"/></svg> <span data-i18n="classesDistribution">توزيع الصفوف</span></h2><div id="class-chart"></div></div>
-      <div class="card"><h2><svg><use href="#i-alert"/></svg> <span data-i18n="warningsList">التحذيرات</span></h2><div id="warnings-list"></div></div>
+      <div class="card"><h2>👨‍🏫 <span data-i18n="teachersDistribution">توزيع المعلمين</span></h2><div id="teacher-chart"></div></div>
+      <div class="card"><h2>🏫 <span data-i18n="classesDistribution">توزيع الصفوف</span></h2><div id="class-chart"></div></div>
+      <div class="card"><h2>⚠️ <span data-i18n="warningsList">التحذيرات</span></h2><div id="warnings-list"></div></div>
     </section>
 
     <section id="settings" class="tab-panel">
       <div class="card">
-        <h2><svg><use href="#i-calendar"/></svg> <span data-i18n="termInfo">بيانات الفصل</span></h2>
+        <h2>📅 <span data-i18n="termInfo">بيانات الفصل</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="termName">اسم الفصل</label><input type="text" id="term-name"></div>
-          <!-- تم التعديل هنا: type=text -->
           <div class="form-group"><label data-i18n="startDate">البداية</label><input type="text" id="term-start" placeholder="YYYY-MM-DD" dir="ltr" style="text-align:right"></div>
           <div class="form-group"><label data-i18n="endDate">النهاية</label><input type="text" id="term-end" placeholder="YYYY-MM-DD" dir="ltr" style="text-align:right"></div>
         </div>
-        <button class="btn btn-primary" id="save-term-btn"><svg><use href="#i-save"/></svg> <span data-i18n="save">حفظ</span></button>
+        <button class="btn btn-primary" id="save-term-btn">💾 <span data-i18n="save">حفظ</span></button>
       </div>
       <div class="card">
-        <h2><svg><use href="#i-calendar"/></svg> <span data-i18n="holidays">العطل</span></h2>
+        <h2>🎉 <span data-i18n="holidays">العطل</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="holidayName">المناسبة</label><input type="text" id="holiday-name"></div>
-          <!-- تم التعديل هنا: type=text -->
           <div class="form-group"><label data-i18n="holidayDate">التاريخ</label><input type="text" id="holiday-date" placeholder="YYYY-MM-DD" dir="ltr" style="text-align:right"></div>
         </div>
-        <button class="btn btn-primary" id="add-holiday-btn"><svg><use href="#i-plus"/></svg> <span data-i18n="add">إضافة</span></button>
+        <button class="btn btn-primary" id="add-holiday-btn">➕ <span data-i18n="add">إضافة</span></button>
         <div id="holidays-list" style="margin-top:14px"></div>
       </div>
       
@@ -237,17 +242,8 @@
       </div>
 
       <div class="card" data-admin-only>
-        <h2><svg><use href="#i-save"/></svg> <span data-i18n="backup">نسخ احتياطي</span></h2>
-        <div class="btn-row">
-          <button class="btn btn-primary" id="backup-btn"><svg><use href="#i-download"/></svg> <span data-i18n="download">تحميل</span></button>
-          <button class="btn btn-secondary" id="restore-btn"><svg><use href="#i-upload"/></svg> <span data-i18n="restore">استعادة</span></button>
-          <input type="file" id="restore-input" accept=".json" style="display:none">
-        </div>
-      </div>
-
-      <div class="card" data-admin-only>
-        <h2><svg><use href="#i-alert"/></svg> <span data-i18n="dangerZone">منطقة الخطر</span></h2>
-        <button class="btn btn-danger" id="reset-btn"><svg><use href="#i-trash"/></svg> <span data-i18n="resetAll">حذف الكل</span></button>
+        <h2>🗑️ <span data-i18n="dangerZone">منطقة الخطر</span></h2>
+        <button class="btn btn-danger" id="reset-btn">🗑️ <span data-i18n="resetAll">حذف الكل</span></button>
       </div>
     </section>
   </main>
@@ -257,12 +253,12 @@
 <div id="teacher-modal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2 id="tm-title"><svg><use href="#i-user-plus"/></svg> <span data-i18n="addTeacher">إضافة معلم</span></h2>
+      <h2 id="tm-title">➕ <span data-i18n="addTeacher">إضافة معلم</span></h2>
       <button class="modal-close" onclick="closeTeacherModal()"><svg><use href="#i-x"/></svg></button>
     </div>
 
     <div class="teacher-section">
-      <h3><svg><use href="#i-users"/></svg> <span data-i18n="basicInfo">المعلومات الأساسية</span></h3>
+      <h3>👤 <span data-i18n="basicInfo">المعلومات الأساسية</span></h3>
       <div class="form-row">
         <div class="form-group"><label data-i18n="teacherName">اسم المعلم</label><input type="text" id="tm-name" data-i18n-placeholder="teacherNamePlaceholder" placeholder="أحمد محمد"></div>
         <div class="form-group"><label data-i18n="stage">المرحلة</label>
@@ -272,7 +268,7 @@
     </div>
 
     <div class="teacher-section">
-      <h3><svg><use href="#i-clock"/></svg> <span data-i18n="dailyLimitSection">الحد اليومي</span></h3>
+      <h3>⏱️ <span data-i18n="dailyLimitSection">الحد اليومي</span></h3>
       <div class="form-group">
         <label data-i18n="maxDaily">أقصى حصص في اليوم</label>
         <input type="number" id="tm-max-day" value="6" min="1" max="12" oninput="updateTeacherSummary()">
@@ -281,26 +277,26 @@
     </div>
 
     <div class="teacher-section">
-      <h3><svg><use href="#i-calendar"/></svg> <span data-i18n="workingDaysLabel">أيام الدوام</span></h3>
+      <h3>📅 <span data-i18n="workingDaysLabel">أيام الدوام</span></h3>
       <div id="tm-working-days" class="days-grid"></div>
       <div class="form-hint" style="margin-top:8px" data-i18n="workingDaysHint">اختر أيام عمل المعلم</div>
     </div>
 
     <div class="teacher-section">
-      <h3><svg><use href="#i-book"/></svg> <span data-i18n="assignments">الصفوف والمواد</span></h3>
+      <h3>📚 <span data-i18n="assignments">الصفوف والمواد</span></h3>
       <div id="tm-assignments" class="assignments-list"></div>
-      <button type="button" class="btn btn-secondary btn-sm" onclick="addAssignmentRow()"><svg><use href="#i-plus"/></svg> <span data-i18n="addAssignment">إضافة صف/مادة</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="addAssignmentRow()">➕ <span data-i18n="addAssignment">إضافة صف/مادة</span></button>
       <div class="form-hint" style="margin-top:8px" data-i18n="assignmentsHint">حدد عدد الحصص لكل مادة</div>
     </div>
 
     <div class="summary-panel">
-      <h3><svg><use href="#i-chart"/></svg> <span data-i18n="summary">ملخص</span></h3>
+      <h3>📊 <span data-i18n="summary">ملخص</span></h3>
       <div id="tm-summary"></div>
     </div>
 
     <div class="modal-footer">
       <button class="btn btn-secondary" onclick="closeTeacherModal()" data-i18n="cancel">إلغاء</button>
-      <button class="btn btn-primary" id="tm-save-btn" onclick="saveTeacherFromModal()"><svg><use href="#i-save"/></svg> <span data-i18n="save">حفظ</span></button>
+      <button class="btn btn-primary" id="tm-save-btn" onclick="saveTeacherFromModal()">💾 <span data-i18n="save">حفظ</span></button>
     </div>
   </div>
 </div>
@@ -309,13 +305,13 @@
 <div id="modal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <h2><svg><use href="#i-clock"/></svg> <span data-i18n="unavailTitle">أوقات عدم التوفر</span> — <span id="modal-teacher-name"></span></h2>
+      <h2>⏰ <span data-i18n="unavailTitle">أوقات عدم التوفر</span> — <span id="modal-teacher-name"></span></h2>
       <button class="modal-close" id="modal-close"><svg><use href="#i-x"/></svg></button>
     </div>
     <div id="modal-grid"></div>
     <div class="modal-footer">
       <p data-i18n="unavailHint">انقر لتبديل الحالة</p>
-      <button class="btn btn-primary" id="modal-save"><svg><use href="#i-save"/></svg> <span data-i18n="saveClose">حفظ وإغلاق</span></button>
+      <button class="btn btn-primary" id="modal-save">💾 <span data-i18n="saveClose">حفظ وإغلاق</span></button>
     </div>
   </div>
 </div>
@@ -324,4 +320,4 @@
 
 <script src="app.js"></script>
 </body>
-</html>
+</html>من 
