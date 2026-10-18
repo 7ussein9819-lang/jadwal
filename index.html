@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>جَدوَل · Jadwal</title>
-<link rel="manifest" href='data:application/manifest+json,{"name":"Jadwal","short_name":"Jadwal","start_url":"./","display":"standalone","background_color":"#ecfdf5","theme_color":"#10b981","icons":[{"src":"https://cdn-icons-png.flaticon.com/512/2882/2882059.png","sizes":"512x512","type":"image/png"}]}'>
+<link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<!-- ربط ملف التصميم -->
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -62,6 +61,10 @@
       <p data-i18n="appTag">إدارة الجدول الدراسي بذكاء</p>
     </div>
     <div class="header-actions">
+      <!-- أيقونة التلغرام المضافة حديثاً -->
+      <a href="https://t.me/HJS_98" target="_blank" class="icon-toggle" title="Telegram" style="text-decoration:none;">
+        <svg><use href="#i-send"/></svg>
+      </a>
       <button class="icon-toggle" id="theme-btn" data-i18n-title="toggleTheme"><svg id="theme-icon"><use href="#i-moon"/></svg></button>
       <button class="icon-toggle" id="lang-btn" data-i18n-title="changeLang"><svg><use href="#i-globe"/></svg></button>
     </div>
@@ -208,8 +211,9 @@
         <h2><svg><use href="#i-calendar"/></svg> <span data-i18n="termInfo">بيانات الفصل</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="termName">اسم الفصل</label><input type="text" id="term-name"></div>
-          <div class="form-group"><label data-i18n="startDate">البداية</label><input type="date" id="term-start"></div>
-          <div class="form-group"><label data-i18n="endDate">النهاية</label><input type="date" id="term-end"></div>
+          <!-- تم التعديل هنا: type=text -->
+          <div class="form-group"><label data-i18n="startDate">البداية</label><input type="text" id="term-start" placeholder="YYYY-MM-DD" dir="ltr" style="text-align:right"></div>
+          <div class="form-group"><label data-i18n="endDate">النهاية</label><input type="text" id="term-end" placeholder="YYYY-MM-DD" dir="ltr" style="text-align:right"></div>
         </div>
         <button class="btn btn-primary" id="save-term-btn"><svg><use href="#i-save"/></svg> <span data-i18n="save">حفظ</span></button>
       </div>
@@ -217,7 +221,8 @@
         <h2><svg><use href="#i-calendar"/></svg> <span data-i18n="holidays">العطل</span></h2>
         <div class="form-row">
           <div class="form-group"><label data-i18n="holidayName">المناسبة</label><input type="text" id="holiday-name"></div>
-          <div class="form-group"><label data-i18n="holidayDate">التاريخ</label><input type="date" id="holiday-date"></div>
+          <!-- تم التعديل هنا: type=text -->
+          <div class="form-group"><label data-i18n="holidayDate">التاريخ</label><input type="text" id="holiday-date" placeholder="YYYY-MM-DD" dir="ltr" style="text-align:right"></div>
         </div>
         <button class="btn btn-primary" id="add-holiday-btn"><svg><use href="#i-plus"/></svg> <span data-i18n="add">إضافة</span></button>
         <div id="holidays-list" style="margin-top:14px"></div>
@@ -317,7 +322,6 @@
 
 <div id="toast" class="toast"></div>
 
-<!-- ربط ملف الجافاسكريبت -->
 <script src="app.js"></script>
 </body>
 </html>
