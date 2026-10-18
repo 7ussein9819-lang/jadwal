@@ -865,13 +865,17 @@ function renderScheduleDisplay(){
     });
     html += '</tbody></table></div>';
     el.innerHTML = html;
+    
+    // استدعاء الدالة الخاصة بالألوان بعد رسم الجدول
+    setTimeout(() => {
+      const colorSelect = document.getElementById('table-color');
+      if(colorSelect) applyTableColor(colorSelect.value);
+    }, 50);
   }catch(e){}
 }
-document.getElementById('schedule-view').addEventListener('change', renderScheduleSelect);
-document.getElementById('schedule-entity').addEventListener('change', renderScheduleDisplay);
 
 /* =========================================
-   11. دوال مساعدة للطباعة (تُستدعى من الدالة الكبيرة)
+   11. دوال مساعدة للطباعة
    ========================================= */
 function buildMiniScheduleHTML(view, id, opts){
   const periods = Math.max(1, state.settings.periods || 7);
@@ -941,7 +945,7 @@ function buildMiniScheduleHTML(view, id, opts){
 }
 
 /* =========================================
-   12. الطباعة (النسخة النهائية)
+   12. الطباعة
    ========================================= */
 function openPrintWindow(scope){
   try{
@@ -952,7 +956,7 @@ function openPrintWindow(scope){
 
     const size = document.getElementById('print-size').value;
     const orient = document.getElementById('print-orientation').value;
-    const colorMode = document.getElementById('table-color').value; // اللون المخصص للجدول فقط
+    const colorMode = document.getElementById('table-color').value;
 
     let content = '';
     let pageConfig = '';
@@ -1027,7 +1031,6 @@ function openPrintWindow(scope){
     const fs = size === 'A3' ? '8pt' : '7pt';
     const subFs = size === 'A3' ? '7pt' : '6pt';
 
-    // تحديد الألوان بناءً على اختيار المستخدم
     let colors = {};
     if (colorMode === 'bw') {
       colors = { headerBg: '#333333', headerText: '#ffffff', dayBg: '#e5e5e5', filledBg: '#f5f5f5', emptyBg: '#ffffff', border: '#999999', text: '#000000', subText: '#333333' };
@@ -1044,7 +1047,6 @@ function openPrintWindow(scope){
     } else if (colorMode === 'gray') {
       colors = { headerBg: '#64748b', headerText: '#ffffff', dayBg: '#f1f5f9', filledBg: '#f8fafc', emptyBg: '#ffffff', border: '#cbd5e1', text: '#1e293b', subText: '#475569' };
     } else {
-      // theme (default green)
       colors = { headerBg: '#10b981', headerText: '#ffffff', dayBg: '#d1fae5', filledBg: '#ecfdf5', emptyBg: '#ffffff', border: '#6ee7b7', text: '#064e3b', subText: '#047857' };
     }
 
@@ -1590,7 +1592,82 @@ document.getElementById('days-count').addEventListener('change', debounce(() => 
   save(); render();
 }, 400));
 
-// تسجيل Service Worker ليعمل الموقع أوفلاين
+/* =========================================
+   17. تحديث ألوان الجدول في الشاشة الرئيسية
+   ========================================= */
+function applyTableColor(colorMode) {
+  const table = document.querySelector('.schedule-table');
+  if(!table) return;
+  
+  table.removeAttribute('style');
+  
+  let colors = {};
+  if (colorMode === 'bw') {
+    colors = { header: '#333', day: '#e5e5e5', filled: '#f5f5f5', text: '#000', sub: '#333' };
+  } else if (colorMode === 'blue') {
+    colors = { header: '#3b82f6', day: '#dbeafe', filled: '#eff6ff', text: '#1e3a8a', sub: '#1d4ed8' };
+  } else if (colorMode === 'green') {
+    colors = { header: '#10b981', day: '#d1fae5', filled: '#ecfdf5', text: '#064e3b', sub: '#047857' };
+  } else if (colorMode === 'purple') {
+    colors = { header: '#8b5cf6', day: '#ede9fe', filled: '#f5f3ff', text: '#4c1d95', sub: '#6d28d9' };
+  } else if (colorMode === 'orange') {
+    colors = { header: '#f97316', day: '#ffedd5', filled: '#fff7ed', text: '#7c2d12', sub: '#c2410c' };
+  } else if (colorMode === 'red') {
+    colors = { header: '#ef4444', day: '#fee2e2', filled: '#fef2f2', text: '#7f1d1d', sub: '#b91c1c' };
+  } else if (colorMode === 'gray') {
+    colors = { header: '#64748b', day: '#f1f5f9', filled: '#f8fafc', text: '#1e293b', sub: '#475569' };
+  } else {
+    const style = getComputedStyle(document.documentElement);
+    colors = { 
+      header: style.getPropertyValue('--primary').trim() || '#10b981',
+      day: 'rgba(16,185,129,0.15)', 
+      filled: 'rgba(16,185,129,0.1)', 
+      text: style.getPropertyValue('--primary2').trim() || '#059669',
+      sub: style.getPropertyValue('--text-dim').trim() || '#047857'
+    };
+  }
+
+  const ths = table.querySelectorAll('th');
+  ths.forEach(th => {
+    if(!th.classList.contains('day-cell')) {
+      th.style.setProperty('background', colors.header, 'important');
+      th.style.setProperty('color', '#fff', 'important');
+    }
+  });
+
+  const dayCells = table.querySelectorAll('.day-cell');
+  dayCells.forEach(td => {
+    td.style.setProperty('background', colors.day, 'important');
+    td.style.setProperty('color', colors.text, 'important');
+  });
+
+  const filledCells = table.querySelectorAll('.slot-filled');
+  filledCells.forEach(td => {
+    td.style.setProperty('background', colors.filled, 'important');
+    td.style.setProperty('color', colors.text, 'important');
+  });
+
+  const subjectNames = table.querySelectorAll('.subject-name');
+  subjectNames.forEach(span => {
+    span.style.setProperty('color', colors.text, 'important');
+  });
+
+  const teacherNames = table.querySelectorAll('.teacher-name');
+  teacherNames.forEach(span => {
+    span.style.setProperty('color', colors.sub, 'important');
+  });
+}
+
+document.getElementById('table-color').addEventListener('change', (e) => {
+  applyTableColor(e.target.value);
+  renderScheduleDisplay();
+});
+
+// ربط الأحداث
+document.getElementById('schedule-view').addEventListener('change', renderScheduleSelect);
+document.getElementById('schedule-entity').addEventListener('change', renderScheduleDisplay);
+
+// تسجيل Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').catch(err => console.log('SW Error:', err));
