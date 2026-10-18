@@ -50,7 +50,7 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
 .icon-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none}
 
 /* =========================================
-   التبويبات المكبرة (مع الإيموجي)
+   التبويبات المكبرة (big-tabs)
    ========================================= */
 .tabs-wrapper{position:relative;margin-bottom:20px}
 .tabs{
@@ -69,32 +69,34 @@ header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;whi
   -webkit-overflow-scrolling:touch;
 }
 .tabs::-webkit-scrollbar{display:none}
-.tabs button{
+
+/* التنسيق الخاص بالتبويبات الكبيرة */
+.tabs.big-tabs button {
   flex:0 0 auto;
   min-width:max-content;
-  padding:12px 20px;
+  padding:16px 26px;
   background:transparent;
   border:none;
   color:var(--text-dim);
-  border-radius:14px;
+  border-radius:16px;
   cursor:pointer;
   font-family:inherit;
-  font-weight:800;
-  font-size:16px; /* تكبير الخط */
+  font-weight:900;
+  font-size:18px; /* حجم خط كبير جداً */
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
+  gap:12px;
   transition:all .3s var(--tr);
   white-space:nowrap;
 }
-.tabs button.active{
+.tabs.big-tabs button.active{
   background:linear-gradient(135deg,var(--primary),var(--primary2));
   color:#fff;
-  box-shadow:0 6px 20px rgba(16,185,129,0.4);
+  box-shadow:0 8px 24px rgba(16,185,129,0.4);
   transform:translateY(-2px);
 }
-.tabs button:hover:not(.active){color:var(--text);background:var(--surface-dim)}
+.tabs.big-tabs button:hover:not(.active){color:var(--text);background:var(--surface-dim)}
 
 /* =========================================
    الكروت والمحتوى
@@ -283,8 +285,8 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
   header h1{font-size:24px}
   header p{font-size:13px}
   .icon-toggle{width:42px;height:42px}
-  .tabs{padding:10px;gap:10px}
-  .tabs button{padding:16px 28px;font-size:17px}
+  .tabs.big-tabs{padding:10px;gap:10px}
+  .tabs.big-tabs button{padding:18px 32px;font-size:20px}
   .card{padding:22px}
   .stat-value{font-size:32px}
   .stat-icon-badge{width:46px;height:46px}
@@ -298,9 +300,8 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
   header p{font-size:11px}
   .icon-toggle{width:34px;height:34px;border-radius:9px}
   .icon-toggle svg{width:16px;height:16px}
-  /* تكبير التبويبات على الجوال */
-  .tabs{padding:8px;gap:8px}
-  .tabs button{padding:12px 18px;font-size:15px;gap:8px}
+  .tabs.big-tabs{padding:6px;gap:6px}
+  .tabs.big-tabs button{padding:12px 18px;font-size:16px}
   .card{padding:14px;margin-bottom:12px;border-radius:14px}
   .card h2{font-size:14px;margin-bottom:11px}
   .stat-card{padding:12px 8px;border-radius:14px}
@@ -334,18 +335,9 @@ html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
   header p{font-size:10px}
   .icon-toggle{width:32px;height:32px}
   .icon-toggle svg{width:14px;height:14px}
-  /* الحفاظ على حجم التبويبات كبير */
-  .tabs button{padding:10px 16px;font-size:14px}
+  .tabs.big-tabs button{padding:10px 14px;font-size:14px}
   .card{padding:12px}
   .btn{padding:8px 12px;font-size:11px}
   .btn-row{gap:5px}
   .btn-row .btn{flex:1 1 calc(50% - 3px);min-width:0}
-}
-@media(max-width:360px){
-  header h1{font-size:13px}
-  header p{display:none}
-  /* إخفاء النص في الشاشات الصغيرة جداً، إبقاء الإيموجي فقط */
-  .tabs button span{display:none}
-  .tabs button{padding:12px}
-  .tabs button{font-size:20px}
 }
