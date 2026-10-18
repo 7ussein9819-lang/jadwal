@@ -1,0 +1,366 @@
+/* =========================================
+   المتغيرات الأساسية (الواجهة ثابتة بلون أخضر)
+   ========================================= */
+:root{
+  --radius:18px;--radius-sm:12px;--tr:cubic-bezier(.4,0,.2,1);
+  --primary:#10b981;--primary2:#059669;--primary-light:#34d399;--accent:#14b8a6;
+  --success:#10b981;--warning:#f59e0b;--danger:#ef4444;--info:#3b82f6;
+  
+  /* الوضع النهاري (الافتراضي) */
+  --bg1:#ecfdf5;--bg2:#d1fae5;--bg3:#a7f3d0;--bg4:#6ee7b7;
+  --surface:rgba(255,255,255,0.75);--surface-solid:#fff;
+  --surface-hover:rgba(255,255,255,0.95);--surface-dim:rgba(255,255,255,0.5);
+  --text:#064e3b;--text-dim:#047857;--text-mute:#6b7280;
+  --border:rgba(16,185,129,0.2);--border-strong:rgba(16,185,129,0.38);
+  --shadow:0 4px 24px rgba(16,185,129,0.1);--shadow-hover:0 12px 40px rgba(16,185,129,0.2);
+  --orb-opacity:0.3;
+}
+
+/* الوضع الليلي */
+[data-theme="dark"]{
+  --bg1:#041f1c;--bg2:#052e2b;--bg3:#062e26;--bg4:#0f1e1a;
+  --surface:rgba(255,255,255,0.05);--surface-solid:#12241f;
+  --surface-hover:rgba(255,255,255,0.09);--surface-dim:rgba(255,255,255,0.03);
+  --text:#d1fae5;--text-dim:#6ee7b7;--text-mute:#9ca3af;
+  --border:rgba(52,211,153,0.15);--border-strong:rgba(52,211,153,0.3);
+  --shadow:0 4px 24px rgba(0,0,0,0.35);--shadow-hover:0 12px 40px rgba(0,0,0,0.55);
+  --primary:#34d399;--primary2:#10b981;--primary-light:#6ee7b7;
+  --orb-opacity:0.15;
+}
+
+/* =========================================
+   الأساسيات
+   ========================================= */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 35%,var(--bg3) 70%,var(--bg4) 100%);background-size:200% 200%;animation:bgShift 20s ease infinite;color:var(--text);min-height:100vh;padding:16px;overflow-x:hidden;position:relative;transition:background .4s}
+@keyframes bgShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* الكرات المتحركة في الخلفية */
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:var(--orb-opacity);animation:float 22s ease-in-out infinite;transition:background .4s}
+.orb-1{width:420px;height:420px;background:#34d399;top:-120px;right:-120px}
+.orb-2{width:520px;height:520px;background:#6ee7b7;bottom:-180px;left:-120px;animation-delay:-6s}
+.orb-3{width:320px;height:320px;background:#a7f3d0;top:45%;left:35%;animation-delay:-12s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-40px) scale(1.08)}66%{transform:translate(-30px,30px) scale(.92)}}
+.app{max-width:1280px;margin:0 auto;position:relative;z-index:1;width:100%}
+
+/* =========================================
+   الهيدر (الرأس)
+   ========================================= */
+header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:16px 18px;background:var(--surface);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);flex-wrap:nowrap;transition:all .4s}
+.logo-badge{width:46px;height:46px;min-width:46px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(16,185,129,0.4);flex-shrink:0}
+.logo-badge svg{width:24px;height:24px;stroke:#fff;stroke-width:2;fill:none}
+.header-text{flex:1;min-width:0;overflow:hidden}
+header h1{font-size:20px;font-weight:900;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header p{color:var(--text-dim);font-size:12px;margin-top:2px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.header-actions{display:flex;gap:6px;flex-shrink:0;position:relative}
+.icon-toggle{width:38px;height:38px;border-radius:10px;border:1px solid var(--border-strong);background:var(--surface-dim);color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s var(--tr)}
+.icon-toggle:hover{background:var(--surface-hover);border-color:var(--primary);transform:translateY(-1px)}
+.icon-toggle svg{width:18px;height:18px;stroke:currentColor;fill:none}
+
+/* =========================================
+   التبويبات
+   ========================================= */
+.tabs-wrapper{position:relative;margin-bottom:16px}
+.tabs{display:flex;gap:5px;overflow-x:auto;flex-wrap:nowrap;padding:6px;background:var(--surface);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:999px;box-shadow:var(--shadow);scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;min-width:max-content;padding:10px 16px;background:transparent;border:none;color:var(--text-dim);border-radius:999px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;gap:7px;transition:all .3s var(--tr);white-space:nowrap}
+.tabs button svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0}
+.tabs button.active{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 5px 20px rgba(16,185,129,0.4)}
+.tabs button:hover:not(.active){color:var(--text);background:var(--surface-dim)}
+
+/* =========================================
+   الكروت والمحتوى
+   ========================================= */
+.tab-panel{display:none;animation:panelFade .35s ease}
+.tab-panel.active{display:block}
+@keyframes panelFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--surface);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);transition:all .4s}
+.card:hover{border-color:var(--border-strong);box-shadow:var(--shadow-hover)}
+.card h2{margin-bottom:14px;font-size:16px;font-weight:800;display:flex;align-items:center;gap:8px;color:var(--text)}
+.card h2 svg{width:18px;height:18px;stroke:var(--primary);fill:none;flex-shrink:0}
+
+/* =========================================
+   الإحصائيات (الكروت العلوية)
+   ========================================= */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+.stat-card{background:var(--surface);backdrop-filter:blur(24px);border:1px solid var(--border);border-radius:var(--radius);padding:16px 12px;text-align:center;position:relative;box-shadow:var(--shadow);transition:all .3s var(--tr)}
+.stat-card.clickable{cursor:pointer}
+.stat-card.clickable:hover{transform:translateY(-4px);border-color:var(--primary);box-shadow:0 12px 40px rgba(16,185,129,0.3);background:var(--surface-hover)}
+.stat-icon-badge{width:42px;height:42px;border-radius:12px;background:rgba(16,185,129,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;transition:all .3s}
+.stat-icon-badge svg{width:20px;height:20px;stroke:var(--primary);fill:none}
+.stat-value{font-size:28px;font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--primary),var(--primary-light),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{color:var(--text-dim);font-size:11px;font-weight:700;margin-top:3px}
+
+/* =========================================
+   النماذج (الحقول)
+   ========================================= */
+.form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:10px}
+.form-group{margin-bottom:8px}
+.form-group label{display:block;margin-bottom:6px;color:var(--text-dim);font-size:12px;font-weight:800}
+.form-group input,.form-group select{width:100%;padding:10px 13px;background:var(--surface-dim);border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:14px;transition:all .3s var(--tr)}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(16,185,129,0.15);background:var(--surface-hover)}
+.form-group input::placeholder{color:var(--text-mute)}
+.form-group select option{background:var(--surface-solid);color:var(--text)}
+.form-hint{color:var(--text-mute);font-size:11px;margin-top:4px;font-weight:500;line-height:1.5}
+
+/* إصلاح حقل التاريخ */
+input[type="date"] {
+  direction: ltr;
+  text-align: right;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* =========================================
+   الأزرار
+   ========================================= */
+.btn{padding:10px 18px;border-radius:var(--radius-sm);border:none;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;transition:all .25s var(--tr);display:inline-flex;align-items:center;justify-content:center;gap:7px}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;flex-shrink:0}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;box-shadow:0 4px 16px rgba(16,185,129,0.4)}
+.btn-primary:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 7px 24px rgba(16,185,129,0.5)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-large{width:100%;padding:15px;font-size:14px;margin-top:4px}
+.btn-secondary{background:var(--surface-dim);border:1px solid var(--border-strong);color:var(--text)}
+.btn-secondary:hover{background:var(--surface-hover);border-color:var(--primary)}
+.btn-danger{background:rgba(239,68,68,0.1);color:var(--danger);border:1px solid rgba(239,68,68,0.35)}
+.btn-danger:hover{background:rgba(239,68,68,0.2);border-color:var(--danger)}
+.btn-success{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
+.btn-success:hover{transform:translateY(-1px);box-shadow:0 7px 24px rgba(16,185,129,0.5)}
+.btn-sm{padding:6px 11px;font-size:11px}
+.btn-sm svg{width:13px;height:13px}
+.btn-row{display:flex;gap:7px;flex-wrap:wrap}
+
+/* =========================================
+   القوائم (المعلمين والصفوف)
+   ========================================= */
+.list{display:flex;flex-direction:column;gap:8px}
+.list-item{display:flex;align-items:flex-start;justify-content:space-between;padding:13px 15px;background:var(--surface-dim);border-radius:var(--radius-sm);border:1px solid var(--border);transition:all .25s var(--tr);gap:10px}
+.list-item:hover{background:var(--surface-hover);border-color:var(--border-strong)}
+.list-item .info{flex:1;min-width:0}
+.list-item .title{font-weight:800;font-size:14px;margin-bottom:5px;color:var(--text);display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.list-item .meta{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px}
+.list-item .actions{display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap}
+.assignments-preview{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;padding-top:7px;border-top:1px dashed var(--border)}
+.assign-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;background:var(--surface);border-radius:7px;font-size:11px;font-weight:600;border:1px solid var(--border);color:var(--text);white-space:nowrap}
+.assign-chip svg{width:10px;height:10px;stroke:var(--primary);fill:none;flex-shrink:0}
+.assign-chip b{color:var(--primary);font-weight:800}
+
+/* =========================================
+   الشارات
+   ========================================= */
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}
+.badge svg{width:10px;height:10px;stroke:currentColor;fill:none;flex-shrink:0}
+.badge-primary{background:rgba(16,185,129,0.15);color:var(--primary);border:1px solid var(--border-strong)}
+.badge-success{background:rgba(16,185,129,0.15);color:var(--success);border:1px solid rgba(16,185,129,0.3)}
+.badge-warning{background:rgba(245,158,11,0.15);color:var(--warning);border:1px solid rgba(245,158,11,0.3)}
+.badge-danger{background:rgba(239,68,68,0.15);color:var(--danger);border:1px solid rgba(239,68,68,0.3)}
+.badge-info{background:rgba(59,130,246,0.15);color:var(--info);border:1px solid rgba(59,130,246,0.3)}
+
+.icon-btn{padding:7px;background:var(--surface-dim);border:1px solid var(--border-strong);color:var(--text);border-radius:8px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;justify-content:center;line-height:1}
+.icon-btn:hover{background:var(--surface-hover);border-color:var(--primary);transform:translateY(-1px)}
+.icon-btn svg{width:14px;height:14px;stroke:currentColor;fill:none}
+.icon-btn.danger{color:var(--danger)}
+.icon-btn.danger:hover{border-color:var(--danger);background:rgba(239,68,68,0.12)}
+
+/* =========================================
+   الحالات الفارغة والتنبيهات
+   ========================================= */
+.empty-state{text-align:center;padding:36px 16px;color:var(--text-mute)}
+.empty-state svg{width:42px;height:42px;stroke:var(--text-mute);fill:none;opacity:.5;margin-bottom:10px}
+.empty-state p{font-size:13px;font-weight:500}
+
+.alert{padding:11px 14px;border-radius:var(--radius-sm);margin-bottom:8px;display:flex;align-items:flex-start;gap:9px;font-size:12px;font-weight:600;line-height:1.5;border:1px solid;animation:alertSlide .3s ease}
+@keyframes alertSlide{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.alert svg{width:16px;height:16px;flex-shrink:0;stroke:currentColor;fill:none;margin-top:1px}
+.alert-error{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.35);color:var(--danger)}
+.alert-warning{background:rgba(245,158,11,0.1);border-color:rgba(245,158,11,0.35);color:var(--warning)}
+.alert-success{background:rgba(16,185,129,0.1);border-color:rgba(16,185,129,0.35);color:var(--success)}
+.alert-info{background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.35);color:var(--info)}
+
+/* =========================================
+   الجدول الأساسي (يأخذ الألوان من JS)
+   ========================================= */
+.schedule-table{width:100%;border-collapse:separate;border-spacing:3px;margin-top:12px;min-width:560px;table-layout:fixed}
+.schedule-table th,.schedule-table td{padding:9px 5px;border-radius:8px;text-align:center;font-size:11px;word-wrap:break-word}
+.schedule-table th{font-weight:800;background:var(--primary);color:#fff}
+.schedule-table .day-cell{background:rgba(16,185,129,0.15);color:var(--primary);font-weight:800;white-space:nowrap}
+.schedule-table .slot-filled{background:rgba(16,185,129,0.1);color:var(--primary2);transition:transform .2s}
+[data-theme="dark"] .schedule-table .slot-filled{color:var(--primary-light)}
+.schedule-table .slot-empty{background:var(--surface-dim);color:var(--text-mute)}
+.schedule-table .subject-name{font-weight:800;display:block;margin-bottom:2px;font-size:11px}
+.schedule-table .teacher-name{font-size:10px;opacity:.7;font-weight:600;display:block}
+.table-scroll{overflow-x:auto;border-radius:var(--radius-sm);-webkit-overflow-scrolling:touch}
+
+/* =========================================
+   الرسائل المنبثقة (Toast)
+   ========================================= */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;padding:12px 22px;border-radius:12px;font-weight:700;box-shadow:0 10px 36px rgba(16,185,129,0.5);transition:transform .4s var(--tr);z-index:3000;max-width:calc(100vw - 32px);text-align:center;font-size:13px}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.error{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 10px 36px rgba(239,68,68,0.5)}
+.toast.success{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 10px 36px rgba(16,185,129,0.5)}
+
+/* =========================================
+   النوافذ المنبثقة (Modals)
+   ========================================= */
+.modal{position:fixed;inset:0;background:rgba(4,31,28,0.7);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;z-index:2000;padding:16px;overflow-y:auto}
+[data-theme="light"] .modal{background:rgba(6,78,59,0.4)}
+.modal.show{display:flex;animation:panelFade .3s}
+.modal-content{background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:var(--radius);max-width:760px;width:100%;max-height:90vh;overflow-y:auto;padding:20px;box-shadow:0 24px 80px rgba(0,0,0,0.4);margin:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--border);position:sticky;top:-20px;background:var(--surface-solid);z-index:1;margin-top:-20px;padding-top:20px}
+.modal-header h2{font-size:15px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:7px;flex:1;min-width:0}
+.modal-header h2 svg{width:17px;height:17px;stroke:var(--primary);fill:none;flex-shrink:0}
+.modal-close{background:transparent;border:none;color:var(--text);cursor:pointer;width:32px;height:32px;min-width:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.modal-close:hover{background:var(--surface-hover);transform:rotate(90deg)}
+.modal-close svg{width:16px;height:16px;stroke:currentColor;fill:none}
+.modal-footer{margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--border)}
+.modal-footer p{color:var(--text-dim);font-size:11px;flex:1;min-width:120px}
+
+/* أقسام نافذة المعلم */
+.teacher-section{padding:12px 0;border-bottom:1px solid var(--border)}
+.teacher-section:last-of-type{border-bottom:none;padding-bottom:0}
+.teacher-section h3{font-size:11px;font-weight:800;color:var(--text-dim);margin-bottom:10px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.4px}
+.teacher-section h3 svg{width:13px;height:13px;stroke:var(--primary);fill:none}
+.days-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:6px}
+.day-checkbox{position:relative}
+.day-checkbox input{position:absolute;opacity:0;pointer-events:none}
+.day-checkbox label{display:flex;align-items:center;justify-content:center;padding:9px 12px;background:var(--surface-dim);border:2px solid var(--border);border-radius:9px;font-weight:700;font-size:12px;color:var(--text-dim);transition:all .2s;cursor:pointer;text-align:center}
+.day-checkbox input:checked + label{background:rgba(16,185,129,0.15);border-color:var(--primary);color:var(--primary)}
+
+.assignments-list{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+.assignment-row{display:grid;grid-template-columns:1.4fr 1.4fr 75px 34px;gap:6px;align-items:center;background:var(--surface-dim);padding:8px;border-radius:9px;border:1px solid var(--border);animation:panelFade .25s}
+.assignment-row select,.assignment-row input{padding:8px 10px;background:var(--surface-solid);border:1px solid var(--border-strong);border-radius:6px;color:var(--text);font-family:inherit;font-size:12px;width:100%;min-width:0}
+.assignment-row select:focus,.assignment-row input:focus{outline:none;border-color:var(--primary)}
+.assignment-row .remove-btn{padding:6px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:var(--danger);border-radius:6px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;min-width:34px;height:34px}
+.assignment-row .remove-btn:hover{background:rgba(239,68,68,0.3)}
+.assignment-row .remove-btn svg{width:12px;height:12px;stroke:currentColor;fill:none}
+
+.summary-panel{background:rgba(16,185,129,0.06);border:1px solid var(--border-strong);border-radius:10px;padding:12px;margin-top:12px}
+.summary-panel h3{font-size:11px;font-weight:800;color:var(--text-dim);margin-bottom:10px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.4px}
+.summary-panel h3 svg{width:13px;height:13px;stroke:var(--primary);fill:none}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:7px;margin-bottom:9px}
+.summary-item{text-align:center;padding:9px 5px;background:var(--surface);border-radius:8px;border:1px solid var(--border)}
+.summary-item .lbl{font-size:10px;color:var(--text-mute);font-weight:700;margin-bottom:2px}
+.summary-item .val{font-size:18px;font-weight:900;color:var(--primary)}
+.summary-item.warn .val{color:var(--warning)}
+.summary-item.danger .val{color:var(--danger)}
+.summary-status{padding:9px;background:var(--surface);border-radius:8px;text-align:center;font-weight:800;font-size:12px}
+.summary-status.ok{color:var(--success)}
+.summary-status.warn{color:var(--warning)}
+.summary-status.danger{color:var(--danger)}
+
+/* جدول عدم التوفر */
+.unavail-table{width:100%;border-collapse:separate;border-spacing:3px}
+.unavail-table th,.unavail-table td{padding:8px 4px;text-align:center;border-radius:7px;font-size:11px}
+.unavail-table th{background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:800}
+.unavail-table .day-cell{background:rgba(16,185,129,0.15);color:var(--primary);font-weight:800;white-space:nowrap;font-size:11px}
+.unavail-table td.avail{background:rgba(16,185,129,0.15);color:var(--success);cursor:pointer;font-weight:800;transition:all .15s;user-select:none}
+.unavail-table td.avail:hover{background:rgba(16,185,129,0.3);transform:scale(1.05)}
+.unavail-table td.unavail{background:rgba(239,68,68,0.2);color:var(--danger);cursor:pointer;font-weight:800;transition:all .15s;user-select:none}
+.unavail-table td.unavail:hover{background:rgba(239,68,68,0.35);transform:scale(1.05)}
+
+/* =========================================
+   إضافات (روابط المشاركة، الرسوم البيانية، العطل)
+   ========================================= */
+.share-box{display:flex;gap:7px;margin-top:9px;flex-wrap:wrap}
+.share-box input{flex:1;min-width:150px;padding:9px 12px;background:var(--surface-dim);border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--text);font-family:inherit;font-size:11px;direction:ltr;text-align:left}
+
+.chart-bar-container{background:var(--surface-dim);border-radius:9px;padding:10px 12px;margin-bottom:6px;border:1px solid var(--border)}
+.chart-bar-label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;font-weight:700;color:var(--text);gap:8px}
+.chart-bar-label span:first-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chart-bar-label span:last-child{flex-shrink:0}
+.chart-bar{height:8px;background:var(--surface-dim);border-radius:4px;overflow:hidden}
+.chart-bar-fill{height:100%;border-radius:4px;transition:width .8s var(--tr);background:linear-gradient(90deg,var(--primary),var(--primary-light))}
+.chart-bar-fill.warn{background:linear-gradient(90deg,#f59e0b,#f97316)}
+.chart-bar-fill.danger{background:linear-gradient(90deg,#ef4444,#dc2626)}
+
+.holiday-item{display:flex;justify-content:space-between;align-items:center;padding:8px 11px;background:var(--surface-dim);border-radius:8px;margin-bottom:6px;border:1px solid var(--border);font-size:12px;color:var(--text);gap:8px;flex-wrap:wrap}
+.holiday-item button{background:transparent;border:1px solid rgba(239,68,68,0.3);color:var(--danger);padding:3px 8px;border-radius:6px;cursor:pointer;font-family:inherit;font-weight:700;font-size:10px;transition:all .2s;flex-shrink:0}
+.holiday-item button:hover{background:rgba(239,68,68,0.15)}
+
+.steps{padding-right:20px;line-height:2;color:var(--text-dim);font-size:13px}
+.steps b{color:var(--text);font-weight:800}
+html[dir="ltr"] .steps{padding-right:0;padding-left:20px}
+
+.spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* =========================================
+   تجاوب الشاشات (Responsive)
+   ========================================= */
+@media(min-width:1024px){
+  body{padding:24px}
+  header{padding:20px 24px;gap:18px}
+  .logo-badge{width:52px;height:52px;min-width:52px;border-radius:16px}
+  .logo-badge svg{width:26px;height:26px}
+  header h1{font-size:24px}
+  header p{font-size:13px}
+  .icon-toggle{width:42px;height:42px}
+  .tabs{padding:7px}
+  .tabs button{padding:11px 18px;font-size:13px}
+  .card{padding:22px}
+  .stat-value{font-size:32px}
+  .stat-icon-badge{width:46px;height:46px}
+}
+@media(max-width:768px){
+  body{padding:10px}
+  header{padding:12px 14px;gap:10px;margin-bottom:14px;flex-wrap:nowrap}
+  .logo-badge{width:40px;height:40px;min-width:40px;border-radius:11px}
+  .logo-badge svg{width:20px;height:20px}
+  header h1{font-size:17px}
+  header p{font-size:11px}
+  .icon-toggle{width:34px;height:34px;border-radius:9px}
+  .icon-toggle svg{width:16px;height:16px}
+  .tabs{padding:5px;gap:4px}
+  .tabs button{padding:8px 12px;font-size:11px;gap:5px}
+  .tabs button svg{width:13px;height:13px}
+  .card{padding:14px;margin-bottom:12px;border-radius:14px}
+  .card h2{font-size:14px;margin-bottom:11px}
+  .stat-card{padding:12px 8px;border-radius:14px}
+  .stat-icon-badge{width:36px;height:36px;border-radius:10px}
+  .stat-icon-badge svg{width:17px;height:17px}
+  .stat-value{font-size:22px}
+  .stat-label{font-size:10px}
+  .stats{gap:8px;grid-template-columns:repeat(2,1fr)}
+  .form-row{grid-template-columns:1fr;gap:8px}
+  .form-group input,.form-group select{font-size:13px;padding:9px 11px}
+  .btn{padding:9px 14px;font-size:12px}
+  .btn svg{width:13px;height:13px}
+  .btn-large{padding:13px;font-size:13px}
+  .list-item{padding:11px 12px}
+  .schedule-table th,.schedule-table td{padding:6px 3px;font-size:10px}
+  .modal{padding:0}
+  .modal-content{max-width:100%;max-height:100vh;min-height:100vh;border-radius:0;padding:16px;margin:0}
+  .modal-header{padding-top:16px;top:-16px;margin-top:-16px}
+  .assignment-row{grid-template-columns:1fr 1fr;gap:5px}
+  .assignment-row .remove-btn{grid-column:span 2;height:32px}
+  .days-grid{grid-template-columns:repeat(2,1fr)}
+  .summary-grid{grid-template-columns:repeat(2,1fr)}
+  .modal-footer{flex-direction:column-reverse;gap:8px}
+  .modal-footer .btn{width:100%}
+}
+@media(max-width:480px){
+  body{padding:8px}
+  header{padding:10px 12px;gap:8px}
+  .logo-badge{width:36px;height:36px;min-width:36px;border-radius:10px}
+  header h1{font-size:15px}
+  header p{font-size:10px}
+  .icon-toggle{width:32px;height:32px}
+  .icon-toggle svg{width:14px;height:14px}
+  .tabs button{padding:7px 10px;font-size:10px}
+  .tabs button svg{width:12px;height:12px}
+  .card{padding:12px}
+  .btn{padding:8px 12px;font-size:11px}
+  .btn-row{gap:5px}
+  .btn-row .btn{flex:1 1 calc(50% - 3px);min-width:0}
+}
+@media(max-width:360px){
+  header h1{font-size:13px}
+  header p{display:none}
+  .tabs button span{display:none}
+  .tabs button{padding:8px}
+  .tabs button svg{width:16px;height:16px}
+}
